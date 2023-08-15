@@ -77,6 +77,49 @@ export const playerStyles = StyleSheet.create({
     }
 })
 
+export const PlayerScreenStyles = StyleSheet.create({
+    view: {
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    playBtn: {
+        flex: 3,
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        flexDirection: 'row',
+        marginLeft:120,
+        marginRight: 85,
+        paddingTop:20
+    },
+    img: {
+        width: 250,
+        height: 250,
+        backgroundColor: '#ffffff'
+    },
+    topBtnView :{
+        flex: 1.5,
+        flexDirection: 'row',
+        paddingLeft: 60,
+        paddingRight: 60
+    },
+    headerText: {
+        fontSize: 20,
+        fontWeight: 'bold'
+    },
+    centerText: {
+        fontSize: 15,
+        fontWeight: 'bold'
+    },
+    titleText: {
+        fontSize: 23,
+        fontWeight: 'bold'
+    },
+    timeText: {
+        fontSize: 10,
+        fontWeight: 'bold'
+    }
+})
+
 export const viewStyles = StyleSheet.create({
     alignBtn: {
         borderRadius:10,
