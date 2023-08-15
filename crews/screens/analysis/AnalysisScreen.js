@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import { Button, StyleSheet, Text, TextInput, View, Image, TouchableOpacity,ScrollView } from 'react-native';
-import TeamStatsScreen from './analysisScreen/TeamStatsScreen';
-import CoachInfoScreen from './analysisScreen/CoachInfoScreen';
-import PlayerScreen from './analysisScreen/PlayerScreen';
+import TeamStatsScreen from '../analysisScreen/TeamStatsScreen';
+import CoachInfoScreen from '../analysisScreen/CoachInfoScreen';
+import PlayerScreen from '../analysisScreen/PlayerScreen';
 
 export default function AnalysisScreen() {
   const [showTeamStats, setShowTeamStats] = useState(true);
@@ -11,7 +11,7 @@ export default function AnalysisScreen() {
   return (
     <View style={{flex:1}}>
       <View style={styles.imageContainer}>
-        <Image style={styles.imageInput} source={require('../assets/analysis/jeounBuk.png')} />
+        <Image style={styles.imageInput} source={require('../../assets/analysis/jeounBuk.png')} />
       </View>
       <View style={styles.textContainer}>
         <TouchableOpacity onPress={() => { setShowTeamStats(true), setShowCoachInfo(false), setShowPlayer(false); } }>
