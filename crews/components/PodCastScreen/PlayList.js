@@ -20,7 +20,6 @@ const PlayList = (props) => {
         <View style = {[playListStyles.iconView]}>
           <Image source = {require("../../assets/PodCastScreen/icon2.png")}/>
         </View>
-  
       </TouchableOpacity>
     )
   }
