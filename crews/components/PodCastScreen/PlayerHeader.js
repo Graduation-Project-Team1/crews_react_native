@@ -4,7 +4,7 @@ import { PlayerScreenStyles } from '../../styles/PodCastScreen/styles';
 
 const Header = () => {
     return (
-        <View style={[PlayerScreenStyles.view, {flex: 1.5, marginTop: 30}]}>
+        <View style={[PlayerScreenStyles.view, {flex: 1.5}]}>
             <View style ={
                 [PlayerScreenStyles.view, {flex: 0.2}]
                 }>
