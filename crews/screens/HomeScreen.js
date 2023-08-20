@@ -7,11 +7,11 @@ import Header from "../components/homeScreen/Header";
 import TopContents from "../components/homeScreen/TopContents";
 import Contents from "../components/homeScreen/Contents";
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
   return (
     <View style={[styles.layout, setBgColors.green]}>
       <StatusBar style='auto'/>
-      <Header/>
+      <Header navigation={navigation}/>
       <TopContents/>
       <Contents/>
     </View>
