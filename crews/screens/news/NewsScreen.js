@@ -1,12 +1,12 @@
 import React from "react";
 import { Text, View } from "react-native";
 
-const PodCastScreen = () => {
+const NewsScreen = () => {
   return (
     <View>
-      <Text>PodCast Screen</Text>
+      <Text>News Screen</Text>
     </View>
   );
 };
 
-export default PodCastScreen;
+export default NewsScreen;
