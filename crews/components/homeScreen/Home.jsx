@@ -1,13 +1,13 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
-import HomeScreen from '../../screens/HomeScreen';
-import NewsScreen from '../../screens/NewsScreen';
-import PodCastScreen from '../../screens/PodCastScreen';
-import AnalysisScreen from '../../screens/AnalysisScreen';
-import TeamScreen from '../../screens/TeamScreen';
-import colors from '../../styles/colors';
+import HomeScreen from '../../screens/home/HomeScreen';
+import NewsScreen from '../../screens/news/NewsScreen';
+import AnalysisScreen from '../../screens/analysis/AnalysisScreen';
+import TeamScreen from '../../screens/team/TeamScreen';
 import CustomTabButton from '../common/CustomTabButton';
+import colors from '../../styles/colors';
+import PodcastIndex from '../../screens/podcast/PodcastIndex';
 
 const Tab = createBottomTabNavigator();
 
@@ -39,7 +39,7 @@ const Home = () => {
     >
       <Tab.Screen name="HomeScreen" component={HomeScreen} />
       <Tab.Screen name="News" component={NewsScreen} />
-      <Tab.Screen name="PodCast" component={PodCastScreen} />
+      <Tab.Screen name="PodCast" component={PodcastIndex} />
       <Tab.Screen name="Analysis" component={AnalysisScreen} />
       <Tab.Screen name="Team" component={TeamScreen} />
     </Tab.Navigator>
