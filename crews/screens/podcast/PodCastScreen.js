@@ -44,7 +44,8 @@ const PodCastScreen = ({navigation}) => {
             teamName = "전북현대"
             hashTag1 = "연휴"
             hashTag2 = "휴가"
-            hashTag3 = "나이티">
+            hashTag3 = "나이티"
+            navigation =  {navigation} >
             </EveningBanner>
           </View>
           

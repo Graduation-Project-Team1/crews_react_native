@@ -33,7 +33,7 @@ const Profile = () => {
         }}>
           <Image
             style = {[profileStyle.image]}
-            source = {require('../assets/user.png')}
+            source = {require('../../assets/onboarding/user.png')}
           />
           <View style = {{
             flexDirection: 'row'

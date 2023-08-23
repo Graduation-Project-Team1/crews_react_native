@@ -140,15 +140,15 @@ export const commonStyle = StyleSheet.create({
     },
     leagueCategoryView: {
       height: 30,
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 20,
-        marginRight: 5,
-        paddingLeft: 10,
-        paddingRight: 10,
-        borderWidth: 2,
-        borderColor: '#276A52',
-        backgroundColor: '#ffffff'
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: 20,
+      marginRight: 5,
+      paddingLeft: 10,
+      paddingRight: 10,
+      borderWidth: 2,
+      borderColor: '#276A52',
+      backgroundColor: '#ffffff'
     },
     leagueCategoryText: {
       color: '#276A52', 
@@ -175,7 +175,7 @@ export const commonStyle = StyleSheet.create({
       paddingTop: 60
     },
     categoryMenuView: {
-      flex: 2,
+      flex: 2.5,
       alignItems: 'center',
       justifyContent: 'center',
       padding: 10

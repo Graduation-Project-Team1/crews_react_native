@@ -30,7 +30,7 @@ const Check = () => {
             }}>
                 <Image
                 style = {[checkStyle.image]}
-                source = {require('../assets/user.png')}
+                source = {require('../../assets/onboarding/user.png')}
                 />
             </View>
             </Shadow>
