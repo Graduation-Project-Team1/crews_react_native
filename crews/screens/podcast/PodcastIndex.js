@@ -2,6 +2,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import PodCastScreen from './PodCastScreen';
 import PodcastPlayer from './PodcastPlayer';
+import OnboardingScreen from '../onboarding/OnboardingScreen';
 
 
 const Stack = createStackNavigator();
@@ -18,6 +19,12 @@ export default function PodcastIndex({navigation}) {
                 options={{ headerShown: false }}
                 name="PodcastPlayer"
                 component={PodcastPlayer}
+            />
+
+            <Stack.Screen
+                options = {{ headerShown: false}}
+                name= "Onboarding"
+                component={OnboardingScreen}
             />
         </Stack.Navigator>
     );

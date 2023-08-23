@@ -3,7 +3,7 @@ import { TouchableOpacity } from 'react-native';
 import { Text, View } from 'react-native';
 import Swiper from 'react-native-web-swiper';
 import { AntDesign } from '@expo/vector-icons';
-import { commonStyle, swiperStyle, } from '../../components/onboardingScreen/style';
+import { commonStyle, swiperStyle, } from '../../styles/onboardingScreen/style';
 
 import { TeamDataProvider, NicknameDataProvider } from '../../components/onboardingScreen/context';
 
