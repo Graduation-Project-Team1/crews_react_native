@@ -1,0 +1,25 @@
+{
+    "sport": [
+        { "id": 1, "league": "K-League 1", "team": "전북 현대 모터스", "sport_id": 1 },
+        { "id": 2, "league": "K-League 2", "team": "부산 아이파크", "sport_id": 1 },
+        { "id": 3, "league": "AFC 챔피언스 리그", "team": "우리 FC", "sport_id": 1 },
+        { "id": 4, "league": "KBO 리그", "team": "두산 베어스", "sport_id": 2 },
+        { "id": 5, "league": "KBO 리그", "team": "기아 타이거즈", "sport_id": 2 },
+        { "id": 6, "league": "KBO 창단기념 대회", "team": "LG 트윈스", "sport_id": 2 },
+        { "id": 7, "league": "FIFA 월드컵", "team": "한국 대표팀", "sport_id": 3 },
+        { "id": 8, "league": "EAFF E-1 축구 선수권 대회", "team": "한국 대표팀", "sport_id": 3 },
+        { "id": 9, "league": "AFC U-23 챔피언십", "team": "한국 U-23 대표팀", "sport_id": 3 },
+        { "id": 10, "league": "UEFA Champions League", "team": "리버풀 FC", "sport_id": 4 },
+        { "id": 11, "league": "Premier League", "team": "맨체스터 시티", "sport_id": 4 },
+        { "id": 12, "league": "La Liga", "team": "바르셀로나 FC", "sport_id": 4 },
+        { "id": 13, "league": "MLB", "team": "뉴욕 양키스", "sport_id": 5 },
+        { "id": 14, "league": "MLB", "team": "로스앤젤레스 다저스", "sport_id": 5 },
+        { "id": 15, "league": "Nippon Professional Baseball", "team": "요코하마 DeNA 베이스타즈", "sport_id": 5 },
+        { "id": 16, "league": "NBA", "team": "로스앤젤레스 레이커스", "sport_id": 6 },
+        { "id": 17, "league": "NBA", "team": "보스턴 셀틱스", "sport_id": 6 },
+        { "id": 18, "league": "EuroLeague", "team": "CSKA 모스크바", "sport_id": 6 },
+        { "id": 19, "league": "KBO 리그", "team": "두산 베어스", "sport_id": 2 },
+        { "id": 20, "league": "KBO 리그", "team": "두산 베어스", "sport_id": 2 },
+        { "id": 21, "league": "KBO 리그", "team": "두산 베어스", "sport_id": 2 }
+    ]
+}
