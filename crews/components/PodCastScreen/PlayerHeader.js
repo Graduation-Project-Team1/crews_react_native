@@ -1,10 +1,11 @@
 import React from 'react';
+import { Text, View } from 'react-native';
 import { AntDesign, Feather } from '@expo/vector-icons'; 
 import { PlayerScreenStyles } from '../../styles/PodCastScreen/styles';
 
 const Header = () => {
     return (
-        <View style={[PlayerScreenStyles.view, {flex: 1.5}]}>
+        <View style={[PlayerScreenStyles.view, {flex: 1.5, flexDirection: 'row'}]}>
             <View style ={
                 [PlayerScreenStyles.view, {flex: 0.2}]
                 }>
