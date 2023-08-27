@@ -1,20 +1,49 @@
-import React,{ useEffect } from 'react';
+import React,{ useEffect, useState } from 'react';
 import { ScrollView } from 'react-native';
 import { Text, View } from 'react-native';
 import { commonStyle, myMemberStyle } from '../../styles/onboardingScreen/style';
 
-import { useTeamData } from './context';
+import data from './exampleData.json';
+
+import { useTeamData, useMemberData } from './context';
 import TeamMembers from './TeamMember';
+import MemberNextBtn from './MemberNextBtn';
 
 
-const MyMember = () => {
+const MyMember = ({swiper}) => {
 
-    const {teamData} = useTeamData();
-  
+    const [memberList, setMemberList] = useState(data.team);
+    const [filteredList, setFilteredList] = useState(null)
+ 
+    const { teamData } = useTeamData();
+    const { onMemberClick } = useMemberData();
+    
+
+
     useEffect(() => {
-    }, [teamData]);
-  
-  
+      if(teamData){
+      setFilteredList(memberList.filter(item => item.team === teamData));
+      onMemberClick(null);
+    }}, [teamData]);
+
+
+    
+
+    console.log("memberList: ", filteredList);
+    
+    
+   
+    
+    
+
+    
+
+    const onClick = (member) => {
+      console.log("MyMemberScreen: ", member);
+      onMemberClick(member);
+    }
+
+
     return (
       <View style={{ flex: 1 }}>
         <View style = {[myMemberStyle.headerView]}>
@@ -32,15 +61,22 @@ const MyMember = () => {
         </View>
         <View style = {[myMemberStyle.line]}/>
         <View style={[myMemberStyle.bottomView]}>
-          <ScrollView>
+          <ScrollView style = {{marginBottom : 10}}>
                 <View
                   style={[myMemberStyle.rowView]}>
-                    <TeamMembers name= '이름'/>
-                    <TeamMembers name= '이름'/>
-                    <TeamMembers name= '이름'/>
-                    <TeamMembers name= '이름'/>
+                    {filteredList && (filteredList.map(item => (
+                    <TeamMembers
+                    name={item.member}
+                    key={item.id}
+                    onPress={() => onClick(item.member)}
+                    />
+                )))}
                 </View>
-              </ScrollView>
+          </ScrollView>
+          <MemberNextBtn
+                onPress = {() => swiper.current.scrollBy(1, true)}
+                message = '선수를 선택해주세요'
+            />
         </View>
       </View>
     )

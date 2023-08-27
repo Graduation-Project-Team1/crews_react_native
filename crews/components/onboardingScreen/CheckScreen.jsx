@@ -5,6 +5,8 @@ import { Shadow } from 'react-native-shadow-2';
 import { commonStyle, checkStyle, } from '../../styles/onboardingScreen/style';
 import { useNicknameData } from './context';
 
+import StartBtn from './StartBtn';
+
 
 const Check = () => {
 
@@ -15,30 +17,39 @@ const Check = () => {
 
     return (
         <View style = {{flex:1}}>
-        <View style = {[checkStyle.headerView]}>
-            <Text style = {[commonStyle.boldText]}>등록 정보를 확인하세요</Text>
-            <Text style = {[commonStyle.text]}>수정을 원한다면 이전으로 돌아가 수정해주세요.</Text>
-            <Text style = {[commonStyle.text]}>등록 후에도 프로필 편집을 통해 수정이 가능합니다.</Text>
-        </View>
-        <View style = {[checkStyle.profileView]}>
-            <Shadow
-            distance={15}
-            offset={[6, 6]}
-            >
+            <View style = {[checkStyle.headerView]}>
+                <Text style = {[commonStyle.boldText]}>등록 정보를 확인하세요</Text>
+                <Text style = {[commonStyle.text]}>수정을 원한다면 이전으로 돌아가 수정해주세요.</Text>
+                <Text style = {[commonStyle.text]}>등록 후에도 프로필 편집을 통해 수정이 가능합니다.</Text>
+            </View>
+            <View style = {[checkStyle.profileView]}>
+                <Shadow
+                distance={15}
+                offset={[6, 6]}
+                >
+                <View style = {{
+                    borderRadius: 103
+                }}>
+                    <Image
+                    style = {[checkStyle.image]}
+                    source = {require('../../assets/onboarding/user.png')}
+                    />
+                </View>
+                </Shadow>
+                <View style = {[checkStyle.nicknameView]}>
+                <Text style = {[checkStyle.nickname]}>{nicknameData}</Text>
+                <Text style = {[checkStyle.text]}>님</Text>
+                </View> 
+            </View>
             <View style = {{
-                borderRadius: 103
+                alignItems: 'center',
+                marginBottom: 10
             }}>
-                <Image
-                style = {[checkStyle.image]}
-                source = {require('../../assets/onboarding/user.png')}
+                < StartBtn
+                    onPress = {() => {}}
+                    message = '정보를 모두 입력해주세요'
                 />
             </View>
-            </Shadow>
-            <View style = {[checkStyle.nicknameView]}>
-            <Text style = {[checkStyle.nickname]}>{nicknameData}</Text>
-            <Text style = {[checkStyle.text]}>님</Text>
-            </View> 
-        </View>
         </View>
     )
 }

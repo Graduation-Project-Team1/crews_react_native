@@ -1,5 +1,5 @@
-import React,{ useState } from 'react';
-import { ScrollView } from 'react-native';
+import React,{ useState, useEffect } from 'react';
+import { ScrollView } from 'react-native-gesture-handler';
 import { Text, View } from 'react-native';
 import data from './exampleData.json'
 import { commonStyle, myTeamStyle, } from '../../styles/onboardingScreen/style';
@@ -9,9 +9,11 @@ import { useTeamData } from './context';
 import SportTeam from './SportTeam';
 import SportLeague from './SportLeague';
 import SportCategory from './SportCategory';
+import TeamNextBtn from './TeamNextBtn';
 
-const MyTeam = () => {
+const MyTeam = ({swiper}) => {
 
+const [teamList, setTeamList] = useState(data.sport);
 const [filteredList, setFilteredList] = useState([]);
 const [subCategoryData, setSubCategoryData] = useState([]);
 const [sport, setSport] = useState(1);
@@ -19,15 +21,30 @@ const [sport, setSport] = useState(1);
 const { onTeamClick } = useTeamData();
 const { teamData } = useTeamData();
 
+async function getTeamList() {
+    try {
+      //응답 성공
+      const response = await axios.get('');
+      setTeamList(response);
+      console.log(response);
+    } catch (error) {
+      //응답 실패
+      console.error(error);
+    }
+  }
+
+useEffect(() => {
+    console.log("MyTeamScreen: teamList 데이터가 변경됨(*화면 실행시에도 이 메세지가 출력됨)")
+}, [teamList]);
+
 const onClick = (selectedSport) => {
-    const updatedFilteredList = data.sport.filter(item => selectedSport === item.sport_id);
+    const updatedFilteredList = teamList.filter(item => selectedSport === item.sport_id);
     setFilteredList(updatedFilteredList);
-    setSport(selectedSport);
     setSubCategoryData([]);
 }
 
 const onClickLeague = (title) => {
-    const leagueData = filteredList.filter(item => item.league === title && item.sport_id === sport);
+    const leagueData = filteredList.filter(item => item.league === title);
     setSubCategoryData(leagueData);
 }
 
@@ -78,7 +95,7 @@ return (
             </ScrollView>
         </View>
         <View style = {[myTeamStyle.bottomView]}>
-            <ScrollView>
+            <ScrollView style = {{marginBottom : 10}}>
                 <View
                 style={[myTeamStyle.rowView]}>
                 {subCategoryData.map(item => (
@@ -90,7 +107,12 @@ return (
                 ))}
                 </View>
             </ScrollView>
+            <TeamNextBtn
+                onPress = {() => swiper.current.scrollBy(1, true)}
+                message = '팀을 선택해주세요'
+            />
         </View>
+        
     </View>
 )
 }

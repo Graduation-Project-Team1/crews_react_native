@@ -10,7 +10,8 @@ import PodcastList from '../../components/PodCastScreen/PodcastItems.js';
 const PodCastScreen = ({navigation}) => {
   return (
     <View style = {{
-      flex: 1
+      flex: 1,
+      backgroundColor: '#ffffff'
     }}>
       <View style = {{
         flex: 8

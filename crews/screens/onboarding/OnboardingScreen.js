@@ -1,66 +1,71 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import { TouchableOpacity } from 'react-native';
-import { Text, View } from 'react-native';
-import Swiper from 'react-native-web-swiper';
+import { Text, View, Button } from 'react-native';
+import  Swiper  from 'react-native-swiper';
 import { AntDesign } from '@expo/vector-icons';
 import { commonStyle, swiperStyle, } from '../../styles/onboardingScreen/style';
 
-import { TeamDataProvider, NicknameDataProvider } from '../../components/onboardingScreen/context';
+import { TeamDataProvider, NicknameDataProvider, MemberDataProvider } from '../../components/onboardingScreen/context';
 
 import Profile from '../../components/onboardingScreen/ProfileScreen';
 import MyMember from '../../components/onboardingScreen/MyMemberScreen';
 import Check from '../../components/onboardingScreen/CheckScreen';
 import MyTeam from '../../components/onboardingScreen/MyTeamScreen';
+import NextBtn from '../../components/onboardingScreen/TeamNextBtn.jsx';
+
 
 const OnboardingScreen = () => {
 
-  return (
-    <TeamDataProvider>
-      <NicknameDataProvider>
-        <View style = {{
-          flex: 1,
-          marginTop: 25
-        }}>
-          <Swiper 
-            style={[commonStyle.alignment]} 
-            showsButtons loop={false}
-            controlsProps={{
-              dotsTouchable: true,
-              dotsPos: 'top',
-              prevPos: 'top-left',
-              nextPos: 'bottom',
-              PrevComponent: ({ onPress }) => 
-                <AntDesign 
-                name="left" 
-                size={24} 
-                color="black"
-                onPress={onPress}
-                />,
-              NextComponent: ({ onPress }) => <TouchableOpacity
-                  onPress = {onPress}
-                  style = {[swiperStyle.nextBtn]}>
+    const swiper = useRef(null);
+
+    return (
+        <TeamDataProvider>
+        <NicknameDataProvider>
+        <MemberDataProvider>
+            <View style = {{
+            flex: 1,
+            backgroundColor: '#ffffff',
+            marginTop: 25
+            }}>
+            <Swiper 
+                style={[commonStyle.alignment]} 
+                buttonWrapperStyle={{alignItems: 'flex-start', flex:1, flexDirection:'column', top: 5, bottom: 10}} 
+                showsButtons={true} 
+                loop = {false}
+                ref={swiper}
+                paginationStyle={{bottom: undefined,  top:20, justifyContent: 'center' }}
+                prevButton = {
+                        <AntDesign 
+                        name="left" 
+                        size={24} 
+                        color="black"
+                        style = {{position: 'absolute'}}
+                        />
+                }
+                nextButton = {<View/>}
+                dotColor='#D9D9D980'
+                activeDotColor='#D0BCFF'
+                activeDotStyle = {{width: 18}}
+                controlsProps={{
+                lastNextElement: () => <TouchableOpacity
+                style = {[swiperStyle.nextBtn]}>
                     <View style = {[commonStyle.alignment]}>
-                    <Text style = {[swiperStyle.btnText]}>다음으로</Text>
-                  </View>
+                    <Text style = {[swiperStyle.btnText]}>시작하기</Text>
+                </View>
                 </TouchableOpacity>,
-              lastNextElement: () => <TouchableOpacity
-              style = {[swiperStyle.nextBtn]}>
-                <View style = {[commonStyle.alignment]}>
-                <Text style = {[swiperStyle.btnText]}>시작하기</Text>
-              </View>
-            </TouchableOpacity>,
-            }}
-            >
-            <Profile/>
-            <MyTeam/>
-            <MyMember/>
-            <Check/>
-            
-          </Swiper>
-        </View>
-      </NicknameDataProvider>
-    </TeamDataProvider>
-  )
+                }}
+                >
+                <Profile swiper={swiper}/>
+                <MyTeam swiper={swiper}/>
+                <MyMember swiper={swiper}/>
+                <Check/>
+                
+            </Swiper>
+            </View>
+        </MemberDataProvider>
+        </NicknameDataProvider>
+        </TeamDataProvider>
+    )
 }
 
 export default OnboardingScreen;

@@ -5,9 +5,9 @@ import { Image } from 'react-native';
 
 import {useNicknameData} from './context';
 import {commonStyle, profileStyle} from '../../styles/onboardingScreen/style'
+import ProfileNextBtn from './ProfileNextBtn';
 
-
-const Profile = () => {
+const Profile = ({swiper}) => {
 
     const { enterNickname } = useNicknameData();
   
@@ -27,7 +27,7 @@ const Profile = () => {
           <Text style = {[commonStyle.text]}>나의팀 이미지로 자동 등록됩니다</Text>
         </View>
         <View style = {{
-          flex:17,
+          flex:15,
           alignItems: 'center',
           paddingTop: 10
         }}>
@@ -40,13 +40,22 @@ const Profile = () => {
           }}>
             <View style = {[profileStyle.textInputView]}>
               <TextInput 
-                style = {{fontSize: 25}}
+                style = {{fontSize: 25, textAlign: 'center'}}
                 onChangeText={(text) => {inputNickname(text)}}
                 placeholder='크루즈회원'
               />
             </View>
             <Text style = {{fontSize: 25}}> 님</Text>
           </View>
+        </View>
+        <View style = {{
+            alignItems: 'center',
+            marginBottom: 10
+        }}>
+            <ProfileNextBtn 
+                onPress = {() => swiper.current.scrollBy(1, true)}
+                message = '닉네임을 입력해주세요'
+            />
         </View>
       </View>
     )

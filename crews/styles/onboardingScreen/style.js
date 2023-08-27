@@ -18,13 +18,11 @@ export const commonStyle = StyleSheet.create({
   
   export const swiperStyle = StyleSheet.create({
     nextBtn: {
-      backgroundColor: '#276A52',
       width: 390,
       height: 40,
       borderRadius: 10,
       alignItems: 'center',
-      justifyContent: 'center',
-      marginBottom: 20
+      justifyContent: 'center'
     },
     btnText: {
       color: '#ffffff',
@@ -86,6 +84,7 @@ export const commonStyle = StyleSheet.create({
       alignItems: 'center', 
       justifyContent: 'center', 
       padding: 20,
+      paddingBottom: 10
     },
     rowView: {
       flexDirection: 'row',
@@ -101,7 +100,7 @@ export const commonStyle = StyleSheet.create({
       paddingTop: 60
     },
     profileView: {
-      flex:17,
+      flex:15,
       alignItems: 'center',
       paddingTop: 10
     },
@@ -184,7 +183,8 @@ export const commonStyle = StyleSheet.create({
       flex: 13,
       alignItems: 'center',
       justifyContent: 'center',
-      padding: 20
+      padding: 20,
+      paddingBottom: 10
     },
     rowView: {
       flexDirection: 'row',
