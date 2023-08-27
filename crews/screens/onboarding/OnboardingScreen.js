@@ -7,11 +7,10 @@ import { commonStyle, swiperStyle, } from '../../styles/onboardingScreen/style';
 
 import { TeamDataProvider, NicknameDataProvider, MemberDataProvider } from '../../components/onboardingScreen/context';
 
-import Profile from '../../components/onboardingScreen/ProfileScreen';
-import MyMember from '../../components/onboardingScreen/MyMemberScreen';
-import Check from '../../components/onboardingScreen/CheckScreen';
-import MyTeam from '../../components/onboardingScreen/MyTeamScreen';
-import NextBtn from '../../components/onboardingScreen/TeamNextBtn.jsx';
+import Profile from './ProfileScreen';
+import MyMember from './MyMemberScreen';
+import Check from './CheckScreen';
+import MyTeam from './MyTeamScreen';
 
 
 const OnboardingScreen = () => {

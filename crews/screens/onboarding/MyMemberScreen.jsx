@@ -3,11 +3,11 @@ import { ScrollView } from 'react-native';
 import { Text, View } from 'react-native';
 import { commonStyle, myMemberStyle } from '../../styles/onboardingScreen/style';
 
-import data from './exampleData.json';
+import data from '../../components/onboardingScreen/exampleData.json';
 
-import { useTeamData, useMemberData } from './context';
-import TeamMembers from './TeamMembers';
-import MemberNextBtn from './MemberNextBtn';
+import { useTeamData, useMemberData } from '../../components/onboardingScreen/context';
+import TeamMembers from '../../components/onboardingScreen/TeamMembers';
+import MemberNextBtn from '../../components/onboardingScreen/MemberNextBtn';
 
 
 const MyMember = ({swiper}) => {

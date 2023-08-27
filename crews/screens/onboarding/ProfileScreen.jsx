@@ -3,9 +3,9 @@ import { TextInput} from 'react-native';
 import { Text, View} from 'react-native';
 import { Image } from 'react-native';
 
-import {useNicknameData} from './context';
+import { useNicknameData } from '../../components/onboardingScreen/context';
 import {commonStyle, profileStyle} from '../../styles/onboardingScreen/style'
-import ProfileNextBtn from './ProfileNextBtn';
+import ProfileNextBtn from '../../components/onboardingScreen/ProfileNextBtn';
 
 const Profile = ({swiper}) => {
 

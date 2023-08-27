@@ -1,15 +1,15 @@
 import React,{ useState, useEffect } from 'react';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Text, View } from 'react-native';
-import data from './exampleData.json'
+import data from '../../components/onboardingScreen/exampleData.json'
 import { commonStyle, myTeamStyle, } from '../../styles/onboardingScreen/style';
 
-import { useTeamData } from './context';
+import { useTeamData } from '../../components/onboardingScreen/context';
 
-import SportTeam from './SportTeam';
-import SportLeague from './SportLeague';
-import SportCategory from './SportCategory';
-import TeamNextBtn from './TeamNextBtn';
+import SportTeam from '../../components/onboardingScreen/SportTeam';
+import SportLeague from '../../components/onboardingScreen/SportLeague';
+import SportCategory from '../../components/onboardingScreen/SportCategory';
+import TeamNextBtn from '../../components/onboardingScreen/TeamNextBtn'
 
 const MyTeam = ({swiper}) => {
 
