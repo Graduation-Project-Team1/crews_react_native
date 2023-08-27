@@ -6,7 +6,7 @@ import { commonStyle, myMemberStyle } from '../../styles/onboardingScreen/style'
 import data from './exampleData.json';
 
 import { useTeamData, useMemberData } from './context';
-import TeamMembers from './TeamMember';
+import TeamMembers from './TeamMembers';
 import MemberNextBtn from './MemberNextBtn';
 
 
