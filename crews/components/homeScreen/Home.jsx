@@ -1,11 +1,11 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
-import HomeScreen from '../../screens/HomeScreen';
-import NewsScreen from '../../screens/NewsScreen';
-import PodCastScreen from '../../screens/PodCastScreen';
-import AnalysisScreen from '../../screens/AnalysisScreen';
-import TeamScreen from '../../screens/TeamScreen';
+import HomeScreen from '../../screens/home/HomeScreen';
+import NewsScreen from '../../screens/news/NewsScreen';
+import PodCastScreen from '../../screens/podcast/PodCastScreen';
+import AnalysisScreen from '../../screens/analysis/AnalysisScreen';
+import TeamScreen from '../../screens/team/TeamScreen';
 import colors from '../../styles/colors';
 import CustomTabButton from '../common/CustomTabButton';
 
