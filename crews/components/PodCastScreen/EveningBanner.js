@@ -1,3 +1,4 @@
+import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { Image } from "react-native";
 import colors from '../../styles/PodCastScreen/colors';
@@ -6,7 +7,11 @@ import { bannerStyles, viewStyles} from '../../styles/PodCastScreen/styles';
 
 const EveningBanner = (props) =>{
     return(
-      <TouchableOpacity style = {[bannerStyles.banner,{backgroundColor: colors.subColor}]}>
+      <TouchableOpacity style = {[
+        bannerStyles.banner,
+        {backgroundColor: colors.subColor}
+        ]}
+        onPress={() => {}}>
         <View style = {{
           padding: 15
           }}>
