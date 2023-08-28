@@ -2,12 +2,14 @@ import React from 'react';
 import { TextInput} from 'react-native';
 import { Text, View} from 'react-native';
 import { Image } from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
 
 import { useNicknameData } from '../../components/onboardingScreen/context';
 import {commonStyle, profileStyle} from '../../styles/onboardingScreen/style'
 import ProfileNextBtn from '../../components/onboardingScreen/ProfileNextBtn';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const Profile = ({swiper}) => {
+const Profile = ({swiper, navigation}) => {
 
     const { enterNickname } = useNicknameData();
   
@@ -17,11 +19,27 @@ const Profile = ({swiper}) => {
   
     return(
       <View style = {{flex:1}}>
+        <View style = {{alignItems: 'flex-start'}}>
+          <TouchableOpacity 
+          onPress={() => navigation.pop()}
+          style = {{
+            marginTop: 15,
+            marginLeft: 10
+          }}>
+            <AntDesign 
+            name="left" 
+            size={24} 
+            color="black"
+            />
+          </TouchableOpacity>
+        </View>
+        
         <View style = {{
           flex:4,
           alignItems: 'center',
-          paddingTop: 60
+          paddingTop: 25
         }}>
+          
           <Text style = {[commonStyle.boldText]}>기본 정보를 등록해주세요</Text>
           <Text style = {[commonStyle.text]}>프로필 이미지는 이후 선택할</Text>
           <Text style = {[commonStyle.text]}>나의팀 이미지로 자동 등록됩니다</Text>

@@ -13,7 +13,7 @@ import Check from './CheckScreen';
 import MyTeam from './MyTeamScreen';
 
 
-const OnboardingScreen = () => {
+const OnboardingScreen = ({navigation}) => {
 
     const swiper = useRef(null);
 
@@ -45,16 +45,8 @@ const OnboardingScreen = () => {
                 dotColor='#D9D9D980'
                 activeDotColor='#D0BCFF'
                 activeDotStyle = {{width: 18}}
-                controlsProps={{
-                lastNextElement: () => <TouchableOpacity
-                style = {[swiperStyle.nextBtn]}>
-                    <View style = {[commonStyle.alignment]}>
-                    <Text style = {[swiperStyle.btnText]}>시작하기</Text>
-                </View>
-                </TouchableOpacity>,
-                }}
                 >
-                <Profile swiper={swiper}/>
+                <Profile swiper={swiper} navigation={navigation}/>
                 <MyTeam swiper={swiper}/>
                 <MyMember swiper={swiper}/>
                 <Check/>

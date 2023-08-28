@@ -11,7 +11,7 @@ const EveningBanner = (props) =>{
         bannerStyles.banner,
         {backgroundColor: colors.subColor}
         ]}
-        onPress={() => props.navigation.navigate('Onboarding')}>
+        onPress={() => {}}>
         <View style = {{
           padding: 15
           }}>
