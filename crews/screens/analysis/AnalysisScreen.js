@@ -9,7 +9,7 @@ export default function AnalysisScreen() {
   const [showCoachInfo, setShowCoachInfo] = useState(false);
   const [showPlayer, setShowPlayer] = useState(false);
   return (
-    <View style={{flex:1}}>
+    <View style={{flex:1, backgroundColor:'#FFFFFF'}}>
       <View style={styles.imageContainer}>
         <Image style={styles.imageInput} source={require('../../assets/analysis/jeounBuk.png')} />
       </View>
@@ -34,7 +34,7 @@ export default function AnalysisScreen() {
 
       {/* 코치 정보 화면 */}
       {showCoachInfo && (
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView style={{showsVerticalScrollIndicator:false}}>
         <CoachInfoScreen/>
       </ScrollView>
       
@@ -42,9 +42,9 @@ export default function AnalysisScreen() {
 
       {/* 선수 화면 */}
       {showPlayer && (
-        <ScrollView showsVerticalScrollIndicator={false}>
+        /*<ScrollView style={{showsVerticalScrollIndicator:false}}> */
           <PlayerScreen/>
-        </ScrollView>
+        
       )}
     </View>
   );
