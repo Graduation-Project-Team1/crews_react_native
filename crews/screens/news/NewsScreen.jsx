@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { ScrollView, Text, View } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import { styles } from "../styles/styles";
-import { newsBoxStyles, newsScreenStyles } from "../styles/newsScreen/newsScreenStyles";
-import Tag from "../components/common/Tag";
-import IssueBox from "../components/newsScreen/IssueBox";
-import CommunityBox from "../components/newsScreen/CommunityBox";
-import NewsBox from "../components/newsScreen/NewsBox";
+import { styles } from "../../styles/styles";
+import { newsBoxStyles, newsScreenStyles } from "../../styles/newsScreen/newsScreenStyles";
+import Tag from "../../components/common/Tag";
+import IssueBox from "../../components/newsScreen/IssueBox";
+import CommunityBox from "../../components/newsScreen/CommunityBox";
+import NewsBox from "../../components/newsScreen/NewsBox";
 
 const NewsScreen = () => {
   const [value, setValue] = useState('인스타그램')
