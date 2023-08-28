@@ -4,16 +4,16 @@ import { Text, View } from 'react-native';
 import { commonStyle, myMemberStyle } from '../../styles/onboardingScreen/style';
 
 
-const TeamMembers = ({ name, onPress }) => {
+const TeamMembers = (props) => {
 
     return (
       <TouchableOpacity style = {[
         commonStyle.alignment,
         {margin: 5}
       ]}
-      onPress={() => onPress(name)}>
+      onPress={props.onPress}>
         <View style = {[myMemberStyle.imageView]}></View>
-        <Text style = {{fontWeight: 'bold'}}>{name}</Text>
+        <Text style = {{fontWeight: 'bold'}}>{props.name}</Text>
       </TouchableOpacity>
     )
   }
