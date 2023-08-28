@@ -8,7 +8,6 @@ import TeamScreen from '../../screens/team/TeamScreen';
 import colors from '../../styles/colors';
 
 import CustomTabButton from '../common/CustomTabButton';
-import colors from '../../styles/colors';
 import PodcastIndex from '../../screens/podcast/PodcastIndex';
 
 const Tab = createBottomTabNavigator();
