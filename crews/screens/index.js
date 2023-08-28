@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import AnalysisScreen from './analysis/AnalysisScreen';
-import HomeScreen from './home/HomeScreen';
+import HomeIndex from './home/HomeIndex';
 import NewsScreen from './news/NewsScreen';
 import PodcastIndex from './podcast/PodcastIndex';
 import TeamScreen from './team/TeamScreen';
@@ -19,7 +19,7 @@ const Root = ({navigation}) => {
         <BottomTab.Navigator>
             <BottomTab.Screen 
             name={'Home'} 
-            component={HomeScreen}
+            component={HomeIndex}
             options={{
                 tabBarButton: CustomTabButton,
                 tabBarActiveTintColor: colors.Green,
