@@ -21,11 +21,6 @@ export default function PodcastIndex({navigation}) {
                 component={PodcastPlayer}
             />
 
-            <Stack.Screen
-                options = {{ headerShown: false}}
-                name= "Onboarding"
-                component={OnboardingScreen}
-            />
         </Stack.Navigator>
     );
 }

@@ -7,7 +7,7 @@ import OnboardingScreen from '../onboarding/OnboardingScreen';
 
 const Stack = createStackNavigator();
 
-export default function HomeIndex({navigation}) {
+export default function SettingIndex({navigation}) {
     return (
         <Stack.Navigator initialRouteName='SettingScreen'>
             <Stack.Screen
