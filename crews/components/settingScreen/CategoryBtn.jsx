@@ -15,7 +15,7 @@ const CategoryBtn = ( props ) => {
             alignItems: 'center',
             justifyContent: 'space-between'
         }}>
-            <Text style = {{fontSize: 15}}>{props.title}</Text>
+            <Text style = {{fontSize: 15, color: props.color}}>{props.title}</Text>
             <AntDesign 
                 name="right" 
                 size={17} 

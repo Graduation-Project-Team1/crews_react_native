@@ -1,8 +1,9 @@
 import React from "react";
-import { Text, View, Button, TouchableOpacity } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
+import { View } from "react-native";
 
 import CategoryBtn from "../../components/settingScreen/CategoryBtn";
+import CateHeader from "../../components/settingScreen/CateHeader";
+import ProfileView from "../../components/settingScreen/ProfileView";
 
 const AccountSettingScreen = ({navigation}) => {
   return (
@@ -10,36 +11,12 @@ const AccountSettingScreen = ({navigation}) => {
       flex: 1,
       backgroundColor: '#ffffff'
     }}>
-      <View style = {{
-        height: 50,
-        marginTop: 25,
-        padding: 10,
-        flexDirection: 'row',
-        alignItems: 'center'
-      }}>
-        <TouchableOpacity 
-        onPress={()=> navigation.pop()}
-        style = {{ 
-            alignItems: 'center',
-            justifyContent: 'center'
-        }}>
-            <AntDesign 
-            name="left" 
-            size={17} 
-            color="black"/>
-        </TouchableOpacity>
-        <Text style = {{fontSize: 15, fontWeight: 'bold'}}>계정 관리</Text>
-      </View>
-      <View style = {{
-        height: 100,
-        backgroundColor: '#b0b0b0'
-      }}>
-
-      </View>
+      <CateHeader title = '계정 관리' onPress = {()=> navigation.pop()}/>
+      <ProfileView/>
       <CategoryBtn title = '로그아웃'/>
-      <CategoryBtn title = '회원 탈퇴'/>
+      <CategoryBtn title = '회원 탈퇴' color = '#ff0000'/>
     </View>
   );
-};
+}
 
 export default AccountSettingScreen;
