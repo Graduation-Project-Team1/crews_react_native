@@ -7,7 +7,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { useNicknameData } from '../../components/onboardingScreen/context';
 import {commonStyle, profileStyle} from '../../styles/onboardingScreen/style'
 import ProfileNextBtn from '../../components/onboardingScreen/ProfileNextBtn';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { TouchableOpacity } from 'react-native';
 
 const Profile = ({swiper, navigation}) => {
 
