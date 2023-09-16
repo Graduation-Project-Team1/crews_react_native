@@ -10,6 +10,7 @@ import TeamScreen from './team/TeamScreen';
 import { Ionicons } from '@expo/vector-icons';
 import CustomTabButton from '../components/common/CustomTabButton';
 import colors from '../styles/colors';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 
 const BottomTab = createBottomTabNavigator();
@@ -62,9 +63,14 @@ const Root = ({navigation}) => {
 }
 
 export default function index () {
+
+    const queryClient = new QueryClient();
+
     return(
-        <NavigationContainer>
-            <Root/>
-        </NavigationContainer>
+        <QueryClientProvider client={queryClient}>
+            <NavigationContainer>
+                <Root/>
+            </NavigationContainer>
+        </QueryClientProvider>
     )
 };
