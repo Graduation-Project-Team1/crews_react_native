@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 
 
-import Header from '../../components/homeScreen/Header';
+import Header from '../../components/PodCastScreen/PlayerHeader';
 import Center from '../../components/PodCastScreen/PlayerCenter';
 import Bottom from '../../components/PodCastScreen/PlayerBottom';
 

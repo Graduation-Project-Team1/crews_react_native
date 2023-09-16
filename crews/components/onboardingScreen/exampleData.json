@@ -21,5 +21,12 @@
         { "id": 19, "league": "KBO 리그", "team": "두산 베어스", "sport_id": 2 },
         { "id": 20, "league": "KBO 리그", "team": "두산 베어스", "sport_id": 2 },
         { "id": 21, "league": "KBO 리그", "team": "두산 베어스", "sport_id": 2 }
+    ],
+    "team": [
+        { "id": 1, "team": "두산 베어스", "member": "김선수" },
+        { "id": 2, "team": "두산 베어스", "member": "이선수" },
+        { "id": 3, "team": "두산 베어스", "member": "박선수" },
+        { "id": 4, "team": "두산 베어스", "member": "최선수" }
     ]
 }
+

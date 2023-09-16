@@ -1,7 +1,7 @@
 import React from "react";
 import PlayList from "./PlayList";
 import { initialWindowMetrics } from "react-native-safe-area-context";
-import { ScrollView, Text, View } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const items = [
     {
@@ -33,6 +33,26 @@ const items = [
         key: 6,
         title: "5월 22번째 날 : 전북현대", 
         time: "2023년 05월 22일 오후 4시"
+    },
+    {
+        key: 7,
+        title: "5월 22번째 날 : 전북현대", 
+        time: "2023년 05월 22일 오후 4시"
+    },
+    {
+        key: 8,
+        title: "5월 22번째 날 : 전북현대", 
+        time: "2023년 05월 22일 오후 4시"
+    },
+    {
+        key: 9,
+        title: "5월 22번째 날 : 전북현대", 
+        time: "2023년 05월 22일 오후 4시"
+    },
+    {
+        key: 10,
+        title: "5월 22번째 날 : 전북현대", 
+        time: "2023년 05월 22일 오후 4시"
     }
 ];
 
@@ -48,8 +68,7 @@ const PodcastList = ({navigation}) => {
                     key = {item.key}
                     title = {item.title}
                     time = {item.time}
-                >
-                </PlayList>
+                />
             ))}
             
         </ScrollView>

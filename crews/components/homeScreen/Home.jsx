@@ -5,8 +5,9 @@ import HomeScreen from '../../screens/home/HomeScreen';
 import NewsScreen from '../../screens/news/NewsScreen';
 import AnalysisScreen from '../../screens/analysis/AnalysisScreen';
 import TeamScreen from '../../screens/team/TeamScreen';
-import CustomTabButton from '../common/CustomTabButton';
 import colors from '../../styles/colors';
+
+import CustomTabButton from '../common/CustomTabButton';
 import PodcastIndex from '../../screens/podcast/PodcastIndex';
 
 const Tab = createBottomTabNavigator();
