@@ -17,7 +17,7 @@ export const searchScreenStyles = StyleSheet.create({
   },
 
   headerText: {
-    color: colors.white
+    color: colors.white,
   },
 
   resultContainer: {
@@ -26,5 +26,5 @@ export const searchScreenStyles = StyleSheet.create({
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
     backgroundColor: colors.white
-  }
+  },
 })
