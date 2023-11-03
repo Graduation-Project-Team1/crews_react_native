@@ -1,45 +1,38 @@
 import React, {useState} from 'react';
-import { Button, StyleSheet, Text, TextInput, View, Image, TouchableOpacity,ScrollView } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity,ScrollView } from 'react-native';
 import TeamStatsScreen from './TeamStatsScreen';
 import CoachInfoScreen from './CoachInfoScreen';
 import PlayerScreen from './PlayerScreen';
 
-export default function AnalysisScreen() {
+export default function StatisticScreen() {
   const [showTeamStats, setShowTeamStats] = useState(true);
   const [showCoachInfo, setShowCoachInfo] = useState(false);
   const [showPlayer, setShowPlayer] = useState(false);
   return (
     <View style={{flex:1, backgroundColor:'#FFFFFF'}}>
-      <View style={styles.imageContainer}>
-        <Image style={styles.imageInput} source={require('../../assets/analysis/jeounBuk.png')} />
-      </View>
+      <View style={styles.line} />
       <View style={styles.textContainer}>
         <TouchableOpacity onPress={() => { setShowTeamStats(true), setShowCoachInfo(false), setShowPlayer(false); } }>
-            <Text style={styles.textInput}>팀 통계</Text>
+            <Text style={styles.textInput}>팀</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => { setShowTeamStats(false), setShowCoachInfo(true), setShowPlayer(false); } }>
-            <Text>코치 정보</Text>
+            <Text style={[styles.textInput,{marginLeft:7}]}>코치</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => { setShowTeamStats(false), setShowCoachInfo(false), setShowPlayer(true); } }>
-            <Text>선수</Text>
+            <Text style={[styles.textInput,{marginLeft:7}]}>선수</Text>
         </TouchableOpacity>
       </View>
-      
-      <View style={styles.line} />
 
       {/* 팀 통계*/}
       {showTeamStats && (
-        <TeamStatsScreen />
+        <TeamStatsScreen/>
       )}
-
       {/* 코치 정보 화면 */}
       {showCoachInfo && (
       <ScrollView style={{showsVerticalScrollIndicator:false}}>
         <CoachInfoScreen/>
       </ScrollView>
-      
       )}
-
       {/* 선수 화면 */}
       {showPlayer && (
         /*<ScrollView style={{showsVerticalScrollIndicator:false}}> */
@@ -51,6 +44,9 @@ export default function AnalysisScreen() {
 };
 
 const styles = StyleSheet.create({
+  bold:{
+    fontWeight:'bold'
+  },
   imageContainer: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -63,12 +59,16 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginTop: 5,
+    marginLeft:15,
+    marginTop: 20,
   },
   textInput: {
-    flex: 1,
-    textAlign: 'center',
+    color:'#1B1DB7',
+    borderWidth:0.8,
+    borderColor: '#1B1DB7',
+    borderRadius:10,
+    paddingLeft:12,
+    paddingRight:12,
   },
   line: {
     height: 1,
