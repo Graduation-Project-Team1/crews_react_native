@@ -1,5 +1,5 @@
 import React from 'react';
-import Auth from './components/homeScreen/Auth';
+import Auth from './screens/Auth';
 
 
 export default function App() {

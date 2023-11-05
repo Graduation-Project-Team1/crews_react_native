@@ -8,7 +8,6 @@ export default {
   white: '#FFFFFF',
   BGgray: '#D9D9D9',
 
-  twitterBlue: '#1DA1F2',
   primary: '#1B1DB7',
   primaryLight: '#D6E3FF',
   primaryLightMore: '#EFF4FF',
@@ -20,9 +19,13 @@ export default {
   secondaryDark: '#013800',
   alret: '#FF0000',
   unselectedGray: '#959DB1',
-  whitheGray: '#F5F5F5',
+  whiteGray: '#F5F5F5',
   dividerGray: '#E5E9EF',
   iconGray: '#D3D3D3',
   disabledGray: '#EBEBEB',
   textGray: '#A3A3A3',
+
+  twitter: '#1DA1F2',
+  instagram: '#E1306C',
+  reddit: '#FF4500',
 };
