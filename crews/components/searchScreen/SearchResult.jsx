@@ -20,18 +20,21 @@ const SearchResult = ({result}) => {
         time: "2023.08.01 17:03",
         watch: "1,234",
         img: 'https://r.yna.co.kr/global/home/v01/img/yonhapnews_logo_1200x800_kr01.jpg',
+        url: "https://www.naver.com",
       },
       {
         title: "프로야구, 2021년 3월 13일 개막",
         time: "2023.08.01 17:03",
         watch: "1,234",
         img: 'https://r.yna.co.kr/global/home/v01/img/yonhapnews_logo_1200x800_kr01.jpg',
+        url: "https://www.naver.com",
       },
       {
         title: "프로야구, 2021년 3월 13일 개막",
         time: "2023.08.01 17:03",
         watch: "1,234",
         img: 'https://r.yna.co.kr/global/home/v01/img/yonhapnews_logo_1200x800_kr01.jpg',
+        url: "https://www.naver.com",
       },
     ],
     radio: [
@@ -137,7 +140,8 @@ const SearchResult = ({result}) => {
                       time={news.time}
                       watch={news.watch}
                       img={news.img}
-                    />
+                      url={news.url}
+                  />
                   ))
                 }
               </View>

@@ -17,7 +17,8 @@ const NewsSection = ({emotion, newsList}) => {
               time={news.time}
               watch={news.watch}
               img={news.img}
-            />
+              url={news.url}
+              />
           );
         })}
       </View>
