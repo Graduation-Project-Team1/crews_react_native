@@ -9,11 +9,11 @@ import Contents from "../../components/homeScreen/Contents";
 
 const HomeScreen = ({navigation}) => {
   return (
-    <View style={[styles.layout, setBgColors.green]}>
+    <View style={[styles.layout, setBgColors.primary]}>
       <StatusBar style='auto'/>
       <Header navigation={navigation}/>
       <TopContents/>
-      <Contents/>
+      <Contents navigation={navigation}/>
     </View>
   );
 };

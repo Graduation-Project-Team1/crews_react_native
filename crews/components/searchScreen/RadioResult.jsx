@@ -1,20 +1,70 @@
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import React from "react";
-import { Text, View } from "react-native";
-import { faPlay } from "@fortawesome/free-solid-svg-icons";
-import { searchResultStyles } from "../../styles/searchScreen/searchResult";
+import { StyleSheet, Text, View } from "react-native";
+import Play from "../../assets/icons/icon_play.svg";
+import colors from "../../styles/colors";
 
-const RadioResult = ({rank, title, tags}) => {
+const RadioResult = ({order, title, tags}) => {
   return (
-    <View style={searchResultStyles.radio}>
-      <Text style={searchResultStyles.rank}>{rank}</Text>
-      <View style={searchResultStyles.radioContent}>
-        <Text style={searchResultStyles.titleText}>{title}</Text>
-        <Text style={searchResultStyles.subText}>{`#${tags[0]} #${tags[1]} #${tags[2]}`}</Text>
+    <View style={radioResultStyle.base}>
+      <Text style={radioResultStyle.order}>{order}</Text>
+      <View style={radioResultStyle.content}>
+        <Text style={radioResultStyle.title}>{title}</Text>
+        <View style={radioResultStyle.tags}>
+          {tags.map((tag, index) => (
+            <Text key={index} style={radioResultStyle.tag}>#{tag}</Text>
+          ))}
+        </View>
       </View>
-      <FontAwesomeIcon icon={faPlay} size={30}/>
+      <Play width={35} height={35} />
     </View>
   );
 };
 
 export default RadioResult;
+
+export const radioResultStyle = StyleSheet.create({
+  base: {
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "flex-start",
+    justifyContent: "flex-start",
+    marginBottom: 13,
+  },
+
+  order: {
+    width: 23,
+    marginRight: 13,
+    fontSize: 18,
+    fontWeight: 600,
+    lineHeight: 27,
+    color: colors.black,
+  },
+
+  content: {
+    flexGrow: 1,
+    flexDirection: "column",
+    justifyContent: "center",
+    alignContent: "flex-start",
+  },
+
+  title: {
+    fontSize: 16,
+    fontWeight: 400,
+    lineHeight: 24,
+    color: colors.black,
+  },
+
+  tags: {
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    columnGap: 10,
+  },
+
+  tag: {
+    fontSize: 13,
+    fontWeight: 400,
+    lineHeight: 19.5,
+    color: colors.textGray,
+  },
+});

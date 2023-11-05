@@ -1,5 +1,5 @@
 import React from "react";
-import { TouchableOpacity, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import SelectedTag from "./SelectedTag";
 import UnselectedTag from "./UnselectedTag";
 
@@ -14,3 +14,4 @@ const Tag = ({isSelected, text, onPress}) => {
 };
 
 export default Tag;
+
