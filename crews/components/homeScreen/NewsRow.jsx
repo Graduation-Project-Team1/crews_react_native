@@ -1,11 +1,17 @@
 import React from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, Linking, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Clock from "../../assets/icons/icon_clock.svg";
 import People from "../../assets/icons/icon_people.svg";
 import colors from "../../styles/colors";
 
-const NewsRow = ({order, title, time, watch, img}) => {
+const NewsRow = ({order, title, time, watch, img, url}) => {
+
+  const handlePress = () => {
+    Linking.openURL(url);
+  }
+
   return (
+    <TouchableOpacity onPress={handlePress}>
     <View style={newsRowStyle.base}>
       <Text style={newsRowStyle.order}>{order}</Text>
       <View style={newsRowStyle.content}>
@@ -19,6 +25,7 @@ const NewsRow = ({order, title, time, watch, img}) => {
       </View>
       <Image style={newsRowStyle.img} source={{uri: img}}/>
     </View>
+    </TouchableOpacity>
   );
 };
 
