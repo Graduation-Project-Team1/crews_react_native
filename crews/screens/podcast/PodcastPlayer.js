@@ -6,16 +6,18 @@ import Header from '../../components/PodCastScreen/PlayerHeader';
 import Center from '../../components/PodCastScreen/PlayerCenter';
 import Bottom from '../../components/PodCastScreen/PlayerBottom';
 
+import { PlayerScreenStyles, playListStyles } from '../../styles/PodCastScreen/styles';
+
 const PodcastPlayer = ({navigation}) => {
     return(
       <View style={{
         flex: 1,
-        backgroundColor: '#D4E1DC',
         flexDirection: 'column',
       }}>
         <Header/>
-        <Center/>
         <Bottom/>
+        <View style = {[PlayerScreenStyles.img]}>
+        </View>
       </View>
     )
     

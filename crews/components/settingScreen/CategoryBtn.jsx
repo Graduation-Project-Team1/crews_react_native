@@ -8,14 +8,14 @@ const CategoryBtn = ( props ) => {
         <TouchableOpacity 
         onPress={props.onPress}
         style = {{
-            height: 50,
+            height: 55,
             padding: 15,
-            marginTop: 5,
+            
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'space-between'
         }}>
-            <Text style = {{fontSize: 15, color: props.color}}>{props.title}</Text>
+            <Text style = {{fontSize: 16, color: props.color}}>{props.title}</Text>
             <AntDesign 
                 name="right" 
                 size={17} 

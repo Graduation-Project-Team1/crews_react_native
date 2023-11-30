@@ -3,6 +3,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { Text, View } from 'react-native';
 import data from '../../components/onboardingScreen/exampleData.json'
 import { commonStyle, myTeamStyle, } from '../../styles/onboardingScreen/style';
+import axios from 'axios';
 
 import { useTeamData } from '../../components/onboardingScreen/context';
 
@@ -13,34 +14,59 @@ import TeamNextBtn from '../../components/onboardingScreen/TeamNextBtn'
 
 const MyTeam = ({swiper}) => {
 
-const [teamList, setTeamList] = useState(data.sport);
+const [leagueList, setLeagueList] = useState([])
+const [teamList, setTeamList] = useState([]);
 const [filteredList, setFilteredList] = useState([]);
 const [subCategoryData, setSubCategoryData] = useState([]);
-const [sport, setSport] = useState(1);
+
+const [onSport, setOnSport] = useState('');
+const [onLeague, setOnLeague] = useState('');
 
 const { onTeamClick } = useTeamData();
 const { teamData } = useTeamData();
 
-async function getTeamList() {
-    try {
-      //응답 성공
-      const response = await axios.get('');
-      setTeamList(response);
-      console.log(response);
-    } catch (error) {
-      //응답 실패
-      console.error(error);
-    }
-  }
 
 useEffect(() => {
-    console.log("MyTeamScreen: teamList 데이터가 변경됨(*화면 실행시에도 이 메세지가 출력됨)")
-}, [teamList]);
+    const getLeagueList = async() => {
+        try {
+            const responseLeague = await axios.get(`http://crews.jongmin.xyz:8080/data/league/list?sportsName=${onSport}`);
 
-const onClick = (selectedSport) => {
-    const updatedFilteredList = teamList.filter(item => selectedSport === item.sport_id);
-    setFilteredList(updatedFilteredList);
-    setSubCategoryData([]);
+                // 성공적인 응답 처리
+                setLeagueList(responseLeague.data);
+                console.log("getLeagueList: 성공");
+
+        } catch (error) {
+            // Axios 오류 처리
+            
+            console.error(error);
+            
+        }
+    };
+
+    const getTeamList = async() => {
+        try {
+            const responseTeam = await axios.get(`http://crews.jongmin.xyz:8080/data/team/list?leagueId=${onLeague}`);
+
+                // 성공적인 응답 처리
+                setTeamList(responseTeam.data);
+                console.log("getTeamList: 성공");
+
+        } catch (error) {
+            // Axios 오류 처리
+            console.error(error);
+            console.error("Response status:", error.response.status);
+        }
+    };
+
+    getLeagueList();
+    getTeamList();
+
+    console.log("MyTeamScreen: teamList 데이터가 변경됨(*화면 실행시에도 이 메세지가 출력됨)")
+    console.log("onleague: ", onLeague);
+}, [onSport, onLeague]);
+
+const onClickSport = (selectedSport) => {
+    setOnSport(selectedSport);
 }
 
 const onClickLeague = (title) => {
@@ -48,7 +74,7 @@ const onClickLeague = (title) => {
     setSubCategoryData(leagueData);
 }
 
-const uniqueLeagueTitles = Array.from(new Set(filteredList.map(item => item.league))); // 중복 제거
+//const uniqueLeagueTitles = Array.from(new Set(filteredList.map(item => item.league))); // 중복 제거
 
 const selectTeamClick = (selectedTeam) => {
     onTeamClick(selectedTeam);
@@ -58,61 +84,65 @@ const selectTeamClick = (selectedTeam) => {
 
 return (
     <View style = {{flex:1}}>
-        <View style = {[myTeamStyle.headerView]}>
-            <Text style = {[commonStyle.boldText]}>어느 팀을 좋아하시나요?</Text>
-            <Text style = {[commonStyle.text]}>당신의 팀에 대한 소식을 전달해드려요</Text>
-        </View>
-        <View style = {[myTeamStyle.categoryMenuView]}>
-            <ScrollView 
-            horizontal = {true}
-            showsHorizontalScrollIndicator = {false}
-            style = {{
-                flexDirection: 'row',
-            }}>
-                <SportCategory title = '국내축구' onPress = {() => onClick(1)}/>
-                <SportCategory title = '국내야구' onPress = {() => onClick(2)}/>
-                <SportCategory title = '국내농구' onPress = {() => onClick(3)}/>
-                <SportCategory title = '해외축구' onPress = {() => onClick(4)}/>
-                <SportCategory title = '해외야구' onPress = {() => onClick(5)}/>
-                <SportCategory title = '해외농구' onPress = {() => onClick(6)}/>
-            </ScrollView>
-            <ScrollView 
-            horizontal = {true}
-            showsHorizontalScrollIndicator = {false}
-            style = {{
-                flexDirection: 'row',
-                marginsTop: 5
-            }}>
-                {
-                uniqueLeagueTitles.map(title => (
-                    <SportLeague
-                    title={title}
-                    key={title}
-                    onPress={() => onClickLeague(title)}
-                    />
-                ))
-                }
-            </ScrollView>
-        </View>
-        <View style = {[myTeamStyle.bottomView]}>
-            <ScrollView style = {{marginBottom : 10}}>
-                <View
-                style={[myTeamStyle.rowView]}>
-                {subCategoryData.map(item => (
-                    <SportTeam
-                    name={item.team}
-                    key={item.id}
-                    onPress={() => selectTeamClick(item.team)}
-                    />
-                ))}
-                </View>
-            </ScrollView>
+        <ScrollView>
+            <View style = {[myTeamStyle.headerView]}>
+                <Text style = {[commonStyle.boldText]}>어느 팀을 좋아하시나요?</Text>
+                <Text style = {[commonStyle.text]}>당신의 팀에 대한 소식을 전달해드려요</Text>
+            </View>
+            <View style = {[myTeamStyle.categoryMenuView]}>
+                <ScrollView 
+                horizontal = {true}
+                showsHorizontalScrollIndicator = {false}
+                style = {{
+                    flexDirection: 'row',
+                    marginBottom: 10,
+                    marginTop: 25
+                }}>
+                    <SportCategory title = '국내축구' onPress = {() => onClickSport('Football')}/>
+                    <SportCategory title = '국내야구' onPress = {() => onClickSport('Baseball')}/>
+                    <SportCategory title = '국내농구' onPress = {() => onClickSport('Basketball')}/>
+                    <SportCategory title = '해외축구' onPress = {() => onClickSport('Football')}/>
+                    <SportCategory title = '해외야구' onPress = {() => onClickSport('Baseball')}/>
+                    <SportCategory title = '해외농구' onPress = {() => onClickSport('Basketball')}/>
+                </ScrollView>
+                <ScrollView 
+                horizontal = {true}
+                showsHorizontalScrollIndicator = {false}
+                style = {{
+                    flexDirection: 'row',
+                    marginsTop: 5
+                }}>
+                    {
+                    leagueList.map((leagueItem, index) => (
+                        <SportLeague
+                        title={leagueItem.leagueName}
+                        key={index}
+                        onPress={() => {setOnLeague(leagueItem.leagueId)}}
+                        />
+                    ))
+                    }
+                </ScrollView>
+            </View>
+            <View style = {[myTeamStyle.bottomView]}>
+
+                    <View
+                    style={[myTeamStyle.rowView]}>
+                    {teamList.map((item,index) => (
+                        <SportTeam
+                        name={item.teamName}
+                        key={index}
+                        onPress={() => {}}
+                        />
+                    ))}
+                    </View> 
+            </View>
+        </ScrollView>
+        <View style = {{alignItems: 'center'}}>
             <TeamNextBtn
                 onPress = {() => swiper.current.scrollBy(1, true)}
                 message = '팀을 선택해주세요'
             />
         </View>
-        
     </View>
 )
 }

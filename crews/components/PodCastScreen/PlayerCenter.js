@@ -6,9 +6,7 @@ import { PlayerScreenStyles } from '../../styles/PodCastScreen/styles';
 const Center = () => {
     return (
         <View style = {[PlayerScreenStyles.view, {flex: 6}]}>
-            <View style = {[PlayerScreenStyles.view, {flex: 1}]}>
-            <Text style = {PlayerScreenStyles.centerText}>Podcast  |  Script</Text>
-            </View>
+
             <View style = {[PlayerScreenStyles.view, {flex: 7}]}>
             <View style = {PlayerScreenStyles.img}>
             </View>

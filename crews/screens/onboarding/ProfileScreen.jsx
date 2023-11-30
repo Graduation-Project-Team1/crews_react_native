@@ -3,6 +3,9 @@ import { TextInput} from 'react-native';
 import { Text, View} from 'react-native';
 import { Image } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
+import colors from '../../styles/colors';
+import { LinearGradient } from 'expo-linear-gradient';
+
 
 import { useNicknameData } from '../../components/onboardingScreen/context';
 import {commonStyle, profileStyle} from '../../styles/onboardingScreen/style'
@@ -29,7 +32,7 @@ const Profile = ({swiper, navigation}) => {
             <AntDesign 
             name="left" 
             size={24} 
-            color="black"
+            color={colors.iconGray}
             />
           </TouchableOpacity>
         </View>
@@ -40,30 +43,26 @@ const Profile = ({swiper, navigation}) => {
           paddingTop: 25
         }}>
           
-          <Text style = {[commonStyle.boldText]}>기본 정보를 등록해주세요</Text>
+          <Text style = {[commonStyle.boldText]}>기본 정보를 등록해주세요.</Text>
           <Text style = {[commonStyle.text]}>프로필 이미지는 이후 선택할</Text>
-          <Text style = {[commonStyle.text]}>나의팀 이미지로 자동 등록됩니다</Text>
+          <Text style = {[commonStyle.text]}>나의 팀 이미지로 자동 등록됩니다.</Text>
         </View>
         <View style = {{
           flex:15,
           alignItems: 'center',
           paddingTop: 10
         }}>
-          <Image
-            style = {[profileStyle.image]}
-            source = {require('../../assets/onboarding/user.png')}
-          />
+          <LinearGradient style={profileStyle.image} colors={[colors.primary, '#1B1DB7d7','#1B1DB7c7', '#1B1DB7b7', '#1B1DB797']}></LinearGradient>
           <View style = {{
             flexDirection: 'row'
           }}>
             <View style = {[profileStyle.textInputView]}>
               <TextInput 
-                style = {{fontSize: 25, textAlign: 'center'}}
+                style = {{fontSize: 18, fontWeight:'400', textAlign: 'center', color: colors.textGray}}
                 onChangeText={(text) => {inputNickname(text)}}
-                placeholder='크루즈회원'
+                placeholder='닉네임'
               />
             </View>
-            <Text style = {{fontSize: 25}}> 님</Text>
           </View>
         </View>
         <View style = {{

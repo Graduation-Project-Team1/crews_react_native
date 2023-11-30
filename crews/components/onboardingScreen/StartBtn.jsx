@@ -1,6 +1,7 @@
 import React,{ useEffect } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { Text, View } from 'react-native';
+import colors from '../../styles/colors';
 
 import { commonStyle, swiperStyle, } from '../../styles/onboardingScreen/style';
 
@@ -19,7 +20,7 @@ const StartBtn = (props) => {
     return memberData && teamData && nicknameData ? 
         (<TouchableOpacity
             onPress={props.onPress}
-            style = {[swiperStyle.nextBtn, {backgroundColor: '#276A52'}]}>
+            style = {[swiperStyle.nextBtn, {backgroundColor: colors.primary}]}>
                 <View style = {[commonStyle.alignment]}>
                     <Text style = {[swiperStyle.btnText]}>시작하기</Text>
                 </View>
