@@ -11,23 +11,45 @@ const PlayerInfo = (props) => {
         <View style={{flexDirection:'column'}}>
           <Text style={{marginTop:17,paddingLeft:19,paddingRight:30, borderBottomWidth: 1,borderColor: "#ccc"}}>이름</Text>
           <View style={{flexDirection:'row'}}>
-            <Text style={{marginTop:17, marginLeft:15}}>김정훈</Text>
+            <Text style={{marginTop:17, marginLeft:15}}>{statInfo[2][0]}</Text>
           </View>
           <View style={{flexDirection:'row'}}>
-            <Text style={{marginTop:17, marginLeft:15}}>정민기</Text>
+            <Text style={{marginTop:17, marginLeft:15}}>{statInfo[3][0]}</Text>
           </View>
         </View>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.row}>
           <View style={{flexDirection:"column",borderBottomWidth: 1,borderColor: "#ccc"}}>
             <Text style={{marginTop:17,borderBottomWidth: 1,borderColor: "#ccc"}}>   
-              포지션        득점        도움        공격포인트      슈팅        파울        경고        퇴장        패널티킥        유효        슈팅        경기수
+              포지션       선방        실점        무실점경기      슈팅        파울        경고        퇴장   패널티킥   경기수
             </Text>
-            <Text style={{marginTop:17,marginLeft:5}}>   
-              GK                0              0             0                     0             0             0              0               0                0               0            0
-            </Text>
-            <Text style={{marginTop:17,marginLeft:5}}>   
-              GK                0              0             0                     0             0             0              0               0                0               0            0
-            </Text>
+            <View style={{ flexDirection: 'row', marginTop: 17, marginLeft: 5 }}>
+              <Text style={{ flex: 1,marginRight:5 }}>GK</Text>
+              <Text style={{ flex: 1, marginRight: 15}}>{statInfo[2][2]}</Text>
+              <Text style={{ flex: 1, marginRight: 15}}>{statInfo[2][3]}</Text>
+              <Text style={{ flex: 1, marginRight: 15}}>{statInfo[2][4]}</Text>
+              <Text style={{ flex: 1, marginRight: 15 }}>{statInfo[2][5]}</Text>
+              <Text style={{ flex: 1, marginRight: 20 }}>{statInfo[2][6]}</Text>
+              <Text style={{ flex: 1 }}>{statInfo[2][7]}</Text>
+              <Text style={{ flex: 1 }}>{statInfo[2][8]}</Text>
+              <Text style={{ flex: 1 }}>{statInfo[2][9]}</Text>
+              <Text style={{ flex: 1 }}>{statInfo[2][10]}</Text>
+              
+            </View>
+
+            <View style={{ flexDirection: 'row', marginTop: 17, marginLeft: 5 }}>
+              <Text style={{ flex: 1,marginRight:5 }}>GK</Text>
+              <Text style={{ flex: 1, marginRight: 15}}>{statInfo[3][2]}</Text>
+              <Text style={{ flex: 1, marginRight: 15 }}>{statInfo[3][3]}</Text>
+              <Text style={{ flex: 1, marginRight: 15 }}>{statInfo[3][4]}</Text>
+              <Text style={{ flex: 1, marginRight: 15 }}>{statInfo[3][5]}</Text>
+              <Text style={{ flex: 1, marginRight: 20 }}>{statInfo[3][6]}</Text>
+              <Text style={{ flex: 1 }}>{statInfo[3][7]}</Text>
+              <Text style={{ flex: 1 }}>{statInfo[3][8]}</Text>
+              <Text style={{ flex: 1 }}>{statInfo[3][9]}</Text>
+              <Text style={{ flex: 1 }}>{statInfo[3][10]}</Text>
+            </View>
+            
+            
           </View>
         </ScrollView>
       </View>
@@ -37,93 +59,103 @@ const PlayerInfo = (props) => {
         <View style={{flexDirection:'column'}}>
           <Text style={{marginTop:17,paddingLeft:19,  borderBottomWidth: 1,borderColor: "#ccc"}}>Name</Text>
           <View style={{flexDirection:'row'}}>
-            <Text style={{marginTop:17, marginLeft:15}}>김진수</Text>
+            <Text style={{marginTop:17, marginLeft:15}}>{statInfo[4][0]}</Text>
           </View>
           <View style={{flexDirection:'row'}}>
-            <Text style={{marginTop:17, marginLeft:15}}>정우재</Text>
+            <Text style={{marginTop:17, marginLeft:15}}>{statInfo[5][0]}</Text>
           </View>
           <View style={{flexDirection:'row'}}>
-            <Text style={{marginTop:17, marginLeft:15}}>박진섭</Text>
+            <Text style={{marginTop:17, marginLeft:15}}>{statInfo[6][0]}</Text>
           </View>
           <View style={{flexDirection:'row'}}>
-            <Text style={{marginTop:17, marginLeft:15}}>윤영선</Text>
+            <Text style={{marginTop:17, marginLeft:15}}>{statInfo[7][0]}</Text>
           </View>
           <View style={{flexDirection:'row'}}>
-            <Text style={{marginTop:17, marginLeft:15}}>구자룡</Text>
+            <Text style={{marginTop:17, marginLeft:15}}>{statInfo[8][0]}</Text>
           </View>
           <View style={{flexDirection:'row'}}>
-            <Text style={{marginTop:17, marginLeft:15}}>페트라섹</Text>
+            <Text style={{marginTop:17, marginLeft:15}}>{statInfo[9][0]}</Text>
           </View>
           <View style={{flexDirection:'row'}}>
-            <Text style={{marginTop:17, marginLeft:15}}>정태욱</Text>
+            <Text style={{marginTop:17, marginLeft:15}}>{statInfo[10][0]}</Text>
           </View>
           <View style={{flexDirection:'row'}}>
-            <Text style={{marginTop:17, marginLeft:15}}>홍정호</Text>
+            <Text style={{marginTop:17, marginLeft:15}}>{statInfo[11][0]}</Text>
           </View>
           <View style={{flexDirection:'row'}}>
-            <Text style={{marginTop:17, marginLeft:15}}>최철순</Text>
+            <Text style={{marginTop:17, marginLeft:15}}>{statInfo[12][0]}</Text>
           </View>
           <View style={{flexDirection:'row'}}>
-            <Text style={{marginTop:17, marginLeft:15}}>박창우</Text>
-          </View>
-
-          <View style={{flexDirection:'row'}}>
-            <Text style={{marginTop:17, marginLeft:15}}>안현범</Text>
-          </View>
-          <View style={{flexDirection:'row'}}>
-            <Text style={{marginTop:17, marginLeft:15}}>이수빈</Text>
-          </View><View style={{flexDirection:'row'}}>
-            <Text style={{marginTop:17, marginLeft:15}}>류재문</Text>
-          </View>
-          <View style={{flexDirection:'row'}}>
-            <Text style={{marginTop:17, marginLeft:15}}>보아텡</Text>
-          </View>
-          <View style={{flexDirection:'row'}}>
-            <Text style={{marginTop:17, marginLeft:15}}>백승호</Text>
-          </View>
-          <View style={{flexDirection:'row'}}>
-            <Text style={{marginTop:17, marginLeft:15}}>맹성웅</Text>
-          </View><View style={{flexDirection:'row'}}>
-            <Text style={{marginTop:17, marginLeft:15}}>오재혁</Text>
-          </View>
-          <View style={{flexDirection:'row'}}>
-            <Text style={{marginTop:17, marginLeft:15}}>아마노</Text>
+            <Text style={{marginTop:17, marginLeft:15}}>{statInfo[13][0]}</Text>
           </View>
 
           <View style={{flexDirection:'row'}}>
-            <Text style={{marginTop:17, marginLeft:15}}>안드레 루이스</Text>
+            <Text style={{marginTop:17, marginLeft:15}}>{statInfo[14][0]}</Text>
           </View>
           <View style={{flexDirection:'row'}}>
-            <Text style={{marginTop:17, marginLeft:15}}>송민규</Text>
+            <Text style={{marginTop:17, marginLeft:15}}>{statInfo[15][0]}</Text>
           </View><View style={{flexDirection:'row'}}>
-            <Text style={{marginTop:17, marginLeft:15}}>문선민</Text>
+            <Text style={{marginTop:17, marginLeft:15}}>{statInfo[16][0]}</Text>
           </View>
           <View style={{flexDirection:'row'}}>
-            <Text style={{marginTop:17, marginLeft:15}}>한교원</Text>
+            <Text style={{marginTop:17, marginLeft:15}}>{statInfo[17][0]}</Text>
+          </View>
+          <View style={{flexDirection:'row'}}>
+            <Text style={{marginTop:17, marginLeft:15}}>{statInfo[18][0]}</Text>
+          </View>
+          <View style={{flexDirection:'row'}}>
+            <Text style={{marginTop:17, marginLeft:15}}>{statInfo[19][0]}</Text>
+          </View><View style={{flexDirection:'row'}}>
+            <Text style={{marginTop:17, marginLeft:15}}>{statInfo[20][0]}</Text>
+          </View>
+          <View style={{flexDirection:'row'}}>
+            <Text style={{marginTop:17, marginLeft:15}}>{statInfo[21][0]}</Text>
           </View>
 
           <View style={{flexDirection:'row'}}>
-            <Text style={{marginTop:17, marginLeft:15}}>이동준</Text>
+            <Text style={{marginTop:17, marginLeft:15}}>{statInfo[22][0]}</Text>
           </View>
           <View style={{flexDirection:'row'}}>
-            <Text style={{marginTop:17, marginLeft:15}}>구스타보</Text>
+            <Text style={{marginTop:17, marginLeft:15}}>{statInfo[23][0]}</Text>
           </View><View style={{flexDirection:'row'}}>
-            <Text style={{marginTop:17, marginLeft:15}}>박재용</Text>
+            <Text style={{marginTop:17, marginLeft:15}}>{statInfo[24][0]}</Text>
           </View>
           <View style={{flexDirection:'row'}}>
-            <Text style={{marginTop:17, marginLeft:15}}>하파엘 실바</Text>
+            <Text style={{marginTop:17, marginLeft:15}}>{statInfo[25][0]}</Text>
+          </View>
+
+          <View style={{flexDirection:'row'}}>
+            <Text style={{marginTop:17, marginLeft:15}}>{statInfo[26][0]}</Text>
+          </View>
+          <View style={{flexDirection:'row'}}>
+            <Text style={{marginTop:17, marginLeft:15}}>{statInfo[27][0]}</Text>
+          </View><View style={{flexDirection:'row'}}>
+            <Text style={{marginTop:17, marginLeft:15}}>{statInfo[28][0]}</Text>
+          </View>
+          <View style={{flexDirection:'row'}}>
+            <Text style={{marginTop:17, marginLeft:15}}>{11}</Text>
           </View>
         </View>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.row}>
           <View style={{flexDirection:"column",borderBottomWidth: 1,borderColor: "#ccc"}}>
             <Text style={{marginTop:17,borderBottomWidth: 1,borderColor: "#ccc"}}>   
-              포지션        득점        도움        공격포인트        슈팅        파울        경고        퇴장        패널티킥        유효        슈팅        경기수
+              포지션        득점        도움        기회창출        슈팅        파울        경고        퇴장        패널티킥        유효        슈팅        경기수
             </Text>
+            <View style={{ flexDirection: 'row', marginTop: 17, marginLeft: 5 }}>
+              <Text style={{ flex: 1,marginRight:5 }}>DF</Text>
+              <Text style={{ flex: 1, marginRight: 15}}>{statInfo[4][2]}</Text>
+              <Text style={{ flex: 1, marginRight: 15 }}>{statInfo[4][3]}</Text>
+              <Text style={{ flex: 1, marginRight: 15 }}>{statInfo[4][4]}</Text>
+              <Text style={{ flex: 1, marginRight: 15 }}>{statInfo[4][5]}</Text>
+              <Text style={{ flex: 1, marginRight: 20 }}>{statInfo[4][6]}</Text>
+              <Text style={{ flex: 1 }}>{statInfo[4][7]}</Text>
+              <Text style={{ flex: 1 }}>{statInfo[4][8]}</Text>
+              <Text style={{ flex: 1 }}>{statInfo[4][9]}</Text>
+              <Text style={{ flex: 1 }}>{statInfo[4][10]}</Text>
+              <Text style={{ flex: 1 }}>{statInfo[4][11]}</Text>
+            </View>
             <Text style={{marginTop:17,marginLeft:5}}>   
-              GK                0              0               0                     0             0             0              0               0                0               0            0
-            </Text>
-            <Text style={{marginTop:17,marginLeft:5}}>   
-              GK                0              0               0                     0             0             0              0               0                0               0            0
+              DF                0              0               0                     0             0             0              0               0                0               0            0
             </Text>
             <Text style={{marginTop:17,marginLeft:5}}>   
               DF                0              0               0                     0             0             0              0               0                0               0            0
@@ -233,5 +265,4 @@ const styles = StyleSheet.create({
 });
 
 export default PlayerInfo;
-
 
