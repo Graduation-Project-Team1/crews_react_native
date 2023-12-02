@@ -5,7 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import Main from './home/Main';
 import SearchScreen from './search/SearchScreen';
 import SettingIndex from './setting/SettingIndex';
-import PodcastPlayer from '../../screens/podcast/PodcastPlayer';
+import PodcastPlayer from './podcast/PodcastPlayer';
 
 
 const Stack = createNativeStackNavigator();

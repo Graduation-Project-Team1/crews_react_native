@@ -1,4 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
+import React from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import MorningBanner from '../../components/PodCastScreen/MorningBanner.js';
 import EveningBanner from '../../components/PodCastScreen/EveningBanner.js';
@@ -6,7 +6,7 @@ import AlignButton from '../../components/PodCastScreen/AlignButton.js';
 import PlayList from '../../components/PodCastScreen/PlayList.js';
 import Player from '../../components/PodCastScreen/Player.js';
 import PodcastList from '../../components/PodCastScreen/PodcastItems.js';
-import colors from '../../styles/colors.js';
+import colors from '../../styles/colors.jsx';
 
 const PodCastScreen = ({navigation}) => {
   return (

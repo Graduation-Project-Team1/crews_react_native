@@ -31,7 +31,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-native": "0.71.8",
-    "react-native-calendars": "^1.1301.0",
+    "react-native-calendars": "^1.1302.0",
     "react-native-gesture-handler": "^2.9.0",
     "react-native-modal": "^13.0.1",
     "react-native-paper": "^5.10.6",
@@ -43,12 +43,12 @@
     "react-native-swiper": "^1.6.0",
     "react-native-switch": "^1.5.1",
     "react-native-switch-toggle": "^2.2.1",
+    "react-native-vector-icons": "^10.0.0",
     "react-native-web": "~0.18.10",
     "react-native-web-swiper": "^2.2.4",
-    "react-router-dom": "^6.20.0",
-    "styled-components": "^6.1.1",
     "react-query": "^3.39.3",
-    "react-native-vector-icons": "^10.0.0"
+    "react-router-dom": "^6.20.0",
+    "styled-components": "^6.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
