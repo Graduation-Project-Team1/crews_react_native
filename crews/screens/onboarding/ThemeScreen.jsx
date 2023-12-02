@@ -39,7 +39,7 @@ const Theme = ({swiper}) => {
           <ThemeSelectBtn text = '우리 팀 테마' value = 'team' color = '#276A52' checked = {checked} setChecked = {setChecked} />
           <ThemeSelectBtn text = '크루즈 테마' value = 'cruise' color = '#1B1DB7' checked = {checked} setChecked = {setChecked} />
           <ThemeSelectBtn text = '다크 테마' value = 'dark' color = '#181818' checked = {checked} setChecked = {setChecked} />
-          <ThemeSelectBtn text = '시스템 설정 - 우리팀/다크' color = '#276A52' value = 'system_team' hecked = {checked} setChecked = {setChecked} />
+          <ThemeSelectBtn text = '시스템 설정 - 우리팀/다크' color = '#276A52' value = 'system_team' checked = {checked} setChecked = {setChecked} />
           <ThemeSelectBtn text = '시스템 설정 - 크루즈/다크' color = '#1B1DB7' value = 'system_cruise' checked = {checked} setChecked = {setChecked} />
         </View>
         <View style = {{

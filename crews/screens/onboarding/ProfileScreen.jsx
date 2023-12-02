@@ -52,7 +52,7 @@ const Profile = ({swiper, navigation}) => {
           alignItems: 'center',
           paddingTop: 10
         }}>
-          <LinearGradient style={profileStyle.image} colors={[colors.primary, '#1B1DB7d7','#1B1DB7c7', '#1B1DB7b7', '#1B1DB797']}></LinearGradient>
+          <LinearGradient style={profileStyle.image} colors={[colors.primary, colors.primary+'d7', colors.primary+'c7', colors.primary+'b7', colors.primary+'97']}></LinearGradient>
           <View style = {{
             flexDirection: 'row'
           }}>

@@ -89,7 +89,8 @@ export const myMemberStyle = StyleSheet.create({
     alignItems: 'center', 
     justifyContent: 'center', 
     padding: 20,
-    paddingBottom: 10
+    paddingBottom: 10,
+    marginBottom: 50
   },
   rowView: {
     flexDirection: 'row',
@@ -161,7 +162,8 @@ export const myTeamStyle = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 20,
-    paddingBottom: 10
+    paddingBottom: 10,
+    marginBottom: 50
   },
   rowView: {
     flexDirection: 'row',

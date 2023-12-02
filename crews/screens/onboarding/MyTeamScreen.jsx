@@ -16,8 +16,6 @@ const MyTeam = ({swiper}) => {
 
 const [leagueList, setLeagueList] = useState([])
 const [teamList, setTeamList] = useState([]);
-const [filteredList, setFilteredList] = useState([]);
-const [subCategoryData, setSubCategoryData] = useState([]);
 
 const [onSport, setOnSport] = useState('');
 const [onLeague, setOnLeague] = useState('');
@@ -61,7 +59,6 @@ useEffect(() => {
     getLeagueList();
     getTeamList();
 
-    console.log("MyTeamScreen: teamList 데이터가 변경됨(*화면 실행시에도 이 메세지가 출력됨)")
     console.log("onleague: ", onLeague);
 }, [onSport, onLeague]);
 
@@ -69,10 +66,7 @@ const onClickSport = (selectedSport) => {
     setOnSport(selectedSport);
 }
 
-const onClickLeague = (title) => {
-    const leagueData = filteredList.filter(item => item.league === title);
-    setSubCategoryData(leagueData);
-}
+
 
 //const uniqueLeagueTitles = Array.from(new Set(filteredList.map(item => item.league))); // 중복 제거
 
@@ -84,7 +78,7 @@ const selectTeamClick = (selectedTeam) => {
 
 return (
     <View style = {{flex:1}}>
-        <ScrollView>
+        <ScrollView style>
             <View style = {[myTeamStyle.headerView]}>
                 <Text style = {[commonStyle.boldText]}>어느 팀을 좋아하시나요?</Text>
                 <Text style = {[commonStyle.text]}>당신의 팀에 대한 소식을 전달해드려요</Text>
@@ -131,7 +125,8 @@ return (
                         <SportTeam
                         name={item.teamName}
                         key={index}
-                        onPress={() => {}}
+                        id={item.teamId}
+                        onPress={() => {selectTeamClick(item.teamId);}}
                         />
                     ))}
                     </View> 

@@ -3,19 +3,14 @@ import { Text, View } from 'react-native';
 import { Image } from 'react-native';
 import { Shadow } from 'react-native-shadow-2';
 import { commonStyle, checkStyle, } from '../../styles/onboardingScreen/style';
-import { useNicknameData } from '../../components/onboardingScreen/context';
+
 import { LinearGradient } from 'expo-linear-gradient';
 import colors from '../../styles/colors';
 
 import StartBtn from '../../components/onboardingScreen/StartBtn';
 
 
-const Check = () => {
-
-    const {nicknameData} = useNicknameData();
-
-    useEffect(() => {
-    }, [nicknameData]);
+const Check = ({navigation}) => {
 
     return (
         <View style = {{flex:1}}>

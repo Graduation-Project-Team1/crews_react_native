@@ -5,6 +5,8 @@ import  Swiper  from 'react-native-swiper';
 import { AntDesign } from '@expo/vector-icons';
 import { commonStyle, swiperStyle, } from '../../styles/onboardingScreen/style';
 import colors from '../../styles/colors';
+import { theme1 } from '../../styles/themes';
+import { ThemeProvider } from "styled-components/native";
 
 import { TeamDataProvider, NicknameDataProvider, MemberDataProvider } from '../../components/onboardingScreen/context';
 
@@ -20,6 +22,7 @@ const OnboardingScreen = ({navigation}) => {
     const swiper = useRef(null);
 
     return (
+        <ThemeProvider theme={theme1}>
         <TeamDataProvider>
         <NicknameDataProvider>
         <MemberDataProvider>
@@ -52,13 +55,14 @@ const OnboardingScreen = ({navigation}) => {
                 <MyTeam swiper={swiper}/>
                 <MyMember swiper={swiper}/>
                 <Theme swiper={swiper}/>
-                <Check/>
+                <Check navigation={navigation}/>
                 
             </Swiper>
             </View>
         </MemberDataProvider>
         </NicknameDataProvider>
         </TeamDataProvider>
+        </ThemeProvider>
     )
 }
 
