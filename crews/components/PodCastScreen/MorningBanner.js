@@ -1,28 +1,43 @@
 import {Text, TouchableOpacity, View } from 'react-native';
 import { Image } from "react-native";
 import { bannerStyles} from '../../styles/PodCastScreen/styles';
+import colors from '../../styles/colors';
+import { Entypo } from '@expo/vector-icons';
 
 const MorningBanner = (props) => {
+
+  var hashList = [];
+  hashList = props.list;
+
     return(
       <TouchableOpacity style = {[bannerStyles.banner]}>
-        <View style = {{
-          padding: 15
+        
+          <Text style = {{fontSize: 14, fontWeight:'bold', marginBottom: 2}}>{props.title}</Text>
+          <View style = {{
+            flexDirection:'row'
           }}>
-          <Text style = {[bannerStyles.text]}>오전 6시</Text>
-          <Text style = {[bannerStyles.text]}>하루를 시작하는</Text>
-          <Text style = {[bannerStyles.text]}>{props.teamName}</Text>
-          <Text style = {{color: '#FFFFFF'}}>#{props.hashTag1} #{props.hashTag2} #{props.hashTag3}</Text>
+            {hashList.map(item => (
+              <Text style = {{fontSize: 12, marginRight: 4}}>#{item}</Text>
+            ))}
+            
           </View>
         
-        <View style = {[bannerStyles.imgView]}>      
-          <Image 
-          style = {[bannerStyles.img]}
-          source={require("../../assets/PodCastScreen/image-1.png")}/>
-          <View style = {{
-          padding: 20
-          }}>        
-            <Image source={require("../../assets/PodCastScreen/group-17.png")}/>
-          </View>
+        <View style = {{
+          backgroundColor: '#ffffff',
+          width: 35,
+          height: 35,
+          position: 'absolute',
+          right: 14,
+          borderRadius: 100,
+          justifyContent: 'center'
+        }}>
+        <Entypo style = {{
+          position: 'absolute',
+          right: 4,
+        }}
+        name="controller-play" 
+        size={25} 
+        color={colors.primary}/>
         </View>
       </TouchableOpacity>
       

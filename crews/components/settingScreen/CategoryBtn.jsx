@@ -1,6 +1,5 @@
 import React from "react";
-import { Text, View } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { Text, View, TouchableOpacity } from "react-native";
 import { AntDesign } from '@expo/vector-icons'; 
 
 const CategoryBtn = ( props ) => {
@@ -8,14 +7,14 @@ const CategoryBtn = ( props ) => {
         <TouchableOpacity 
         onPress={props.onPress}
         style = {{
-            height: 50,
+            height: 55,
             padding: 15,
-            marginTop: 5,
+            
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'space-between'
         }}>
-            <Text style = {{fontSize: 15}}>{props.title}</Text>
+            <Text style = {{fontSize: 16, color: props.color}}>{props.title}</Text>
             <AntDesign 
                 name="right" 
                 size={17} 

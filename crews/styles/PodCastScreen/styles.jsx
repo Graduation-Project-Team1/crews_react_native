@@ -1,27 +1,16 @@
 import {StyleSheet} from 'react-native';
-import myColors from './colors';
+import colors from '../colors';
 
 export const bannerStyles = StyleSheet.create({
     banner: {
-        backgroundColor: myColors.mainColor,
-        marginRight: 20,
-        borderRadius:10,
-        elevation: 10
+        width: '100%',
+        height: 70,
+        marginBottom: 10, 
+        backgroundColor: colors.primaryLight,
+        borderRadius:15,
+        paddingHorizontal: 13,
+        justifyContent: 'center'
     },
-    text: {
-        color: '#FFFFFF', fontWeight: 'bold'
-    },
-    imgView: {
-        flexDirection: 'row',
-        alignItems: 'flex-end',
-        marginTop: 10
-    },
-    img:{
-        width: 88,
-        height: 127,
-        resizeMode: 'cover',
-        overflow: 'hidden'
-    }
 })
 
 export const playListStyles = StyleSheet.create({
@@ -29,45 +18,50 @@ export const playListStyles = StyleSheet.create({
         borderRadius:10,
         flexDirection: 'row',
         marginBottom:7,
-        flex: 1
+        height: 60,
+        alignItems: 'center'
     },
-    img: {
+    id: {
         width: 40,
         height: 40,
-        resizeMode: 'cover',
-        overflow: 'hidden'
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     textView: {
         flexDirection: 'column',
-        paddingLeft: 30,
+        paddingLeft: 15,
         flex: 8
     },
     iconView: {
-        alignItems: 'stretch',
-        flex: 1
+        alignItems: 'center',
+        justifyContent:'center',
+        height: '100%',
+        marginRight: 15
     },
-    titleText: {fontWeight: 'bold', fontSize: 12, marginBottom: 2},
-    time: {fontSize: 10, color: '#212121'},
+    titleText: {fontSize: 14, marginBottom: 2},
+    time: {fontSize: 12, color: colors.textGray},
 })
 
 export const playerStyles = StyleSheet.create({
     player: {
-        flex: 1,
-        borderRadius:20,
+        height: 75,
+        width: '100%',
+        position: 'absolute',
+        bottom: 0,
+        borderRadius:30,
         flexDirection: 'row',
         alignItems: 'center',
         padding:10,
-        paddingLeft:15,
-        paddingRight:15,
-        backgroundColor: myColors.musicColor
+        paddingVertical: 15,
+        backgroundColor: '#ffffff'
     }, 
     textView: {
         flexDirection: 'column',
-        paddingLeft: 30,
+        paddingLeft: 15,
         flex: 6
     },
     titleText: {fontWeight: 'bold', fontSize: 15, marginBottom: 2},
-    time: {fontSize: 12, color: '#212121'},
+    time: {fontSize: 12, color: colors.textGray},
     iconView: {
         flexDirection: 'row',
         alignItems: 'stretch',
@@ -83,27 +77,29 @@ export const PlayerScreenStyles = StyleSheet.create({
         justifyContent: 'center'
     },
     playBtn: {
-        flex: 3,
+        flex: 5,
         alignItems: 'center',
         justifyContent: 'space-between',
         flexDirection: 'row',
-        marginLeft:120,
-        marginRight: 85,
-        paddingTop:20
+        width: 200,
     },
     img: {
-        width: 250,
-        height: 250,
-        backgroundColor: '#ffffff'
+        width: 260,
+        height: 260,
+        position: 'absolute', 
+        alignSelf: 'center', 
+        top: 190,
+        backgroundColor: '#e0e0e0'
     },
     topBtnView :{
-        flex: 1.5,
+        height: 30,
         flexDirection: 'row',
-        paddingLeft: 60,
-        paddingRight: 60
+        width: 350,
+        paddingHorizontal: 15,
+        justifyContent: 'space-between'
     },
     headerText: {
-        fontSize: 20,
+        fontSize: 18,
         fontWeight: 'bold'
     },
     centerText: {
@@ -111,24 +107,27 @@ export const PlayerScreenStyles = StyleSheet.create({
         fontWeight: 'bold'
     },
     titleText: {
-        fontSize: 23,
+        fontSize: 20,
         fontWeight: 'bold'
     },
     timeText: {
-        fontSize: 10,
-        fontWeight: 'bold'
+        fontSize: 16,
+        color: colors.textGray,
+        fontWeight: '100'
     }
 })
 
 export const viewStyles = StyleSheet.create({
     alignBtn: {
-        borderRadius:10,
+        borderRadius:50,
+        height: 35, 
         flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
         marginRight:5,
         borderWidth:1,
-        borderColor: '#79747E',
-        padding: 2,
-        paddingLeft: 7,
+        borderColor: colors.textGray,
+        paddingLeft: 12,
         paddingRight: 7
     }
 })

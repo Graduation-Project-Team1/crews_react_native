@@ -15,11 +15,6 @@ export default function PodcastIndex({navigation}) {
                 name="PodCastScreen"
                 component={PodCastScreen}
             />
-            <Stack.Screen
-                options={{ headerShown: false }}
-                name="PodcastPlayer"
-                component={PodcastPlayer}
-            />
 
         </Stack.Navigator>
     );

@@ -1,13 +1,14 @@
 import React,{ useEffect } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { Text, View } from 'react-native';
+import colors from '../../styles/colors';
 
 import { commonStyle, swiperStyle, } from '../../styles/onboardingScreen/style';
 
 import { useMemberData, useNicknameData, useTeamData } from './context';
 
 
-const StartBtn = (props) => {
+const StartBtn = ({navigation}, props) => {
 
     const {memberData} = useMemberData();
     const {teamData} = useTeamData();
@@ -16,10 +17,16 @@ const StartBtn = (props) => {
     useEffect(() => {
     }, [memberData, teamData, nicknameData]);
 
+    const onStart = () => {
+        console.log("nickname: ", nicknameData);
+        console.log("teamData: ", teamData);
+        console.log("PlayerData: ", memberData);
+    }
+
     return memberData && teamData && nicknameData ? 
         (<TouchableOpacity
-            onPress={props.onPress}
-            style = {[swiperStyle.nextBtn, {backgroundColor: '#276A52'}]}>
+            onPress={() => {onStart();}}
+            style = {[swiperStyle.nextBtn, {backgroundColor: colors.primary}]}>
                 <View style = {[commonStyle.alignment]}>
                     <Text style = {[swiperStyle.btnText]}>시작하기</Text>
                 </View>
