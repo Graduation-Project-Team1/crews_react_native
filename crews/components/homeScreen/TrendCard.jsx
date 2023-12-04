@@ -30,7 +30,7 @@ const TrendCard = ({order, title, chart, watch, isCurrentCard}) => {
           {
             isCurrentCard ? <UpDown width={13} height={13} /> : <UpDownGray width={13} height={13} />
           }
-          <Text style={dynamicTextStyle}>{ chart > 0 ? chart + "위 상승" : chart * -1 + "위 하락"}</Text>
+          <Text style={dynamicTextStyle}>{ chart >= 0 ? chart + "위 상승" : chart * -1 + "위 하락"}</Text>
           {
             isCurrentCard ? <TimeLine width={13} height={13} /> : <TimeLineGray width={13} height={13} />
           }

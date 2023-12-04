@@ -1,97 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import RadioResult from "./RadioResult";
 import MatchResult from "./MatchResult";
 import NewsRow from "../homeScreen/NewsRow";
 import colors from "../../styles/colors";
 import Right from "../../assets/icons/icon_right.svg";
+import { searchApi } from "../../api/searchApi";
 
 const SearchResult = ({result}) => {
+  const [teamData, setTeamData] = useState(null);
+  const [newsData, setNewsData] = useState([]);
+  const [radioData, setRadioData] = useState([]);
+  const [gameData, setGameData] = useState([]);
 
-  const resultData = {
-    team: {
-      name: 'FC 서울',
-      img: 'https://files.fcseoul.com/multi01/Club/Club/em_K09.png',
-      category: '국내 축구',
-    },
-    news: [
-      {
-        title: "프로야구, 2021년 3월 13일 개막",
-        time: "2023.08.01 17:03",
-        watch: "1,234",
-        img: 'https://r.yna.co.kr/global/home/v01/img/yonhapnews_logo_1200x800_kr01.jpg',
-        url: "https://www.naver.com",
-      },
-      {
-        title: "프로야구, 2021년 3월 13일 개막",
-        time: "2023.08.01 17:03",
-        watch: "1,234",
-        img: 'https://r.yna.co.kr/global/home/v01/img/yonhapnews_logo_1200x800_kr01.jpg',
-        url: "https://www.naver.com",
-      },
-      {
-        title: "프로야구, 2021년 3월 13일 개막",
-        time: "2023.08.01 17:03",
-        watch: "1,234",
-        img: 'https://r.yna.co.kr/global/home/v01/img/yonhapnews_logo_1200x800_kr01.jpg',
-        url: "https://www.naver.com",
-      },
-    ],
-    radio: [
-      {
-        title: "2023.05.23 (월)",
-        tags: [
-          "프로야구",
-          "KBO",
-          "경기",
-        ]
-      },
-      {
-        title: "2023.05.22 (월)",
-        tags: [
-          "프로야구",
-          "KBO",
-          "경기",
-        ]
-      },
-      {
-        title: "2023.05.22 (월)",
-        tags: [
-          "프로야구",
-          "KBO",
-          "경기",
-        ]
-      }
-    ],
-    game: [
-      {
-        time: "2023.05.22 (월)",
-        team: [
-          {
-            score: 1,
-            img: "https://jbhd-upload-file.s3.ap-northeast-2.amazonaws.com/images/img_emblem_1.827563b2.png",
-          },
-          {
-            score: 0,
-            img: "https://files.fcseoul.com/multi01/Club/Club/em_K09.png",
-          }
-        ]
-      },
-      {
-        time: "2023.05.22 (월)",
-        team: [
-          {
-            score: 1,
-            img: "https://jbhd-upload-file.s3.ap-northeast-2.amazonaws.com/images/img_emblem_1.827563b2.png",
-          },
-          {
-            score: 0,
-            img: "https://files.fcseoul.com/multi01/Club/Club/em_K09.png",
-          }
-        ]
-      }
-    ]
-  }
+  useEffect(() => {
+    searchApi(result)
+      .then((res) => {
+        setTeamData(res.team);
+        setNewsData(res.news);
+        setRadioData(res.radio);
+        setGameData(res.game);
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }, [result])
 
   if (result === '') {
     return (
@@ -99,25 +32,23 @@ const SearchResult = ({result}) => {
         <Text style={emptyResultStyle.text}>검색 결과가 없습니다.</Text>
       </View>
     )
-  } else {
-    result = resultData;
   }
 
   return (
     <View style={searchResultStyle.layout}>
       <ScrollView showsVerticalScrollIndicator={false}>
         {
-          resultData.team !== null && (
+          teamData !== null && (
             <View>
               <View>
                 <Text style={searchResultStyle.teamGray}>{`다른 팀이 궁금하신가요?\n내 팀을 변경하지 않고 다른 팀을 구경해보세요.`}</Text>
                 <View style={searchResultStyle.team}>
                   <Image 
-                    source={{uri: result.team.img}}
+                    source={{uri: teamData.img}}
                     style={searchResultStyle.teamImg}/>
                   <View style={searchResultStyle.teamInfo}>
-                    <Text style={searchResultStyle.teamTitle}>{result.team.name}</Text>
-                    <Text style={searchResultStyle.teamCategory}>{result.team.category}</Text>
+                    <Text style={searchResultStyle.teamTitle}>{teamData.name}</Text>
+                    <Text style={searchResultStyle.teamCategory}>{teamData.category}</Text>
                   </View>
                   <Right width={24} height={24} fill={colors.black}/>
                 </View>
@@ -127,18 +58,17 @@ const SearchResult = ({result}) => {
           )
         }
         {
-          resultData.news !== null && (
+          newsData.length > 0 && (
             <View style={searchResultStyle.contentContainer}>
               <Text style={searchResultStyle.headerText}>뉴스</Text>
               <View>
                 {
-                  result.news.map((news, index) => (
+                  newsData.map((news, index) => (
                     <NewsRow
                       key={index}
                       order={index + 1}
                       title={news.title}
-                      time={news.time}
-                      watch={news.watch}
+                      time={news.createdAt}
                       img={news.img}
                       url={news.url}
                   />
@@ -149,12 +79,12 @@ const SearchResult = ({result}) => {
           )
         }
         {
-          resultData.radio !== null && (
+          radioData.length > 0 && (
             <View style={searchResultStyle.contentContainer}>
               <Text style={searchResultStyle.headerText}>라디오</Text>
               <View>
                 {
-                  result.radio.map((radio, index) => (
+                  radioData.map((radio, index) => (
                     <RadioResult
                       key={index}
                       order={index + 1}
@@ -168,13 +98,13 @@ const SearchResult = ({result}) => {
           )
         }
         {
-          resultData.game !== null && (
+          gameData.length > 0 && (
             
             <View style={searchResultStyle.contentContainer}>
               <Text style={searchResultStyle.headerText}>경기 정보</Text>
               <View>
                 {
-                  result.game.map((game, index) => (
+                  gameData.map((game, index) => (
                     <MatchResult
                       key={index}
                       date={game.time}

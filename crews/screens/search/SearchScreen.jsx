@@ -13,6 +13,8 @@ const SearchScreen = () => {
 
   const handleSearch = () => {
     setResult(keyword)
+    console.log("키워드 : ", keyword);
+    console.log(keyword.split(" ").join("+"));
     Keyboard.dismiss()
   }
 
