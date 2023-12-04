@@ -3,10 +3,10 @@ import { StyleSheet, Text, View } from "react-native";
 import colors from "../../styles/colors";
 import NewsRow from "../homeScreen/NewsRow";
 
-const NewsSection = ({emotion, newsList}) => {
+const NewsSection = ({newsList}) => {
   return (
     <View style={newsSectionStyle.base}>
-      <Text style={newsSectionStyle.title}>{emotion ? '긍정적 뉴스' : '부정적 뉴스'}</Text>
+      <Text style={newsSectionStyle.title}>종합 뉴스</Text>
       <View style={newsSectionStyle.content}>
         {newsList.map((news, index) => {
           return (
@@ -14,8 +14,7 @@ const NewsSection = ({emotion, newsList}) => {
               key={index}
               order={index + 1}
               title={news.title}
-              time={news.time}
-              watch={news.watch}
+              time={news.createdAt}
               img={news.img}
               url={news.url}
               />

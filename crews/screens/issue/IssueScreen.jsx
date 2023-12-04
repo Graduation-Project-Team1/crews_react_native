@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { styles } from "../../styles/styles";
@@ -7,102 +7,36 @@ import CommunityBox from "../../components/issueScreen/CommunityBox";
 import NewsSection from "../../components/issueScreen/NewsSection";
 import colors from "../../styles/colors";
 import SNSBox from "../../components/issueScreen/SNSBox";
+import { snsDataApi, totalNewsApi } from "../../api/issueApi";
 
 const IssueScreen = () => {
   const [value, setValue] = useState('twitter');
+  const [twitterData, setTwitterData] = useState(null);
+  const [instagramData, setInstagramData] = useState(null);
+  const [redditData, setRedditData] = useState(null);
+  const [communityData, setCommunityData] = useState([]);
+  const [newsData, setNewsData] = useState([]);
 
-  const snsList = [
-    {
-      sns: 'twitter',
-      nickname: 'twitUser0309',
-      id: 'twit0309',
-      content: 'Lorem ipsum dolor sit amet consectetur. Eget orci enim tortor mi elementum leo arcu. Sit maecenas et auctor netus ac ut eget. Habitant lectus pharetra nulla ullamcorper suscipit suspendisse aliquam tristique velit. Lacus malesuada sit vel Lorem ipsum dolor sit amet consectetur. Eget orci enim tortor mi elementum leo arcu. Sit maecenas et auctor netus ac ut eget. Habitant lectus pharetra nulla ullamcorper suscipit suspendisse aliquam tristique velit. Lacus malesuada sit vel ',
-      like: 650,
-      time: '2021.08.01 17:03',
-    },
-    {
-      sns: 'instagram',
-      nickname: 'instaUser0309',
-      id: 'insta0309',
-      content: '어쩌구저쩌구',
-      like: 650,
-      time: '2021.08.01 17:03',
-    },
-    {
-      sns: 'reddit',
-      nickname: 'redditUser0309',
-      id: 'reddit0309',
-      content: '어쩌구저쩌구',
-      like: 650,
-      time: '2021.08.01 17:03',
-    },
-  ];
+  useEffect(() => {
+    snsDataApi()
+      .then((res) => {
+        setTwitterData(res.twitter);
+        setInstagramData(res.instagram);
+        setRedditData(res.reddit);
+        setCommunityData(res.community);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
-  const communityIssueList = [
-    {
-      img: 'https://www.ksponco.or.kr/sports/img/olparksoccer/know_3.png',
-      title: '어쩌구이슈',
-      writer: '김민수',
-    },
-    {
-      img: 'https://www.ksponco.or.kr/sports/img/olparksoccer/know_3.png',
-      title: '어쩌구이슈',
-      writer: '김민수',
-    },
-    {
-      img: 'https://www.ksponco.or.kr/sports/img/olparksoccer/know_3.png',
-      title: '어쩌구이슈',
-      writer: '김민수',
-    },
-  ];
-
-  const positiveNewsList = [
-    {
-      title: "프로야구, 2021년 3월 13일 개막",
-      time: "2023.08.01 17:03",
-      watch: "1,234",
-      img: 'https://r.yna.co.kr/global/home/v01/img/yonhapnews_logo_1200x800_kr01.jpg',
-      url: "https://www.naver.com",
-    },
-    {
-      title: "프로야구, 2021년 3월 13일 개막",
-      time: "2023.08.01 17:03",
-      watch: "1,234",
-      img: 'https://r.yna.co.kr/global/home/v01/img/yonhapnews_logo_1200x800_kr01.jpg',
-      url: "https://www.naver.com",
-    },
-    {
-      title: "프로야구, 2021년 3월 13일 개막",
-      time: "2023.08.01 17:03",
-      watch: "1,234",
-      img: 'https://r.yna.co.kr/global/home/v01/img/yonhapnews_logo_1200x800_kr01.jpg',
-      url: "https://www.naver.com",
-    },
-  ]
-
-  const negativeNewsList = [
-    {
-      title: "프로야구, 2021년 3월 13일 개막",
-      time: "2023.08.01 17:03",
-      watch: "1,234",
-      img: 'https://r.yna.co.kr/global/home/v01/img/yonhapnews_logo_1200x800_kr01.jpg',
-      url: "https://www.naver.com",
-    },
-    {
-      title: "프로야구, 2021년 3월 13일 개막",
-      time: "2023.08.01 17:03",
-      watch: "1,234",
-      img: 'https://r.yna.co.kr/global/home/v01/img/yonhapnews_logo_1200x800_kr01.jpg',
-      url: "https://www.naver.com",
-    },
-    {
-      title: "프로야구, 2021년 3월 13일 개막",
-      time: "2023.08.01 17:03",
-      watch: "1,234",
-      img: 'https://r.yna.co.kr/global/home/v01/img/yonhapnews_logo_1200x800_kr01.jpg',
-      url: "https://www.naver.com",
-    },
-  ]
+    totalNewsApi()
+      .then((res) => {
+        setNewsData(res.result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <View style={[styles.layout]}>
@@ -117,24 +51,25 @@ const IssueScreen = () => {
           </View>
           <View style={issueScreenStyle.snsContent}>
             {
-              snsList.filter(item => item.sns === value).map((item, index) => (
-                <SNSBox key={index} sns={item.sns} nickname={item.nickname} id={item.id} content={item.content} like={item.like} time={item.time}/>
-              ))
+              value === 'twitter' ? twitterData && <SNSBox sns={value} nickname={twitterData.nickname} id={twitterData.id} content={twitterData.content} like={twitterData.like} time={twitterData.time}/> :
+              value === 'instagram' ? instagramData && <SNSBox sns={value} nickname={instagramData.nickname} id={instagramData.id} content={instagramData.content} like={instagramData.like} time={instagramData.time}/> :
+              value === 'reddit' ? redditData && <SNSBox sns={value} nickname={redditData.nickname} id={redditData.id} content={redditData.content} like={redditData.like} time={redditData.time}/> : <Text>값이 없습니다.</Text>
             }
           </View>
         </View>
         <View style={issueScreenStyle.content}>
           <Text style={issueScreenStyle.sectionTitle}>커뮤니티 핫이슈</Text>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-            {communityIssueList.map((item, index) => (
-              <CommunityBox key={index} img={item.img} title={item.title} writer={item.writer}/>
-            ))}
+            {
+              communityData.length > 0 ? communityData.map((item, index) => (
+                <CommunityBox key={index} img={item.img} title={item.title} writer={item.writer} url={item.url}/>
+              )) : <Text>값이 없습니다.</Text>
+            }
           </ScrollView>
         </View>
         <View style={issueScreenStyle.divider}/>
         <View style={issueScreenStyle.content}>
-          <NewsSection emotion={true} newsList={positiveNewsList}/>
-          <NewsSection emotion={false} newsList={negativeNewsList}/>
+          <NewsSection newsList={newsData}/>
         </View>
         <View style={{height: 60}} />
       </ScrollView>

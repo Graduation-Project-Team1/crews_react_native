@@ -1,14 +1,21 @@
 import React from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View, TouchableOpacity, Linking } from "react-native";
 import colors from "../../styles/colors";
 
-const CommunityBox = ({img, title, writer}) => {
+const CommunityBox = ({img, title, writer, url}) => {
+
+  const handlePress = () => {
+    Linking.openURL(url);
+  }
+
   return (
+    <TouchableOpacity onPress={handlePress}>
     <View style={communityBoxStyle.base}>
       <Image style={communityBoxStyle.img} source={{uri: img}} />
-      <Text style={communityBoxStyle.title}>{title}</Text>
+      <Text style={communityBoxStyle.title} numberOfLines={1} ellipsizeMode={'tail'}>{title}</Text>
       <Text style={communityBoxStyle.writer}>{writer}</Text>
     </View>
+    </TouchableOpacity>
   );
 };
 
