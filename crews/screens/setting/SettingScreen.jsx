@@ -16,11 +16,11 @@ const SettingScreen = ({navigation}) => {
     useEffect(() => {
         const getUserdata = async() => {
             try {
-                const responseUserdata = await axios.get(`http://crews.jongmin.xyz:8080/data/onboard`);
+                const responseUserdata = await axios.get(`http://crews.jongmin.xyz:8080/data/onboard?userId=123`);
     
                     // 성공적인 응답 처리
                     console.log(responseUserdata.data);
-                    console.log("getLeagueList: 성공");
+                    console.log("getUserdata: 성공");
 
                     //파라미터 만들어진 후 삭제
                     const exUserData = responseUserdata.data.find(item => item.nickname === "유저1");
@@ -35,42 +35,42 @@ const SettingScreen = ({navigation}) => {
             }
         };
 
-        const getUserTeam = async() => {
-            try {
-                const responseUserTeam = await axios.get(`http://crews.jongmin.xyz:8080/data/team?teamId=${userDataRes.teamId}`);
+        // const getUserTeam = async() => {
+        //     try {
+        //         const responseUserTeam = await axios.get(`http://crews.jongmin.xyz:8080/data/team?teamId=${userDataRes.teamId}`);
     
-                    // 성공적인 응답 처리
-                    console.log(responseUserTeam.data);
-                    console.log("getUserTeam: 성공");
+        //             // 성공적인 응답 처리
+        //             console.log(responseUserTeam.data);
+        //             console.log("getUserTeam: 성공");
 
-                    setUserTeam(responseUserTeam.data.teamName);
+        //             setUserTeam(responseUserTeam.data.teamName);
 
-            } catch (error) {
-                // Axios 오류 처리
-                console.error(error);
-            }
-        };
+        //     } catch (error) {
+        //         // Axios 오류 처리
+        //         console.error(error);
+        //     }
+        // };
 
-        const getUserPlayer = async() => {
-            try {
-                const responseUserPlayer = await axios.get(`http://crews.jongmin.xyz:8080/data/player?playerId=${userDataRes.playerId}`);
+        // const getUserPlayer = async() => {
+        //     try {
+        //         const responseUserPlayer = await axios.get(`http://crews.jongmin.xyz:8080/data/player?playerId=${userDataRes.playerId}`);
     
-                    // 성공적인 응답 처리
-                    console.log(responseUserPlayer.data);
-                    console.log("getUserPlayer: 성공");
+        //             // 성공적인 응답 처리
+        //             console.log(responseUserPlayer.data);
+        //             console.log("getUserPlayer: 성공");
 
-                    setUserPlayer(responseUserPlayer.data.name);
+        //             setUserPlayer(responseUserPlayer.data.name);
 
 
-            } catch (error) {
-                // Axios 오류 처리
-                console.error(error);
-            }
-        };
+        //     } catch (error) {
+        //         // Axios 오류 처리
+        //         console.error(error);
+        //     }
+        // };
     
         getUserdata();
-        getUserTeam();
-        getUserPlayer();
+        //getUserTeam();
+        //getUserPlayer();
 
         //console.log("MyTeamScreen: teamList 데이터가 변경됨(*화면 실행시에도 이 메세지가 출력됨)")
         //console.log("onleague: ", onLeague);

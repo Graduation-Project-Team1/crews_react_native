@@ -18,7 +18,6 @@ const Auth = () => {
         <Stack.Screen name='Home' component={Main} />
         <Stack.Screen name='Search' component={SearchScreen}/>
         <Stack.Screen name='SettingIndex' component={SettingIndex}/>
-        <Stack.Screen name='PodcastPlayer' component={PodcastPlayer}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

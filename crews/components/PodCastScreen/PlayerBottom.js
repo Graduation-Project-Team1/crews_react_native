@@ -1,17 +1,43 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Audio } from 'react-native';
+import { useState, useEffect } from 'react';
 import { Feather, MaterialIcons, FontAwesome5 } from '@expo/vector-icons'; 
 import Slider from '@react-native-community/slider';
 import { PlayerScreenStyles } from '../../styles/PodCastScreen/styles';
 import colors from '../../styles/colors';
+import { TouchableOpacity } from 'react-native';
 
+const useAudio = url => {
+        const [audio] = useState(new Audio(url));
+        const [playing, setPlaying] = useState(false);
+    
+        const toggle = () => setPlaying(!playing);
+    
+        useEffect(() => {
+            playing ? audio.play() : audio.pause();
+        },
+        [playing]
+        );
+    
+        useEffect(() => {
+        audio.addEventListener('ended', () => setPlaying(false));
+        return () => {
+            audio.removeEventListener('ended', () => setPlaying(false));
+        };
+        }, []);
+    
+        return [playing, toggle];
+    };
+  
 
-const Bottom = () => {
+const Bottom = (props) => {
+    //const [playing, toggle] = useAudio(props.url);
+
     return (
         <View style = {[PlayerScreenStyles.view, {flex: 1, backgroundColor: '#ffffff'}]}>
             <View style = {[PlayerScreenStyles.view, {flex: 2, paddingTop: 90, paddingBottom: 40}]}>
-                <Text style = {PlayerScreenStyles.titleText}>2023.08.06</Text>
-                <Text style = {PlayerScreenStyles.timeText}>#승리 #패배 #경기</Text>
+                <Text style = {PlayerScreenStyles.titleText}>{props.time}</Text>
+                <Text style = {PlayerScreenStyles.timeText}>{props.hashTag}</Text>
             </View>
             <View style = {PlayerScreenStyles.topBtnView}>
                 <View>
@@ -35,7 +61,9 @@ const Bottom = () => {
             </View>
             <View style = {[PlayerScreenStyles.playBtn]}>
                 <View><MaterialIcons name="skip-previous" size={50} color="black" /></View>
-                <View><MaterialIcons name="pause" size={50} color="black" /></View>
+                <TouchableOpacity onPress={()=>{/*toggle*/}}>
+                    <MaterialIcons name="pause" size={50} color="black" />
+                </TouchableOpacity>
                 <View><MaterialIcons name="skip-next" size={50} color="black" /></View>
             </View>
             <View style = {{
