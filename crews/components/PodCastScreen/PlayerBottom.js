@@ -1,37 +1,17 @@
 import React from 'react';
-import { View, Text, Audio } from 'react-native';
+import { View, Text, } from 'react-native';
 import { useState, useEffect } from 'react';
 import { Feather, MaterialIcons, FontAwesome5 } from '@expo/vector-icons'; 
 import Slider from '@react-native-community/slider';
 import { PlayerScreenStyles } from '../../styles/PodCastScreen/styles';
 import colors from '../../styles/colors';
 import { TouchableOpacity } from 'react-native';
+//import Sound from 'react-native-sound';
 
-const useAudio = url => {
-        const [audio] = useState(new Audio(url));
-        const [playing, setPlaying] = useState(false);
-    
-        const toggle = () => setPlaying(!playing);
-    
-        useEffect(() => {
-            playing ? audio.play() : audio.pause();
-        },
-        [playing]
-        );
-    
-        useEffect(() => {
-        audio.addEventListener('ended', () => setPlaying(false));
-        return () => {
-            audio.removeEventListener('ended', () => setPlaying(false));
-        };
-        }, []);
-    
-        return [playing, toggle];
-    };
-  
+
 
 const Bottom = (props) => {
-    //const [playing, toggle] = useAudio(props.url);
+    
 
     return (
         <View style = {[PlayerScreenStyles.view, {flex: 1, backgroundColor: '#ffffff'}]}>
