@@ -3,43 +3,27 @@ import { Text, View } from 'react-native';
 import { Image } from 'react-native';
 import { Shadow } from 'react-native-shadow-2';
 import { commonStyle, checkStyle, } from '../../styles/onboardingScreen/style';
-import { useNicknameData } from '../../components/onboardingScreen/context';
+
+import { LinearGradient } from 'expo-linear-gradient';
+import colors from '../../styles/colors';
 
 import StartBtn from '../../components/onboardingScreen/StartBtn';
 
 
-const Check = () => {
-
-    const {nicknameData} = useNicknameData();
-
-    useEffect(() => {
-    }, [nicknameData]);
+const Check = ({navigation}) => {
 
     return (
         <View style = {{flex:1}}>
-            <View style = {[checkStyle.headerView]}>
-                <Text style = {[commonStyle.boldText]}>등록 정보를 확인하세요</Text>
-                <Text style = {[commonStyle.text]}>수정을 원한다면 이전으로 돌아가 수정해주세요.</Text>
-                <Text style = {[commonStyle.text]}>등록 후에도 프로필 편집을 통해 수정이 가능합니다.</Text>
-            </View>
-            <View style = {[checkStyle.profileView]}>
+            <View  style = {[checkStyle.view]}>
+                <Text style = {[checkStyle.text, {fontSize:18, marginBottom: 30}]}>준비가 완료되었습니다!</Text>
                 <Shadow
-                distance={15}
-                offset={[6, 6]}
+                distance={5}
+                offset={[0, 4]}
                 >
-                <View style = {{
-                    borderRadius: 103
-                }}>
-                    <Image
-                    style = {[checkStyle.image]}
-                    source = {require('../../assets/onboarding/user.png')}
-                    />
-                </View>
+                    <LinearGradient style={checkStyle.image} colors={[colors.primary, '#1B1DB7d7','#1B1DB7c7', '#1B1DB7b7', '#1B1DB7a7']}></LinearGradient>
                 </Shadow>
-                <View style = {[checkStyle.nicknameView]}>
-                <Text style = {[checkStyle.nickname]}>{nicknameData}</Text>
-                <Text style = {[checkStyle.text]}>님</Text>
-                </View> 
+                <Text style = {[checkStyle.text, {marginTop: 33}]}>CREWS와 함께</Text>
+                <Text style = {[checkStyle.text]}>즐거운 스포츠 생활을 시작해보세요 🎉</Text>
             </View>
             <View style = {{
                 alignItems: 'center',

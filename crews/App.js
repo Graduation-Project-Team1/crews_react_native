@@ -1,9 +1,13 @@
 import React from 'react';
-import Auth from './components/homeScreen/Auth';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import Auth from './screens/Auth';
 
+const queryClient = new QueryClient();
 
 export default function App() {
   return (
-    <Auth/>
+    <QueryClientProvider client={queryClient}>
+      <Auth/>
+    </QueryClientProvider>
   );
 }
