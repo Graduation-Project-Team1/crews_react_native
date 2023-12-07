@@ -1,5 +1,8 @@
+import { string } from "i/lib/util";
 import React, { useEffect, useRef, useState } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { useQuery } from "react-query";
+import { emotionApi, mainNewsApi, trendApi } from "../../api/homeApi";
 import colors from "../../styles/colors";
 import NewsRow from "./NewsRow";
 import TitleBar from "./TitleBar";
@@ -8,6 +11,44 @@ import TrendCard, { trendCardStyle } from "./TrendCard";
 const Contents = ({navigation}) => {
   const scrollViewRef = useRef(null);
   const [scrollOffset, setScrollOffset] = useState(0);
+  const [newsList, setNewsList] = useState([]);
+  const [trendList, setTrendList] = useState([]);
+  const [emotionData, setEmotionData] = useState({});
+
+  useEffect(() => {
+    mainNewsApi()
+    .then((res) => {
+      console.log('뉴스리스트 조회');
+      console.log(res.result);
+      setNewsList(res.result);
+    })
+    .catch((err) => {
+      console.log('뉴스리스트 조회 에러');
+      console.log(err);
+    });
+
+    trendApi()
+    .then((res) => {
+      console.log('트렌드 조회');
+      console.log(res.result);
+      setTrendList(res.result);
+    })
+    .catch((err) => {
+      console.log('트렌드 조회 에러');
+      console.log(err);
+    });
+
+    emotionApi()
+    .then((res) => {
+      console.log('여론 감정 조회');
+      setEmotionData(res);
+    })
+    .catch((err) => {
+      console.log('여론 감정 조회 에러');
+      console.log(err);
+    });
+  }, []);
+
 
   useEffect(() => {
     const rollingInterval = setInterval(() => {
@@ -20,73 +61,7 @@ const Contents = ({navigation}) => {
     }, 2000);
 
     return () => clearInterval(rollingInterval);
-  }, [scrollOffset]);
-
-  const newsList = [
-    {
-      title: "프로야구, 2021년 3월 13일 개막",
-      time: "2023.08.01 17:03",
-      watch: "1,234",
-      img: 'https://r.yna.co.kr/global/home/v01/img/yonhapnews_logo_1200x800_kr01.jpg',
-      url: "https://www.gachon.ac.kr/kor/index.do",
-    },
-    {
-      title: "프로야구, 2021년 3월 13일 개막",
-      time: "2023.08.01 17:03",
-      watch: "1,234",
-      img: 'https://r.yna.co.kr/global/home/v01/img/yonhapnews_logo_1200x800_kr01.jpg',
-      url: "https://sw.gachon.ac.kr/cms/",
-    },
-    {
-      title: "프로야구, 2021년 3월 13일 개막",
-      time: "2023.08.01 17:03",
-      watch: "1,234",
-      img: 'https://r.yna.co.kr/global/home/v01/img/yonhapnews_logo_1200x800_kr01.jpg',
-      url: "https://www.naver.com",
-    },
-  ];
-
-  const trendList = [
-    {
-      title: "키워드1",
-      chart: 3,
-      watch: 153,
-    },
-    {
-      title: "키워드2",
-      chart: -5,
-      watch: 153,
-    },
-    {
-      title: "키워드3",
-      chart: 3,
-      watch: 153,
-    },
-    {
-      title: "키워드5",
-      chart: 3,
-      watch: 153,
-    },
-    {
-      title: "키워드5",
-      chart: 3,
-      watch: 153,
-    },
-  ]
-
-  const emotionData = {
-    positive: {
-      score: 80,
-      keywords: ["키워드1", "키워드2", "키워드3"],
-    },
-    negative: {
-      score: 20,
-      keywords: ["키워드1", "키워드2", "키워드3"],
-    },
-  }
-
-  const positiveStyle = emotionChartItemStyle(emotionData.positive.score, true);
-  const negativeStyle = emotionChartItemStyle(emotionData.negative.score, false);
+  }, [scrollOffset, trendList]);
 
   return (
     <View style={[contentsStyle.layout]}>
@@ -94,19 +69,11 @@ const Contents = ({navigation}) => {
         <TitleBar text="주요 뉴스" navigation={navigation} target={'이슈'} />
         <View>
           {
-            newsList.map((news, index) => {
+            newsList.length > 0 ? newsList.map((news, index) => {
               return (
-                <NewsRow
-                  key={index}
-                  order={index + 1}
-                  title={news.title}
-                  time={news.time}
-                  watch={news.watch}
-                  img={news.img}
-                  url={news.url}
-                />
+                <NewsRow key={index} order={index + 1} title={news.title} time={news.createdAt} img={'https://imgnews.pstatic.net/image/421/2023/12/03/0007212695_001_20231203151104193.jpg?type=w647'} url={'https://n.news.naver.com/mnews/article/421/0007212695?sid=102'}/>
               );
-            })
+            }) : <Text>뉴스가 없습니다.</Text>
           }
         </View>
       </View>
@@ -115,19 +82,19 @@ const Contents = ({navigation}) => {
         <TitleBar text="우리팀 트렌드" navigation={navigation} target={'분석'}  />
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} ref={scrollViewRef}>
           {
-            trendList.map((trend, index) => {
+            trendList.length > 0 ? trendList.map((trend, index) => {
               const isCurrentCard = scrollOffset === index * 168;
               return (
                 <TrendCard
                   key={index}
                   order={index + 1}
-                  title={trend.title}
-                  chart={trend.chart}
-                  watch={trend.watch}
+                  title={trend.keyword}
+                  chart={trend.moving}
+                  watch={trend.mention}
                   isCurrentCard={isCurrentCard}
                 />
               );
-            })
+            }) : <Text>트렌드가 없습니다.</Text>
           }
           <View style={{width: 168}}/>
         </ScrollView>
@@ -136,13 +103,14 @@ const Contents = ({navigation}) => {
             <Text style={emotionChartStyle.emotionTitle}>긍정</Text>
             <View style={emotionChartStyle.emotionContent}>
               <View style={emotionChartStyle.emotionChartBase}>
-                <View style={positiveStyle}/>
+                <View style={emotionChartItemStyle(emotionData ? emotionData.good ? emotionData.good.score : 0 : 0, true)}/>
               </View>
               <View style={emotionChartStyle.emotionChartTagsOuter}>
                 {
-                  emotionData.positive.keywords.map((keyword, index) => {
+                  emotionData && emotionData.good &&
+                  emotionData.good.keyword.map((word, index) => {
                     return (
-                      <Text style={emotionChartStyle.emotionChartTags} key={index}>#{keyword}</Text>
+                      <Text style={emotionChartStyle.emotionChartTags} key={index}>#{word}</Text>
                     );
                   })
                 }
@@ -153,13 +121,14 @@ const Contents = ({navigation}) => {
             <Text style={emotionChartStyle.emotionTitle}>부정</Text>
             <View style={emotionChartStyle.emotionContent}>
               <View style={emotionChartStyle.emotionChartBase}>
-                <View style={negativeStyle}/>
+                <View style={emotionChartItemStyle(emotionData ? emotionData.bad ? emotionData.bad.score : 0 : 0, false)}/>
               </View>
               <View style={emotionChartStyle.emotionChartTagsOuter}>
                 {
-                  emotionData.negative.keywords.map((keyword, index) => {
+                  emotionData && emotionData.bad &&
+                  emotionData.bad.keyword.map((word, index) => {
                     return (
-                      <Text style={emotionChartStyle.emotionChartTags} key={index}>#{keyword}</Text>
+                      <Text style={emotionChartStyle.emotionChartTags} key={index}>#{word}</Text>
                     );
                   })
                 }

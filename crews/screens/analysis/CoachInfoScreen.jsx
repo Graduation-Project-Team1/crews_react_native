@@ -1,120 +1,52 @@
-import React from 'react';
+import React, { useState, useEffect }  from 'react';
 import { View, Text,Image} from 'react-native';
+import axios from 'axios';
 import Icon from "react-native-vector-icons/Ionicons";
 import { coachScreenstyles } from '../../styles/analysisScreen/coachInfoScreen/coachScreen';
 //{/*중간에 잘리는 이유는 부모 컴포넌트의 크기를 안정해줬기 때문에 최상위 view에 flex :1이라 했다*/}
 const CoachInfoScreen = () => {
+  
+  const [coaches, setCoaches] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://18.181.69.27:8080/data/record/coach/6908");  // 실제 API URL로 대체
+        setCoaches(response.data);
+      } catch (error) {
+        console.error('데이터를 가져오는 중 오류 발생:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+  
+  
+  
+  
+  
   return (
-  <View>
-    <View style={coachScreenstyles.layout}>
-      <Text style={coachScreenstyles.textNumber}>
-          1
-      </Text>
-      <Image style={coachScreenstyles.imageInput} source={require('../../assets/analysis/coachPhoto/Heo-Byung-Gil.png')} />
-      <View style={coachScreenstyles.textLayout}>
-        <View style={{marginTop:7,flex:1}}>
-          <Text style={coachScreenstyles.title}>허병길</Text>
-          <View style={{flexDirection:'row',marginTop:5}}>
-            <Icon name="person-circle-outline" size={15} style={coachScreenstyles.timeIcon}/>
-            <Text style={{fontWeight:'bold'}}>대표이사 및 단장</Text>
-            <Icon name="globe-outline" size={15} style={coachScreenstyles.viewIcon}/>
-            <Text style={{fontWeight:'bold'}}>대한민국</Text>
+    <View>
+      {coaches.map((coach, index) => (
+        <View key={index} style={coachScreenstyles.layout}>
+          <Text style={coachScreenstyles.textNumber}>{index + 1}</Text>
+          <Image style={coachScreenstyles.imageInput} source={{ uri: coach.img }} />
+          <View style={coachScreenstyles.textLayout}>
+            <View style={{marginTop:7,flex:1}}>
+              <Text style={coachScreenstyles.title}>{coach.name}</Text>
+              <View style={{flexDirection:'row',marginTop:5}}>
+                <Icon name="person-circle-outline" size={15} style={coachScreenstyles.timeIcon}/>
+                <Text style={{fontWeight:'bold'}}>{coach.roles}</Text>
+                <Icon name="globe-outline" size={15} style={coachScreenstyles.viewIcon}/>
+                <Text style={{fontWeight:'bold'}}>{coach.region}</Text>
+              </View>
+            </View>
           </View>
         </View>
-      </View>
+      ))}
     </View>
-
-    <View style={coachScreenstyles.layout}>
-      <Text style={coachScreenstyles.textNumber}>
-          2
-      </Text>
-      <Image style={coachScreenstyles.imageInput} source={require('../../assets/analysis/coachPhoto/Park-Ji-Sung.png')} />
-      <View style={coachScreenstyles.textLayout}>
-        <View style={{marginTop:7,flex:1}}>
-          <Text style={coachScreenstyles.title}>박지성</Text>
-          <View style={{flexDirection:'row',marginTop:5}}>
-            <Icon name="person-circle-outline" size={15} style={coachScreenstyles.timeIcon}/>
-            <Text style={{fontWeight:'bold'}}>테크니컬 디렉터</Text>
-            <Icon name="globe-outline" size={15} style={coachScreenstyles.viewIcon}/>
-            <Text style={{fontWeight:'bold'}}>대한민국</Text>
-          </View>
-        </View>
-      </View>
-    </View>
-    
-    <View style={coachScreenstyles.layout}>
-      <Text style={coachScreenstyles.textNumber}>
-          3
-      </Text>
-      <Image style={coachScreenstyles.imageInput} source={require('../../assets/analysis/coachPhoto/Kim-Do-Heon.png')} />
-      <View style={coachScreenstyles.textLayout}>
-        <View style={{marginTop:7,flex:1}}>
-          <Text style={coachScreenstyles.title}>김두현</Text>
-          <View style={{flexDirection:'row',marginTop:5}}>
-            <Icon name="person-circle-outline" size={15} style={coachScreenstyles.timeIcon}/>
-            <Text style={{fontWeight:'bold'}}>감독 대행</Text>
-            <Icon name="globe-outline" size={15} style={coachScreenstyles.viewIcon}/>
-            <Text style={{fontWeight:'bold'}}>대한민국</Text>
-          </View>
-        </View>
-      </View>
-    </View>
-
-    <View style={coachScreenstyles.layout}>
-      <Text style={coachScreenstyles.textNumber}>
-          4
-      </Text>
-      <Image style={coachScreenstyles.imageInput} source={require('../../assets/analysis/coachPhoto/Park-Won-Jae.png')} />
-      <View style={coachScreenstyles.textLayout}>
-        <View style={{marginTop:7,flex:1}}>
-          <Text style={coachScreenstyles.title}>박원재</Text>
-          <View style={{flexDirection:'row',marginTop:5}}>
-            <Icon name="person-circle-outline" size={15} style={coachScreenstyles.timeIcon}/>
-            <Text style={{fontWeight:'bold'}}>코치</Text>
-            <Icon name="globe-outline" size={15} style={coachScreenstyles.viewIcon}/>
-            <Text style={{fontWeight:'bold'}}>대한민국</Text>
-          </View>
-        </View>
-      </View>
-    </View>
-
-    <View style={coachScreenstyles.layout}>
-      <Text style={coachScreenstyles.textNumber}>
-          5
-      </Text>
-      <Image style={coachScreenstyles.imageInput} source={require('../../assets/analysis/coachPhoto/Lee-Woon-Jae.png')} />
-      <View style={coachScreenstyles.textLayout}>
-        <View style={{marginTop:7,flex:1}}>
-          <Text style={coachScreenstyles.title}>이운재</Text>
-          <View style={{flexDirection:'row',marginTop:5}}>
-            <Icon name="person-circle-outline" size={15} style={coachScreenstyles.timeIcon}/>
-            <Text style={{fontWeight:'bold'}}>골키퍼 코치</Text>
-            <Icon name="globe-outline" size={15} style={coachScreenstyles.viewIcon}/>
-            <Text style={{fontWeight:'bold'}}>대한민국</Text>
-          </View>
-        </View>
-      </View>
-    </View>
-
-    <View style={coachScreenstyles.layout}>
-      <Text style={coachScreenstyles.textNumber}>
-          6
-      </Text>
-      <Image style={coachScreenstyles.imageInput} source={require('../../assets/analysis/coachPhoto/Lee-Se-Joon.png')} />
-      <View style={coachScreenstyles.textLayout}>
-        <View style={{marginTop:7,flex:1}}>
-          <Text style={coachScreenstyles.title}>이세준</Text>
-          <View style={{flexDirection:'row',marginTop:5}}>
-            <Icon name="person-circle-outline" size={15} style={coachScreenstyles.timeIcon}/>
-            <Text style={{fontWeight:'bold'}}>피지컬 코치</Text>
-            <Icon name="globe-outline" size={15} style={coachScreenstyles.viewIcon}/>
-            <Text style={{fontWeight:'bold'}}>대한민국</Text>
-          </View>
-        </View>
-      </View>
-    </View>
-  </View>  
   );
+  
 };
 
 export default CoachInfoScreen;

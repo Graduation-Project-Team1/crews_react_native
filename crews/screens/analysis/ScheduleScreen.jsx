@@ -1,12 +1,19 @@
-import React from 'react';
-import { StyleSheet, Text, View} from 'react-native';
+import React,{useState} from 'react';
+import { StyleSheet, Text, View, TouchableOpacity,Modal} from 'react-native';
 import {Calendar} from "react-native-calendars";
 import Icon from "react-native-vector-icons/Ionicons";
 import TodayScheduleBox from '../../components/analysisScreen/TodayScheduleBox';
-export default function ScheduleScreen() {
+import LiveChatScreen from './LiveChatScreen';
+
+
+export default function ScheduleScreen({navigation}) {
+  const [showLiveScreen, setLiveScreen] = useState(false);
     return (
       <View style={{flex:1, backgroundColor:'#FFFFFF'}}>
-        <View style={styles.line} />
+        <View style={{ flexDirection: 'row', marginTop: 10 }}>
+          <View style={{ flex: 1, height: 2, backgroundColor: '#1B1DB7' }} />
+          <View style={{ flex: 1, height: 2, backgroundColor: '#CAC4D0' }} />
+        </View>
         <Calendar style={styles.calendar}
             // 캘린더 내 스타일 수정
             theme={{
@@ -31,7 +38,21 @@ export default function ScheduleScreen() {
             <Icon name="chevron-back-outline" size={20}/> : <Icon name="chevron-forward-outline" size={20}/>}
         />
         <Text style={[styles.bold,{fontSize:15,marginLeft:15,marginTop:20}]}>10월 16일 일정</Text>
-        <TodayScheduleBox/>
+
+      <TouchableOpacity onPress={() => {setLiveScreen(true);}}>
+         <TodayScheduleBox />
+      </TouchableOpacity>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={showLiveScreen}
+        onRequestClose={() => {
+          setLiveScreen(false);
+        }}
+      >
+        <LiveChatScreen onClose={() => setLiveScreen(false)} />
+      </Modal>
       </View>
     );
 };

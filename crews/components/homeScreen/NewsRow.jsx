@@ -4,7 +4,7 @@ import Clock from "../../assets/icons/icon_clock.svg";
 import People from "../../assets/icons/icon_people.svg";
 import colors from "../../styles/colors";
 
-const NewsRow = ({order, title, time, watch, img, url}) => {
+const NewsRow = ({order, title, time, img, url}) => {
 
   const handlePress = () => {
     Linking.openURL(url);
@@ -15,12 +15,10 @@ const NewsRow = ({order, title, time, watch, img, url}) => {
     <View style={newsRowStyle.base}>
       <Text style={newsRowStyle.order}>{order}</Text>
       <View style={newsRowStyle.content}>
-        <Text style={newsRowStyle.contentTitle}>{title}</Text>
+        <Text style={newsRowStyle.contentTitle} numberOfLines={1} ellipsizeMode={'tail'}>{title}</Text>
         <View style={newsRowStyle.contentSub}>
             <Clock width={16} height={16}/>
             <Text style={newsRowStyle.contentSubText}>{time}</Text>
-            <People width={16} height={16}/>
-            <Text style={newsRowStyle.contentSubText}>{watch}</Text>
         </View>
       </View>
       <Image style={newsRowStyle.img} source={{uri: img}}/>
@@ -62,6 +60,7 @@ export const newsRowStyle = StyleSheet.create({
     fontSize: 16,
     fontWeight: 400,
     lineHeight: 24,
+    width: 200,
     color: colors.black,
     marginBottom: 4,
   },

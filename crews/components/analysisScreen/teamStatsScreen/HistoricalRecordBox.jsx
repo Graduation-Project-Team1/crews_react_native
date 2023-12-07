@@ -1,8 +1,8 @@
 import React from "react";
 import {View,Text} from "react-native";
 import { historicBoxStyle } from "../../../styles/analysisScreen/teamStatsScreen/historicRecordBox";
-const HistoricalRecordBox = () =>{
-    return(
+const HistoricalRecordBox = ({ data }) => {
+    return (
     <View>
         <Text style={{marginTop: 30,marginLeft:10,fontWeight:'bold'}}>
             역대 우승 기록
@@ -15,16 +15,14 @@ const HistoricalRecordBox = () =>{
                 <Text style={{fontWeight:'bold',marginTop:10}}>AFC</Text>
             </View>
             <View>
-                <Text style={{marginTop:10}}>2009, 2011, 2014, 2015, 2017, 2019, 2020, 2021</Text>
-                <Text style={{marginTop:10}}>2000, 2003, 2005, 2020, 2022</Text>
-                <Text style={{marginTop:10}}>2004</Text>
-                <Text style={{marginTop:10}}>2006, 2016</Text>
+                <Text style={{marginTop:10}}>{data.kLeagueWinRecord + " "}</Text>
+                <Text style={{marginTop:10}}>{data.faCupWinRecord + " "}</Text>
+                <Text style={{marginTop:10}}>{data.superCupWinRecord + " "}</Text>
+                <Text style={{marginTop:10}}>{data.afcWinRecord + " "}</Text>
             </View>
         </View>
     </View>
-    
     );
 };
-
 export default HistoricalRecordBox;
     

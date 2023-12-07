@@ -21,7 +21,7 @@ const KeywordBar = () => {
   // rank, mentions, mood 데이터 배열을 생성
   const ranks = [1, 2, 3, 4, 5];
   const mentions = [153, 130, 100, 110, 120];
-  const moods = ["긍정적", "긍정적", "긍정적", "부정적", "부정적"];
+  const moods = ["이 분위기면 우승도 가능할것 같네요", "수비수들이 좀 더 정신 차렸으면 좋겠네요", "공격수들 좀 더 집중해야돼요", "1111", "원정가서 열심히 훈련하세요..."];
 
   return (
     <View>

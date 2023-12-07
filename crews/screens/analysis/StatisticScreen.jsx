@@ -10,7 +10,10 @@ export default function StatisticScreen() {
   const [showPlayer, setShowPlayer] = useState(false);
   return (
     <View style={{flex:1, backgroundColor:'#FFFFFF'}}>
-      <View style={styles.line} />
+      <View style={{ flexDirection: 'row', marginTop: 10 }}>
+          <View style={{ flex: 1, height: 2, backgroundColor: '#CAC4D0' }} />
+          <View style={{ flex: 1, height: 2, backgroundColor: '#1B1DB7' }} />
+      </View>
       <View style={styles.textContainer}>
         <TouchableOpacity onPress={() => { setShowTeamStats(true), setShowCoachInfo(false), setShowPlayer(false); } }>
             <Text style={styles.textInput}>팀</Text>
