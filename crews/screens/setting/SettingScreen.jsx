@@ -9,9 +9,9 @@ import CategoryBtn from "../../components/settingScreen/CategoryBtn";
 const SettingScreen = ({navigation}) => {
 
     const [userDataRes, setUserDataRes] = useState([]);
-    const [userName, setUserName] = useState([]);
-    const [userTeam, setUserTeam] = useState([]);
-    const [userPlayer, setUserPlayer] = useState([]);
+    const [userName, setUserName] = useState(['user1']);
+    const [userTeam, setUserTeam] = useState(['teamname']);
+    const [userPlayer, setUserPlayer] = useState(['playername']);
 
     useEffect(() => {
         const getUserdata = async() => {
