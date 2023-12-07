@@ -6,15 +6,17 @@ import { FontAwesome5 } from '@expo/vector-icons';
 
 const PlayList = (props) => {
     return(
-      <TouchableOpacity style = {[playListStyles.list]}>
+      <TouchableOpacity 
+      onPress={props.onPress}
+      style = {[playListStyles.list]}>
         <View style = {
           [playListStyles.id]
         }>
-          <Text style = {{color: colors.textGray, }}>{props.id}</Text>
+          <Text style = {{color: colors.textGray }}>{props.id}</Text>
         </View>
         <View style = {[playListStyles.textView]}>
-          <Text style = {[playListStyles.titleText]}>{props.title}</Text>
-          <Text style = {[playListStyles.time]}>{props.time}</Text>
+          <Text style = {[playListStyles.titleText]}>{props.time}</Text>
+          <Text style = {[playListStyles.time]}>{props.hashTag}</Text>
         </View>
         <View style = {[playListStyles.iconView]}>
           <FontAwesome5 name="play" size={15} color="black" />

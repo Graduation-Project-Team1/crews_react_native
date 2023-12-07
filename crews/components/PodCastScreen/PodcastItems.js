@@ -2,72 +2,104 @@ import React from "react";
 import PlayList from "./PlayList";
 import { initialWindowMetrics } from "react-native-safe-area-context";
 import { View } from 'react-native';
+import { usePodcastData } from "./PodcastContext";
 
 const items = [
     {
-        key: 1,
-        title: "2023.05.22 (월)", 
-        time: "#승리 #연승 #패배"
+        "id": 1,
+        "time": "2023.05.22", 
+        "hashTag": "#승리 #연승 #패배",
+        "url": "https://designband.com/wp-content/uploads/2012/10/Thinking-Out-Loud-D.mp3",
+        "duration": 402,
+        "infoSpan": "day"
     },
     {
-        key: 2,
-        title: "2023.05.22 (월)", 
-        time: "#승리 #연승 #패배"
+        "id": 2,
+        "time": "2023.05.22", 
+        "hashTag": "#승리 #연승 #패배",
+        "url": "https://designband.com/wp-content/uploads/2012/10/Uptown-Funk-D.mp3",
+        "duration": 387,
+        "infoSpan": "night"
     },
     {
-        key: 3,
-        title: "2023.05.22 (월)", 
-        time: "#승리 #연승 #패배"
+        "id": 3,
+        "time": "2023.05.23", 
+        "hashTag": "#승리 #연승 #패배",
+        "url": "https://designband.com/wp-content/uploads/2017/07/Love-On-The-Brain-Ash.mp3",
+        "duration": 512,
+        "infoSpan": "day"
     },
     {
-        key: 4,
-        title: "2023.05.22 (월)", 
-        time: "#승리 #연승 #패배"
+        "id": 4,
+        "time": "2023.05.23", 
+        "hashTag": "#승리 #연승 #패배",
+        "url": "https://designband.com/wp-content/uploads/2012/10/Thinking-Out-Loud-D.mp3",
+        "duration": 399,
+        "infoSpan": "night"
     },
     {
-        key: 5,
-        title: "2023.05.22 (월)", 
-        time: "#승리 #연승 #패배"
+        "id": 5,
+        "time": "2023.04.22", 
+        "hashTag": "#승리 #연승 #패배",
+        "url": "https://designband.com/wp-content/uploads/2012/10/Thinking-Out-Loud-D.mp3",
+        "duration": 400,
+        "infoSpan": "day"
     },
     {
-        key: 6,
-        title: "2023.05.22 (월)", 
-        time: "#승리 #연승 #패배"
+        "id": 6,
+        "time": "2023.04.22", 
+        "hashTag": "#승리 #연승 #패배",
+        "url": "https://designband.com/wp-content/uploads/2012/10/Thinking-Out-Loud-D.mp3",
+        "duration": 432,
+        "infoSpan": "night"
     },
     {
-        key: 7,
-        title: "2023.05.22 (월)", 
-        time: "#승리 #연승 #패배"
+        "id": 7,
+        "time": "2023.9.10", 
+        "hashTag": "#승리 #연승 #패배",
+        "url": "https://designband.com/wp-content/uploads/2012/10/Thinking-Out-Loud-D.mp3",
+        "duration": 412,
+        "infoSpan": "day"
     },
     {
-        key: 8,
-        title: "2023.05.22 (월)", 
-        time: "#승리 #연승 #패배"
+        "id": 8,
+        "time": "2023.9.10", 
+        "hashTag": "#승리 #연승 #패배",
+        "url": "https://designband.com/wp-content/uploads/2012/10/Thinking-Out-Loud-D.mp3",
+        "duration": 315,
+        "infoSpan": "night"
     },
     {
-        key: 9,
-        title: "2023.05.22 (월)", 
-        time: "#승리 #연승 #패배"
+        "id": 9,
+        "time": "2023.10.22", 
+        "hashTag": "#승리 #연승 #패배",
+        "url": "https://designband.com/wp-content/uploads/2012/10/Thinking-Out-Loud-D.mp3",
+        "duration": 410,
+        "infoSpan": "day"
     },
     {
-        key: 10,
-        title: "2023.05.22 (월)", 
-        time: "#승리 #연승 #패배"
+        "id": 10,
+        "time": "2023.10.22", 
+        "hashTag": "#승리 #연승 #패배",
+        "url": "https://designband.com/wp-content/uploads/2012/10/Thinking-Out-Loud-D.mp3",
+        "duration": 378,
+        "infoSpan": "night"
     }
-];
+]
 
 const PodcastList = ({navigation}) => {
-    const _onPress = item => {
-        navigation.navigate('PodcastPlayer')
-    };
+
+    const {podcastData} = usePodcastData();
+    const {onClickPodcast} = usePodcastData();
 
     return(
         <View>
             {items.map(item => (
                 <PlayList
-                    id = {item.key}
-                    title = {item.title}
+                    id = {item.id}
                     time = {item.time}
+                    hashTag = {item.hashTag}
+                    onPress = {()=> {onClickPodcast(item)}}
                 />
             ))}
             
