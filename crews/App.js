@@ -1,13 +1,12 @@
-import React from 'react';
-import { QueryClient, QueryClientProvider } from 'react-query';
-import Auth from './screens/Auth';
+import React, { useEffect } from 'react';
+import { RecoilRoot } from 'recoil';
+import Base from './screens/Base';
 
-const queryClient = new QueryClient();
 
 export default function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <Auth/>
-    </QueryClientProvider>
+    <RecoilRoot>
+      <Base/>
+    </RecoilRoot>
   );
 }

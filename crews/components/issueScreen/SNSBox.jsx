@@ -1,20 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Twitter from "../../assets/icons/icon_brand_twitter.svg";
 import Instagram from "../../assets/icons/icon_brand_instagram.svg";
 import Reddit from "../../assets/icons/icon_brand_reddit.svg";
 import Like from "../../assets/icons/icon_like.svg";
 import colors from "../../styles/colors";
+import { ThemeContext } from "styled-components/native";
 
 const SNSBox = ({sns, nickname, id, content, time, like}) => {
-
+  const theme = useContext(ThemeContext);
   const baseStyle = snsBaseStyle(sns);
 
   return (
     <View style={baseStyle}>
       <View style={snsBoxStyle.header}>
         <View>
-          <Text style={snsBoxStyle.nickname}>{nickname}</Text>
+          <Text style={[snsBoxStyle.nickname, {
+            color: theme.text,
+          }]}>{nickname}</Text>
           <Text style={snsBoxStyle.id}>@{id}</Text>
         </View>
         {
@@ -24,7 +27,7 @@ const SNSBox = ({sns, nickname, id, content, time, like}) => {
                 <Reddit width={25} height={25}/> : null
         }
       </View>
-      <Text style={snsBoxStyle.content} ellipsizeMode="tail" numberOfLines={5}>{content}</Text>
+      <Text style={[snsBoxStyle.content, { color: theme.text }]} ellipsizeMode="tail" numberOfLines={5}>{content}</Text>
       <View style={snsBoxStyle.footer}>
         <View style={snsBoxStyle.like}>
           <Like width={16} height={16}/>
@@ -45,7 +48,7 @@ export const snsBaseStyle = (sns) => {
     borderRadius: 13,
     borderWidth: 1,
     borderColor: sns === 'twitter' ? colors.twitter : sns === 'instagram' ? colors.instagram : sns === 'reddit' ? colors.reddit : colors.black,
-    backgroundColor: colors.white,
+    backgroundColor: colors.transparent,
     justifyContent: 'space-between',
     alignItems: 'flex-start',
     paddingVertical: 16,

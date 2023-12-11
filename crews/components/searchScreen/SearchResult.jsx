@@ -1,13 +1,22 @@
-import React, { useEffect, useState } from "react";
-import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import React, { useContext, useEffect, useState } from "react";
+import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import RadioResult from "./RadioResult";
 import MatchResult from "./MatchResult";
 import NewsRow from "../homeScreen/NewsRow";
 import colors from "../../styles/colors";
 import Right from "../../assets/icons/icon_right.svg";
 import { searchApi } from "../../api/searchApi";
+import { ThemeContext } from "styled-components/native";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { otherTeamState, prevTeamState, userTeamState } from "../../recoil/teamState";
+import { useNavigation } from "@react-navigation/native";
 
 const SearchResult = ({result}) => {
+  const theme = useContext(ThemeContext);
+  const [currentTeam, setCurrentTeam] = useRecoilState(userTeamState);
+  const setOtherTeamMode = useSetRecoilState(otherTeamState);
+  const setPrevTeam = useSetRecoilState(prevTeamState);
+  const navigation = useNavigation();
   const [teamData, setTeamData] = useState(null);
   const [newsData, setNewsData] = useState([]);
   const [radioData, setRadioData] = useState([]);
@@ -29,10 +38,28 @@ const SearchResult = ({result}) => {
   if (result === '') {
     return (
       <View style={emptyResultStyle.base}>
-        <Text style={emptyResultStyle.text}>검색 결과가 없습니다.</Text>
+        <Text style={[emptyResultStyle.text, {color: theme.text}]}>검색 결과가 없습니다.</Text>
       </View>
     )
   }
+
+  const handleOtherTeamClick = () => {
+    console.log("다른 팀 클릭");
+
+    setPrevTeam({
+      name: currentTeam.name,
+      id: currentTeam.id,
+    });
+
+    if (teamData) {
+      setOtherTeamMode(true);
+      setCurrentTeam({
+        name: teamData.name,
+        id: teamData.id,
+      })
+      navigation.goBack();
+    }
+  };
 
   return (
     <View style={searchResultStyle.layout}>
@@ -42,16 +69,16 @@ const SearchResult = ({result}) => {
             <View>
               <View>
                 <Text style={searchResultStyle.teamGray}>{`다른 팀이 궁금하신가요?\n내 팀을 변경하지 않고 다른 팀을 구경해보세요.`}</Text>
-                <View style={searchResultStyle.team}>
+                <TouchableOpacity style={searchResultStyle.team} onPress={handleOtherTeamClick}>
                   <Image 
                     source={{uri: teamData.img}}
                     style={searchResultStyle.teamImg}/>
                   <View style={searchResultStyle.teamInfo}>
-                    <Text style={searchResultStyle.teamTitle}>{teamData.name}</Text>
-                    <Text style={searchResultStyle.teamCategory}>{teamData.category}</Text>
+                    <Text style={[searchResultStyle.teamTitle, {color: theme.text}]}>{teamData.name}</Text>
+                    <Text style={[searchResultStyle.teamCategory, {color: theme.text}]}>{teamData.category}</Text>
                   </View>
                   <Right width={24} height={24} fill={colors.black}/>
-                </View>
+                </TouchableOpacity>
               </View>
               <View style={searchResultStyle.divider}/>
             </View>
@@ -60,7 +87,7 @@ const SearchResult = ({result}) => {
         {
           newsData.length > 0 && (
             <View style={searchResultStyle.contentContainer}>
-              <Text style={searchResultStyle.headerText}>뉴스</Text>
+              <Text style={[searchResultStyle.headerText, {color: theme.text}]}>뉴스</Text>
               <View>
                 {
                   newsData.map((news, index) => (
@@ -81,7 +108,7 @@ const SearchResult = ({result}) => {
         {
           radioData.length > 0 && (
             <View style={searchResultStyle.contentContainer}>
-              <Text style={searchResultStyle.headerText}>라디오</Text>
+              <Text style={[searchResultStyle.headerText, {color: theme.text}]}>라디오</Text>
               <View>
                 {
                   radioData.map((radio, index) => (
@@ -101,7 +128,7 @@ const SearchResult = ({result}) => {
           gameData.length > 0 && (
             
             <View style={searchResultStyle.contentContainer}>
-              <Text style={searchResultStyle.headerText}>경기 정보</Text>
+              <Text style={[searchResultStyle.headerText, {color: theme.text}]}>경기 정보</Text>
               <View>
                 {
                   gameData.map((game, index) => (

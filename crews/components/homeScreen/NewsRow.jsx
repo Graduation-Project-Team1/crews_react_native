@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Image, Linking, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { ThemeContext } from "styled-components/native";
 import Clock from "../../assets/icons/icon_clock.svg";
 import People from "../../assets/icons/icon_people.svg";
 import colors from "../../styles/colors";
 
 const NewsRow = ({order, title, time, img, url}) => {
+  const theme = useContext(ThemeContext);
 
   const handlePress = () => {
     Linking.openURL(url);
@@ -13,9 +15,9 @@ const NewsRow = ({order, title, time, img, url}) => {
   return (
     <TouchableOpacity onPress={handlePress}>
     <View style={newsRowStyle.base}>
-      <Text style={newsRowStyle.order}>{order}</Text>
+      <Text style={[newsRowStyle.order, {color: theme.text}]}>{order}</Text>
       <View style={newsRowStyle.content}>
-        <Text style={newsRowStyle.contentTitle} numberOfLines={1} ellipsizeMode={'tail'}>{title}</Text>
+        <Text style={[newsRowStyle.contentTitle, {color: theme.text}]} numberOfLines={1} ellipsizeMode={'tail'}>{title}</Text>
         <View style={newsRowStyle.contentSub}>
             <Clock width={16} height={16}/>
             <Text style={newsRowStyle.contentSubText}>{time}</Text>

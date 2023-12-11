@@ -1,7 +1,8 @@
 import { string } from "i/lib/util";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { useQuery } from "react-query";
+import { ThemeContext } from "styled-components/native";
 import { emotionApi, mainNewsApi, trendApi } from "../../api/homeApi";
 import colors from "../../styles/colors";
 import NewsRow from "./NewsRow";
@@ -9,6 +10,7 @@ import TitleBar from "./TitleBar";
 import TrendCard, { trendCardStyle } from "./TrendCard";
 
 const Contents = ({navigation}) => {
+  const theme = useContext(ThemeContext);
   const scrollViewRef = useRef(null);
   const [scrollOffset, setScrollOffset] = useState(0);
   const [newsList, setNewsList] = useState([]);
@@ -18,8 +20,8 @@ const Contents = ({navigation}) => {
   useEffect(() => {
     mainNewsApi()
     .then((res) => {
-      console.log('뉴스리스트 조회');
-      console.log(res.result);
+      // console.log('뉴스리스트 조회');
+      // console.log(res.result);
       setNewsList(res.result);
     })
     .catch((err) => {
@@ -29,8 +31,8 @@ const Contents = ({navigation}) => {
 
     trendApi()
     .then((res) => {
-      console.log('트렌드 조회');
-      console.log(res.result);
+      // console.log('트렌드 조회');
+      // console.log(res.result);
       setTrendList(res.result);
     })
     .catch((err) => {
@@ -40,7 +42,7 @@ const Contents = ({navigation}) => {
 
     emotionApi()
     .then((res) => {
-      console.log('여론 감정 조회');
+      // console.log('여론 감정 조회');
       setEmotionData(res);
     })
     .catch((err) => {
@@ -64,7 +66,10 @@ const Contents = ({navigation}) => {
   }, [scrollOffset, trendList]);
 
   return (
-    <View style={[contentsStyle.layout]}>
+    <View style={[contentsStyle.layout, StyleSheet.create({
+      backgroundColor: theme.background,
+      color: colors.white,
+    })]}>
       <View>
         <TitleBar text="주요 뉴스" navigation={navigation} target={'이슈'} />
         <View>
@@ -98,12 +103,14 @@ const Contents = ({navigation}) => {
           }
           <View style={{width: 168}}/>
         </ScrollView>
-        <View style={emotionChartStyle.base}>
+        <View style={[emotionChartStyle.base, {borderColor: theme.border}]}>
           <View style={emotionChartStyle.emotionOuter}>
-            <Text style={emotionChartStyle.emotionTitle}>긍정</Text>
+            <Text style={[emotionChartStyle.emotionTitle, {color: theme.text}]}>긍정</Text>
             <View style={emotionChartStyle.emotionContent}>
               <View style={emotionChartStyle.emotionChartBase}>
-                <View style={emotionChartItemStyle(emotionData ? emotionData.good ? emotionData.good.score : 0 : 0, true)}/>
+                <View style={[emotionChartItemStyle(emotionData ? emotionData.good ? emotionData.good.score : 0 : 0), {
+                  backgroundColor: theme.primary,
+                }]}/>
               </View>
               <View style={emotionChartStyle.emotionChartTagsOuter}>
                 {
@@ -118,10 +125,12 @@ const Contents = ({navigation}) => {
             </View>
           </View>
           <View style={emotionChartStyle.emotionOuter}>
-            <Text style={emotionChartStyle.emotionTitle}>부정</Text>
+            <Text style={[emotionChartStyle.emotionTitle, {color: theme.text}]}>부정</Text>
             <View style={emotionChartStyle.emotionContent}>
               <View style={emotionChartStyle.emotionChartBase}>
-                <View style={emotionChartItemStyle(emotionData ? emotionData.bad ? emotionData.bad.score : 0 : 0, false)}/>
+                <View style={[emotionChartItemStyle(emotionData ? emotionData.bad ? emotionData.bad.score : 0 : 0), {
+                  backgroundColor: theme.accent,
+                }]}/>
               </View>
               <View style={emotionChartStyle.emotionChartTagsOuter}>
                 {
@@ -157,7 +166,6 @@ export const contentsStyle = StyleSheet.create({
   title: {
     fontSize: 18,
     fontWeight: 700,
-    color: colors.black,
     marginTop: 35,
     marginBottom: 20
   }
@@ -188,7 +196,6 @@ export const emotionChartStyle = StyleSheet.create({
   emotionTitle: {
     fontSize: 14,
     fontWeight: 600,
-    color: colors.black,
     marginRight: 16,
   },
 
@@ -205,6 +212,7 @@ export const emotionChartStyle = StyleSheet.create({
     alignItems: "center",
     marginBottom: 6,
     backgroundColor: colors.whiteGray,
+    borderRadius: 10,
   },
 
   emotionChartTagsOuter: {
@@ -219,11 +227,10 @@ export const emotionChartStyle = StyleSheet.create({
   }
 });
 
-export const emotionChartItemStyle = (score, emotion) => {
+export const emotionChartItemStyle = (score) => {
   return StyleSheet.create({
     width: `${score}%`,
     height: "100%",
-    backgroundColor: emotion ? colors.primary : colors.accent,
     borderRadius: 10,
   });
 }

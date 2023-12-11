@@ -1,13 +1,19 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Keyboard, StyleSheet, Text, TextInput, TouchableHighlight, View } from "react-native";
 import { styles } from "../../styles/styles";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import SearchResult from "../../components/searchScreen/SearchResult";
 import colors from "../../styles/colors";
+import { ThemeContext } from "styled-components/native";
+import { useRecoilValue } from "recoil";
+import { themeState } from "../../recoil/themeState";
 
 const SearchScreen = () => {
+  const theme = useContext(ThemeContext);
+  const currentTheme = useRecoilValue(themeState);
+
   const [keyword, setKeyword] = useState('');
   const [result, setResult] = useState(null);
 
@@ -19,9 +25,9 @@ const SearchScreen = () => {
   }
 
   return (
-    <View style={styles.layout}>
-      <StatusBar style="auto"/>
-      <View style={searchScreenStyle.layout}>
+    <View style={[styles.layout, {backgroundColor: theme.pointBackground}]}>
+      <StatusBar style={currentTheme === 'dark' ? 'light' : 'dark'}/>
+      <View style={[searchScreenStyle.layout, {backgroundColor: theme.pointBackground}]}>
         <View style={searchScreenStyle.header}>
           <TextInput 
             placeholder="검색어를 입력해주세요." 
@@ -36,7 +42,7 @@ const SearchScreen = () => {
                 color="#FFFFFF"/>
             </TouchableHighlight>
         </View>
-        <View style={searchScreenStyle.resultContainer}>
+        <View style={[searchScreenStyle.resultContainer, {backgroundColor: theme.background}]}>
           <SearchResult result={result}/>
         </View>
       </View>

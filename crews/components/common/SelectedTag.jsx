@@ -23,7 +23,7 @@ export const selectedTagStyle = (text) => {
       borderWidth: 1.5,
       borderColor: text === '트위터' ? colors.twitter : text === '인스타그램' ? colors.instagram : text === '레딧' ? colors.reddit : colors.black,
       borderRadius: 50,
-      backgroundColor: colors.white,
+      backgroundColor: colors.transparent,
       paddingVertical: 2,
       paddingHorizontal: 15,
       alignItems: 'center',

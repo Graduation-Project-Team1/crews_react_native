@@ -7,6 +7,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     paddingTop: Platform.OS === `ios` ? 0 : StatusBar.currentHeight,
+    position: 'relative',
   },
 
   container: {

@@ -1,16 +1,26 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { View, Text } from "react-native";
 
 import CategoryBtn from "../../components/settingScreen/CategoryBtn";
 import CateHeader from "../../components/settingScreen/CateHeader";
 import ProfileView from "../../components/settingScreen/ProfileView";
 import ThemeSelectBtn from '../../components/onboardingScreen/ThemeSelectBtn';
+import { storeTheme } from "../../api/asyncStorage";
+import { useRecoilState } from "recoil";
+import { themeState } from "../../recoil/themeState";
+import { ThemeContext } from "styled-components";
 
 
 const AppSettingScreen = ({navigation}) => {
-
-  const [checked, setChecked] = React.useState('team');
+  const theme = useContext(ThemeContext);
+  const [checked, setChecked] = useRecoilState(themeState);
   const [language, setLanguage] = React.useState('korean');
+
+  useEffect(() => {
+    console.log(checked);
+    storeTheme(checked)
+      .then(() => console.log('success'));
+  }, [checked])
 
 
   return (
@@ -31,11 +41,10 @@ const AppSettingScreen = ({navigation}) => {
                   alignItems: 'center',
                   width: '100%',
                 }}>
-                  <ThemeSelectBtn text = '우리 팀 테마' value = 'team' color = '#276A52' checked = {checked} setChecked = {setChecked} />
-                  <ThemeSelectBtn text = '크루즈 테마' value = 'cruise' color = '#1B1DB7' checked = {checked} setChecked = {setChecked} />
+                  <ThemeSelectBtn text = '우리 팀 테마' value = 'team' color = {theme.primary} checked = {checked} setChecked = {setChecked} />
+                  <ThemeSelectBtn text = '라이트 테마' value = 'light' color = '#1B1DB7' checked = {checked} setChecked = {setChecked} />
                   <ThemeSelectBtn text = '다크 테마' value = 'dark' color = '#181818' checked = {checked} setChecked = {setChecked} />
-                  <ThemeSelectBtn text = '시스템 설정 - 우리팀/다크' color = '#276A52' value = 'system_team' checked = {checked} setChecked = {setChecked} />
-                  <ThemeSelectBtn text = '시스템 설정 - 크루즈/다크' color = '#1B1DB7' value = 'system_cruise' checked = {checked} setChecked = {setChecked} />
+                  <ThemeSelectBtn text = '서울 FC 테마' value = 'team7646' color = '#B6181A' checked = {checked} setChecked = {setChecked} />
                 </View>
                 
             </View>

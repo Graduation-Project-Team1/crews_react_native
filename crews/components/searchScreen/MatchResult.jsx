@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Image, View, Text, StyleSheet } from "react-native";
+import { ThemeContext } from "styled-components/native";
 import colors from "../../styles/colors";
 
 const MatchResult = ({date, team1, team2}) => {
+  const theme = useContext(ThemeContext);
   return (
     <View style={matchResultStyle.base}>
       <View style={matchResultStyle.matchInfo}>
-        <Text style={matchResultStyle.matchDate}>{date}</Text>
-        <Text style={matchResultStyle.matchScore}>{`${team1.score} : ${team2.score}`}</Text>
+        <Text style={[matchResultStyle.matchDate, {color: theme.text}]}>{date}</Text>
+        <Text style={[matchResultStyle.matchScore, {color: theme.text}]}>{`${team1.score} : ${team2.score}`}</Text>
       </View>
       <Image
         source={{uri: team1.img}}
@@ -28,7 +30,7 @@ export const matchResultStyle = StyleSheet.create({
     borderRadius: 13,
     borderWidth: 1,
     borderColor: colors.dividerGray,
-    backgroundColor: colors.white,
+    backgroundColor: colors.transparent,
     flexDirection: 'row',
     paddingVertical: 13,
     paddingHorizontal: 16,

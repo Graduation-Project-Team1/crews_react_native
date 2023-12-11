@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Image, StyleSheet, Text, View, TouchableOpacity, Linking } from "react-native";
+import { ThemeContext } from "styled-components/native";
 import colors from "../../styles/colors";
 
 const CommunityBox = ({img, title, writer, url}) => {
+  const theme = useContext(ThemeContext);
 
   const handlePress = () => {
     Linking.openURL(url);
@@ -12,8 +14,8 @@ const CommunityBox = ({img, title, writer, url}) => {
     <TouchableOpacity onPress={handlePress}>
     <View style={communityBoxStyle.base}>
       <Image style={communityBoxStyle.img} source={{uri: img}} />
-      <Text style={communityBoxStyle.title} numberOfLines={1} ellipsizeMode={'tail'}>{title}</Text>
-      <Text style={communityBoxStyle.writer}>{writer}</Text>
+      <Text style={[communityBoxStyle.title, {color: theme.text}]} numberOfLines={1} ellipsizeMode={'tail'}>{title}</Text>
+      <Text style={[communityBoxStyle.writer, {color: theme.text}]}>{writer}</Text>
     </View>
     </TouchableOpacity>
   );
