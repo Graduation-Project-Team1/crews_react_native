@@ -22,7 +22,6 @@ const OnboardingScreen = ({navigation}) => {
     const swiper = useRef(null);
 
     return (
-        <ThemeProvider theme={theme1}>
         <TeamDataProvider>
         <NicknameDataProvider>
         <MemberDataProvider>
@@ -62,7 +61,6 @@ const OnboardingScreen = ({navigation}) => {
         </MemberDataProvider>
         </NicknameDataProvider>
         </TeamDataProvider>
-        </ThemeProvider>
     )
 }
 

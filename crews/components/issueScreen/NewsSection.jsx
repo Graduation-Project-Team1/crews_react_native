@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { ThemeContext } from "styled-components/native";
 import colors from "../../styles/colors";
 import NewsRow from "../homeScreen/NewsRow";
 
 const NewsSection = ({newsList}) => {
+  const theme = useContext(ThemeContext);
+
   return (
     <View style={newsSectionStyle.base}>
-      <Text style={newsSectionStyle.title}>종합 뉴스</Text>
+      <Text style={[newsSectionStyle.title, {color: theme.text}]}>종합 뉴스</Text>
       <View style={newsSectionStyle.content}>
         {newsList.map((news, index) => {
           return (
