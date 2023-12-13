@@ -12,14 +12,12 @@ const Stack = createNativeStackNavigator();
 
 const Auth = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-      screenOptions={{headerShown: false}}>
-        <Stack.Screen name='Home' component={Main} />
-        <Stack.Screen name='Search' component={SearchScreen}/>
-        <Stack.Screen name='SettingIndex' component={SettingIndex}/>
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Stack.Navigator
+    screenOptions={{headerShown: false}}>
+      <Stack.Screen name='Home' component={Main} />
+      <Stack.Screen name='Search' component={SearchScreen}/>
+      <Stack.Screen name='SettingIndex' component={SettingIndex}/>
+    </Stack.Navigator>
   );
 };
 

@@ -18,6 +18,7 @@ const Profile = ({swiper, navigation}) => {
   
     const inputNickname = (nick) => {
       enterNickname(nick);
+      console.log("nickname: ", nick);
     }
   
     return(
