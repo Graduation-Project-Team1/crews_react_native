@@ -1,21 +1,22 @@
-import React, {useState} from 'react';
+import React, {useState,useContext} from 'react';
 import { Button, StyleSheet, Text, TextInput, View, Image, TouchableOpacity,ScrollView } from 'react-native';
 import ScheduleScreen from './ScheduleScreen';
 import StatisticScreen from './StatisticScreen';
 import PlayerList from '../../components/analysisScreen/playerScreen/PlayerList';
-
+import { ThemeContext } from "styled-components/native";
 export default function AnalysisScreen() {
   const [showStats, setShowStats] = useState(false);
   const [showSchedule, setShowSchedule] = useState(true);
+  const theme = useContext(ThemeContext);
   return (
-    <View style={{flex:1, backgroundColor:'#FFFFFF'}}>
-      <Text style={[styles.bold,{marginLeft:10, marginTop: 70}]}>팀 정보</Text>
+    <View style={{flex:1, backgroundColor:theme.background}}>
+      <Text style={[styles.bold,{marginLeft:10, marginTop: 70,color:theme.text}]}>팀 정보</Text>
       <View style={styles.textContainer}>
         <TouchableOpacity onPress={() => { setShowSchedule(true), setShowStats(false); } }>
-            <Text style={[styles.bold]}>일정</Text>
+            <Text style={[styles.bold,{color:theme.text}]}>일정</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => { setShowSchedule(false), setShowStats(true); } }>
-            <Text style={[styles.bold]}>통계</Text>
+            <Text style={[styles.bold,{color:theme.text}]}>통계</Text>
         </TouchableOpacity>
       </View>
 

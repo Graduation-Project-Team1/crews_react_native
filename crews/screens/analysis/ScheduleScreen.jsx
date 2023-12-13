@@ -1,23 +1,48 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect,useContext} from 'react';
 import { StyleSheet, Text, View, TouchableOpacity,Modal} from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import {Calendar} from "react-native-calendars";
 import Icon from "react-native-vector-icons/Ionicons";
 import TodayScheduleBox from '../../components/analysisScreen/TodayScheduleBox';
 import LiveChatScreen from './LiveChatScreen';
-
+import { ThemeContext } from "styled-components/native";
+import axios from 'axios';
 
 export default function ScheduleScreen({navigation}) {
   const [showLiveScreen, setLiveScreen] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const theme = useContext(ThemeContext);
+
+  const [scheduleData, setScheduleData] = useState([]);  // 수정된 코드
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const scheduleResponse = await axios.get("https://crews.jongmin.xyz/data/schedule?teamId=6908");
+        const markedDate = scheduleResponse.data.reduce((acc, cur) => {
+          const date = cur.dateTime.split('T')[0]; // 'YYYY-MM-DD' 형태로 변환
+          return { ...acc, [date]: { marked: true, dotColor: theme.primary }};
+        }, {});
+        
+        setScheduleData(markedDate);
+       
+        
+      } catch (error) {
+        console.error('데이터를 가져오는 중 오류 발생:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
     return (
-      <View style={{flex:1, backgroundColor:'#FFFFFF'}}>
+      <ScrollView style={{flex:1, backgroundColor:theme.background}}>
         <View style={{ flexDirection: 'row', marginTop: 10 }}>
-          <View style={{ flex: 1, height: 2, backgroundColor: '#1B1DB7' }} />
-          <View style={{ flex: 1, height: 2, backgroundColor: '#CAC4D0' }} />
+          <View style={{ flex: 1, height: 2, backgroundColor: theme.pointBackground}} />
+          <View style={{ flex: 1, height: 2, backgroundColor:  theme.primaryLightMore}} />
         </View>
-        <Calendar style={styles.calendar}
+        <Calendar style={[styles.calendar,{backgroundColor:theme.primaryLight}]}
             // 캘린더 내 스타일 수정
             theme={{
-                calendarBackground:'#EFF4FF',
+                calendarBackground:theme.primaryLight,
                 todayTextColor: 'black',
                 textDayFontSize: 20,
                 textDayFontWeight: 'bold',
@@ -26,7 +51,13 @@ export default function ScheduleScreen({navigation}) {
                 textSectionTitleColor: 'rgba(138, 138, 138, 1)',
             }}
             // 날짜 클릭 시 그 날짜 출력
-            onDayPress={(day) => {console.log(day)}}
+            onDayPress={(day) => {if (scheduleData[day.dateString]) { // 해당 날짜에 일정이 있는 경우
+              setSelectedDate(day.dateString);
+            } else {
+              setSelectedDate(null);
+            }
+          }}
+            markedDates={scheduleData}
             // 이전 달, 다음 달 날짜 숨기기
             hideExtraDays={true}
             // 달 포맷 지정
@@ -37,11 +68,18 @@ export default function ScheduleScreen({navigation}) {
             renderArrow={(direction) => direction === "left" ? 
             <Icon name="chevron-back-outline" size={20}/> : <Icon name="chevron-forward-outline" size={20}/>}
         />
-        <Text style={[styles.bold,{fontSize:15,marginLeft:15,marginTop:20}]}>10월 16일 일정</Text>
+        
 
-      <TouchableOpacity onPress={() => {setLiveScreen(true);}}>
-         <TodayScheduleBox />
-      </TouchableOpacity>
+        {selectedDate && (
+          <View>
+          <Text style={[styles.bold,{fontSize:15,marginLeft:15,marginTop:20}]}>
+            {`${selectedDate.slice(5, 7)}월 ${selectedDate.slice(8)}일 일정`}
+          </Text>
+          <TouchableOpacity onPress={() => {setLiveScreen(true);}}>
+            <TodayScheduleBox />
+          </TouchableOpacity>
+          </View>
+        )}
 
       <Modal
         animationType="slide"
@@ -53,7 +91,7 @@ export default function ScheduleScreen({navigation}) {
       >
         <LiveChatScreen onClose={() => setLiveScreen(false)} />
       </Modal>
-      </View>
+      </ScrollView>
     );
 };
 
@@ -69,7 +107,6 @@ const styles = StyleSheet.create({
         paddingBottom: 30,
         borderWidth: 1,
         borderColor: '#E9E9E9',
-        backgroundColor:'#EFF4FF',
         borderRadius: 20
     },
     imageContainer: {
