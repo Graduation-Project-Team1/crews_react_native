@@ -16,12 +16,14 @@ const PlayerScreen = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const playerResponse = await axios.get("http://18.181.69.27:8080/data/player/list/6908");
-        const keeperResponse = await axios.get("http://18.181.69.27:8080/data/record?pos=gk&id=6908");
-        const defenderResponse = await axios.get("http://18.181.69.27:8080/data/record?pos=df&id=6908");
-        const midfielderResponse = await axios.get("http://18.181.69.27:8080/data/record?pos=mf&id=6908");
-        const attackerResponse = await axios.get("http://18.181.69.27:8080/data/record?pos=fw&id=6908");
-
+        const playerResponse = await axios.get("https://crews.jongmin.xyz/data/player/list?teamId=7653");
+        const keeperResponse = await axios.get("https://crews.jongmin.xyz/data/record?playerId=872090");
+        const defenderResponse = await axios.get("https://crews.jongmin.xyz/data/record?playerId=99963");
+        const midfielderResponse = await axios.get("https://crews.jongmin.xyz/data/record?playerId=38642");
+        const attackerResponse = await axios.get("https://crews.jongmin.xyz/data/record?playerId=38651");
+        ///data/player/list?teamId=
+        ///data/player?playerId=
+        ///data/record?playerId=
         setPlayerData(playerResponse.data);
         setKeeperData(keeperResponse.data);
         setDefenderData(defenderResponse.data);
