@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import { TouchableOpacity } from 'react-native';
 import { Text, View, Button } from 'react-native';
 import  Swiper  from 'react-native-swiper';
@@ -17,12 +17,10 @@ import MyTeam from './MyTeamScreen';
 import Theme from './ThemeScreen';
 
 
-const OnboardingScreen = ({navigation}) => {
-
+const OnboardingScreen = ({navigation, setIsLogin}) => {
     const swiper = useRef(null);
 
     return (
-        <ThemeProvider theme={theme1}>
         <TeamDataProvider>
         <NicknameDataProvider>
         <MemberDataProvider>
@@ -62,7 +60,6 @@ const OnboardingScreen = ({navigation}) => {
         </MemberDataProvider>
         </NicknameDataProvider>
         </TeamDataProvider>
-        </ThemeProvider>
     )
 }
 

@@ -1,28 +1,29 @@
-import React, {useState} from 'react';
+import React, {useState,useContext} from 'react';
 import { StyleSheet, Text, View, TouchableOpacity,ScrollView } from 'react-native';
 import TeamStatsScreen from './TeamStatsScreen';
 import CoachInfoScreen from './CoachInfoScreen';
 import PlayerScreen from './PlayerScreen';
-
+import { ThemeContext } from "styled-components/native";
 export default function StatisticScreen() {
   const [showTeamStats, setShowTeamStats] = useState(true);
   const [showCoachInfo, setShowCoachInfo] = useState(false);
   const [showPlayer, setShowPlayer] = useState(false);
+  const theme = useContext(ThemeContext);
   return (
-    <View style={{flex:1, backgroundColor:'#FFFFFF'}}>
+    <View style={{flex:1, backgroundColor: theme.background}}>
       <View style={{ flexDirection: 'row', marginTop: 10 }}>
-          <View style={{ flex: 1, height: 2, backgroundColor: '#CAC4D0' }} />
-          <View style={{ flex: 1, height: 2, backgroundColor: '#1B1DB7' }} />
+          <View style={{ flex: 1, height: 2, backgroundColor: theme.primaryLightMore}} />
+          <View style={{ flex: 1, height: 2, backgroundColor: theme.pointBackground}} />
       </View>
-      <View style={styles.textContainer}>
+      <View style={[styles.textContainer,{backgroundColor:theme.background}]}>
         <TouchableOpacity onPress={() => { setShowTeamStats(true), setShowCoachInfo(false), setShowPlayer(false); } }>
-            <Text style={styles.textInput}>팀</Text>
+            <Text style={[styles.textInput,{color:theme.text,borderColor:theme.primary}]}>팀</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => { setShowTeamStats(false), setShowCoachInfo(true), setShowPlayer(false); } }>
-            <Text style={[styles.textInput,{marginLeft:7}]}>코치</Text>
+            <Text style={[styles.textInput,{marginLeft:7,color:theme.text,borderColor:theme.primary}]}>코치</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => { setShowTeamStats(false), setShowCoachInfo(false), setShowPlayer(true); } }>
-            <Text style={[styles.textInput,{marginLeft:7}]}>선수</Text>
+            <Text style={[styles.textInput,{marginLeft:7,color:theme.text,borderColor:theme.primary}]}>선수</Text>
         </TouchableOpacity>
       </View>
 
@@ -66,9 +67,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   textInput: {
-    color:'#1B1DB7',
-    borderWidth:0.8,
-    borderColor: '#1B1DB7',
+    borderWidth:1,
     borderRadius:10,
     paddingLeft:12,
     paddingRight:12,

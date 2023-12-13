@@ -2,13 +2,9 @@ import { StyleSheet, StatusBar } from "react-native";
 
 
 export const coachScreenstyles = StyleSheet.create({
-    container: {
-      flex: 1,
-      paddingTop: StatusBar.currentHeight,
-    },
     layout: { 
       flexDirection: 'row', 
-      marginTop: 5
+      marginTop: 5,
     },
     imageInput: {
       width: 60,

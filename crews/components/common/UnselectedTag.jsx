@@ -17,7 +17,7 @@ export const unSelectedTagStyles = StyleSheet.create({
     borderWidth: 1.5,
     borderColor: colors.iconGray,
     borderRadius: 50,
-    backgroundColor: colors.white,
+    backgroundColor: colors.transparent,
     paddingVertical: 2,
     paddingHorizontal: 15,
     alignItems: 'center', // 가로로 가운데 정렬

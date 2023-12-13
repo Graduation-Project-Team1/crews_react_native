@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import HomeScreen from './HomeScreen';
@@ -7,10 +7,11 @@ import AnalysisScreen from '../analysis/AnalysisScreen';
 import TeamScreen from '../team/TeamScreen';
 import colors from '../../styles/colors';
 import PodcastIndex from '../podcast/PodcastIndex';
+
 import { View } from "react-native";
 import Player from '../../components/PodCastScreen/Player';
 import { usePodcastData } from '../../components/PodCastScreen/PodcastContext';
-
+import { ThemeContext } from "styled-components/native";
 
 const Tab = createBottomTabNavigator();
 
@@ -24,11 +25,18 @@ const Main = ({navigation}) => {
     
   }, [podcastData]);
 
+
+
+  const theme = useContext(ThemeContext);
+
+
   return (
     <>
     <Tab.Navigator
       screenOptions={({ route }) => ({
-        tabBarActiveTintColor: colors.primary,
+        tabBarActiveTintColor: theme.bottomNavActive,
+        tabBarActiveBackgroundColor: theme.bottomNavBackground,
+        tabBarInactiveBackgroundColor: theme.bottomNavBackground,
         headerShown: false,
         tabBarIcon: ({ color, size }) => {
           let iconName;
@@ -51,6 +59,8 @@ const Main = ({navigation}) => {
         tabBarStyle: {
           height: 70,
           paddingBottom: 5,
+          backgroundColor: theme.bottomNavBackground,
+          borderTopColor: theme.bottomNavBackground,
         },
       })}
     >

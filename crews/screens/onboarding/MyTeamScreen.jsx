@@ -27,7 +27,7 @@ const { teamData } = useTeamData();
 useEffect(() => {
     const getLeagueList = async() => {
         try {
-            const responseLeague = await axios.get(`http://crews.jongmin.xyz:8080/data/league/list?sportsName=${onSport}`);
+            const responseLeague = await axios.get(`https://crews.jongmin.xyz/data/league/list?sportsName=${onSport}`);
 
                 // 성공적인 응답 처리
                 setLeagueList(responseLeague.data);
@@ -43,7 +43,7 @@ useEffect(() => {
 
     const getTeamList = async() => {
         try {
-            const responseTeam = await axios.get(`http://crews.jongmin.xyz:8080/data/team/list?leagueId=${onLeague}`);
+            const responseTeam = await axios.get(`https://crews.jongmin.xyz/data/team/list?leagueId=${onLeague}`);
 
                 // 성공적인 응답 처리
                 setTeamList(responseTeam.data);

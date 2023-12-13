@@ -3,7 +3,6 @@ import { StyleSheet } from "react-native";
 export const keywordBoxStyle = StyleSheet.create({
   layout: {
     marginTop:40,
-    borderColor:"#E5E9EF",
     padding:15,
     borderWidth:1,
     borderRadius:13,
@@ -27,7 +26,7 @@ export const keywordBoxStyle = StyleSheet.create({
   },
 
   text:{
-    marginLeft:10
+    marginLeft:10,
   }
 
 

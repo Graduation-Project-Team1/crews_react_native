@@ -15,6 +15,7 @@ const Stack = createNativeStackNavigator();
 
 const Auth = () => {
   return (
+
     <PodcastDataProvider>
       <SoundDataProvider>
         <NavigationContainer>
@@ -28,6 +29,7 @@ const Auth = () => {
         </NavigationContainer>
       </SoundDataProvider>
     </PodcastDataProvider>
+
   );
 };
 

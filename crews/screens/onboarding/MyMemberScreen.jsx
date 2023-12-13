@@ -23,7 +23,7 @@ const MyMember = ({swiper}) => {
     useEffect(() => {
       const getMemberList = async() => {
         try {
-            const responseMember = await axios.get(`http://crews.jongmin.xyz:8080/data/player/list?teamId=${teamData}`);
+            const responseMember = await axios.get(`https://crews.jongmin.xyz/data/player/list?teamId=${teamData}`);
 
                 // 성공적인 응답 처리
                 setMemberList(responseMember.data);

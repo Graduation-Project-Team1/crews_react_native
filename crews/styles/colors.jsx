@@ -28,4 +28,6 @@ export default {
   twitter: '#1DA1F2',
   instagram: '#E1306C',
   reddit: '#FF4500',
+
+  transparent: 'transparent',
 };

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { styles } from "../../styles/styles";
@@ -7,9 +7,14 @@ import CommunityBox from "../../components/issueScreen/CommunityBox";
 import NewsSection from "../../components/issueScreen/NewsSection";
 import colors from "../../styles/colors";
 import SNSBox from "../../components/issueScreen/SNSBox";
-import { snsDataApi, totalNewsApi } from "../../api/issueApi";
+import { communityDataApi, snsDataApi, totalNewsApi } from "../../api/issueApi";
+import { ThemeContext } from "styled-components/native";
+import { useRecoilValue } from "recoil";
+import { themeState } from "../../recoil/themeState";
 
 const IssueScreen = () => {
+  const theme = useContext(ThemeContext);
+  const currentTheme = useRecoilValue(themeState);
   const [value, setValue] = useState('twitter');
   const [twitterData, setTwitterData] = useState(null);
   const [instagramData, setInstagramData] = useState(null);
@@ -20,10 +25,9 @@ const IssueScreen = () => {
   useEffect(() => {
     snsDataApi()
       .then((res) => {
-        setTwitterData(res.twitter);
-        setInstagramData(res.instagram);
-        setRedditData(res.reddit);
-        setCommunityData(res.community);
+        setTwitterData(res.filter(item => item.sns === 'twitter')[0]);
+        setInstagramData(res.filter(item => item.sns === 'instagram')[0]);
+        setRedditData(res.filter(item => item.sns === 'reddit')[0]);
       })
       .catch((err) => {
         console.log(err);
@@ -31,7 +35,15 @@ const IssueScreen = () => {
 
     totalNewsApi()
       .then((res) => {
-        setNewsData(res.result);
+        setNewsData(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    communityDataApi()
+      .then((res) => {
+        setCommunityData(res);
       })
       .catch((err) => {
         console.log(err);
@@ -39,11 +51,19 @@ const IssueScreen = () => {
   }, []);
 
   return (
-    <View style={[styles.layout]}>
-      <StatusBar style='auto'/>
-      <ScrollView style={styles.scrollContainer}>
-        <View style={issueScreenStyle.content}>
-          <Text style={issueScreenStyle.sectionTitle}>SNS 핫이슈</Text>
+    <View style={[styles.layout, {
+      backgroundColor: theme.background,
+    }]}>
+      <StatusBar style={currentTheme === 'dark' ? 'light' : 'dark'}/>
+      <ScrollView style={[styles.scrollContainer, {
+        backgroundColor: theme.background,
+      }]}>
+        <View style={[issueScreenStyle.content, {
+        backgroundColor: theme.background,
+      }]}>
+          <Text style={[issueScreenStyle.sectionTitle, {
+        color: theme.text,
+      }]}>SNS 핫이슈</Text>
           <View style={issueScreenStyle.snsTags}>
             <Tag isSelected={value === 'twitter'} text={'트위터'} onPress={()=>setValue('twitter')}/>
             <Tag isSelected={value === 'instagram'} text={'인스타그램'} onPress={()=>setValue('instagram')}/>
@@ -51,24 +71,30 @@ const IssueScreen = () => {
           </View>
           <View style={issueScreenStyle.snsContent}>
             {
-              value === 'twitter' ? twitterData && <SNSBox sns={value} nickname={twitterData.nickname} id={twitterData.id} content={twitterData.content} like={twitterData.like} time={twitterData.time}/> :
-              value === 'instagram' ? instagramData && <SNSBox sns={value} nickname={instagramData.nickname} id={instagramData.id} content={instagramData.content} like={instagramData.like} time={instagramData.time}/> :
-              value === 'reddit' ? redditData && <SNSBox sns={value} nickname={redditData.nickname} id={redditData.id} content={redditData.content} like={redditData.like} time={redditData.time}/> : <Text>값이 없습니다.</Text>
+              value === 'twitter' ? twitterData && <SNSBox sns={value} nickname={twitterData.name} id={twitterData.id} content={twitterData.body} like={twitterData.heart} time={twitterData.date}/> :
+              value === 'instagram' ? instagramData && <SNSBox sns={value} nickname={instagramData.name} id={instagramData.id} content={instagramData.body} like={instagramData.heart} time={instagramData.date}/> :
+              value === 'reddit' ? redditData && <SNSBox sns={value} nickname={redditData.name} id={redditData.id} content={redditData.body} like={redditData.heart} time={redditData.date}/> : <Text>값이 없습니다.</Text>
             }
           </View>
         </View>
-        <View style={issueScreenStyle.content}>
-          <Text style={issueScreenStyle.sectionTitle}>커뮤니티 핫이슈</Text>
+        <View style={[issueScreenStyle.content, {
+        backgroundColor: theme.background,
+      }]}>
+          <Text style={[issueScreenStyle.sectionTitle, {
+        color: theme.text,
+      }]}>커뮤니티 핫이슈</Text>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             {
-              communityData.length > 0 ? communityData.map((item, index) => (
-                <CommunityBox key={index} img={item.img} title={item.title} writer={item.writer} url={item.url}/>
-              )) : <Text>값이 없습니다.</Text>
+              communityData && communityData.length > 0 ? communityData.map((item, index) => (
+                <CommunityBox key={index} press={item.press} title={item.title} writer={item.writer} url={item.url}/>
+              )) : <Text styl={[{color: theme.text}]}>값이 없습니다.</Text>
             }
           </ScrollView>
         </View>
         <View style={issueScreenStyle.divider}/>
-        <View style={issueScreenStyle.content}>
+        <View style={[issueScreenStyle.content, {
+        backgroundColor: theme.background,
+      }]}>
           <NewsSection newsList={newsData}/>
         </View>
         <View style={{height: 60}} />
@@ -119,5 +145,6 @@ export const issueScreenStyle = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "center",
+    backgroundColor: colors.transparent
   }
 })
