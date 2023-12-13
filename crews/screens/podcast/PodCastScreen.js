@@ -16,11 +16,11 @@ const PodCastScreen = ({navigation}) => {
   const {podcastData} = usePodcastData();
   const {onClickPodcast} = usePodcastData();
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    console.log(podcastData);
+  //   console.log(podcastData);
 
-  }, [podcastData]);
+  // }, [podcastData]);
 
   return (
     <View style = {{
@@ -52,22 +52,14 @@ const PodCastScreen = ({navigation}) => {
               marginBottom: 30
             }}>
               <AlignButton name = "최신순"/>
-              <AlignButton name = "2023년 9월"/>
+              <AlignButton name = "2023년 12월"/>
               <Text style = {{fontSize: 18, fontWeight: 'bold', position: 'absolute', right: 0}}>지난 라디오</Text>
             </View>
           
-            <PodcastList/>          
+            <PodcastList month = {9}/>          
             
           </ScrollView>
-      <View>
-        {podcastData &&
-          <Player 
-          navigation = {navigation}
-          time = {podcastData.time}
-          hashTag = {podcastData.hashTag}
-          />
-        } 
-      </View>
+  
     </View>
 
     
