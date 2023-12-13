@@ -1,5 +1,27 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+// token
+export const storeToken = async (token) => {
+  try {
+    await AsyncStorage.setItem('token', token);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getToken = async () => {
+  try {
+    const token = await AsyncStorage.getItem('token');
+    if (token !== null) {
+      return token;
+    } else {
+      return '';
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 // theme
 export const storeTheme = async (theme) => {
   try {
