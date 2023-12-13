@@ -11,13 +11,25 @@ const SNSBox = ({sns, nickname, id, content, time, like}) => {
   const theme = useContext(ThemeContext);
   const baseStyle = snsBaseStyle(sns);
 
+  const formatEpochToDateString = (epoch) => {
+    const ms = epoch * 1000;
+    const date = new Date(ms);
+
+    // 년, 월, 일 추출
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 +1 필요
+    const day = String(date.getDate()).padStart(2, '0');
+
+    return `${year}년 ${month}월 ${day}일`;
+  }
+
   return (
     <View style={baseStyle}>
       <View style={snsBoxStyle.header}>
         <View>
           <Text style={[snsBoxStyle.nickname, {
             color: theme.text,
-          }]}>{nickname}</Text>
+          }]}>{nickname ? nickname : 'nickname'}</Text>
           <Text style={snsBoxStyle.id}>@{id}</Text>
         </View>
         {
@@ -33,7 +45,7 @@ const SNSBox = ({sns, nickname, id, content, time, like}) => {
           <Like width={16} height={16}/>
           <Text style={snsBoxStyle.footerText}>{like}</Text>
         </View>
-        <Text style={snsBoxStyle.footerText}>{time}</Text>
+        <Text style={snsBoxStyle.footerText}>{formatEpochToDateString(time)}</Text>
       </View>
     </View>
   );
