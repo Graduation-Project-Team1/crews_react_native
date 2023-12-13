@@ -19,7 +19,7 @@ const PodcastPlayer = ({navigation}) => {
         flexDirection: 'column',
       }}>
         <Header/>
-        <Bottom time = {podcastData.time} hashTag = {podcastData.hashTag} uri = {podcastData.url} id = {podcastData.id} duration = {podcastData.duration}/>
+        <Bottom/>
         <View style = {[PlayerScreenStyles.img]}>
         </View>
       </View>

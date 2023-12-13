@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import HomeScreen from './HomeScreen';
@@ -7,14 +7,31 @@ import AnalysisScreen from '../analysis/AnalysisScreen';
 import TeamScreen from '../team/TeamScreen';
 import colors from '../../styles/colors';
 import PodcastIndex from '../podcast/PodcastIndex';
+
+import { View } from "react-native";
+import Player from '../../components/PodCastScreen/Player';
+import { usePodcastData } from '../../components/PodCastScreen/PodcastContext';
 import { ThemeContext } from "styled-components/native";
 
 const Tab = createBottomTabNavigator();
 
-const Main = () => {
-const theme = useContext(ThemeContext);
+const Main = ({navigation}) => {
+
+  const {podcastData} = usePodcastData();
+
+  useEffect(() => {
+
+    console.log("팟캐스트 데이터 업데이트: ", podcastData);
+    
+  }, [podcastData]);
+
+
+
+  const theme = useContext(ThemeContext);
+
 
   return (
+    <>
     <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarActiveTintColor: theme.bottomNavActive,
@@ -47,12 +64,22 @@ const theme = useContext(ThemeContext);
         },
       })}
     >
+      
       <Tab.Screen name="홈" component={HomeScreen} />
       <Tab.Screen name="이슈" component={IssueScreen} />
       <Tab.Screen name="라디오" component={PodcastIndex} />
       <Tab.Screen name="팀" component={AnalysisScreen} />
       <Tab.Screen name="분석" component={TeamScreen} />
     </Tab.Navigator>
+    
+    {podcastData &&
+          <Player 
+          navigation = {navigation}
+          time = {podcastData.time}
+          hashTag = {podcastData.hashTag}
+          />
+        } 
+    </>
   );
 }
 

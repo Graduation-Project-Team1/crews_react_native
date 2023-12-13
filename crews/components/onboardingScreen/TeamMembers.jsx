@@ -15,7 +15,7 @@ const TeamMembers = (props) => {
       <TouchableOpacity style = {
         {alignItems: 'center',
         margin: 5,
-        width: 110,
+        width: 100,
         height: 170}
       }
       onPress={props.onPress}>

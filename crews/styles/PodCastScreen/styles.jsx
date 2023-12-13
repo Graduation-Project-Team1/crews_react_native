@@ -47,8 +47,7 @@ export const playerStyles = StyleSheet.create({
         height: 75,
         width: '100%',
         position: 'absolute',
-        bottom: 0,
-        borderRadius:30,
+        bottom: 70.5,
         flexDirection: 'row',
         alignItems: 'center',
         padding:10,
@@ -96,6 +95,7 @@ export const PlayerScreenStyles = StyleSheet.create({
         flexDirection: 'row',
         width: 350,
         paddingHorizontal: 15,
+        marginBottom: 10,
         justifyContent: 'space-between'
     },
     headerText: {

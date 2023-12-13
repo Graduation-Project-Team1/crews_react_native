@@ -17,8 +17,8 @@ const Player = (props) => {
           onPress = {() => props.navigation.navigate('PodcastPlayer')}>
             <MaterialIcons style = {{marginLeft: 10}} name="playlist-play" size={35} color="black" />
             <View style = {[playerStyles.textView]}>
-              <Text style = {[playerStyles.titleText]}>{props.time}</Text>
-              <Text style = {[playerStyles.time]}>{props.hashTag}</Text>
+              <Text style = {[playerStyles.titleText]}>{podcastData.time}</Text>
+              <Text style = {[playerStyles.time]}>#승리 #연승 #패배</Text>
             </View>
             <View style = {[playerStyles.iconView]}>
               <Image 

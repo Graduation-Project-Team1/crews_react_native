@@ -11,16 +11,13 @@ const Stack = createStackNavigator();
 
 export default function PodcastIndex({navigation}) {
     return (
-        <PodcastDataProvider>
             <Stack.Navigator initialRouteName='PodCastScreen'>
                 <Stack.Screen
                     options={{ headerShown: false }}
                     name="PodCastScreen"
                     component={PodCastScreen}
                 />
-            <Stack.Screen name='PodcastPlayer' component={PodcastPlayer} options={{ headerShown: false }}/>
 
             </Stack.Navigator>
-        </PodcastDataProvider>
     );
 }

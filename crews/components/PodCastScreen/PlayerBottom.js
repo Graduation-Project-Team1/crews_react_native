@@ -7,41 +7,24 @@ import { PlayerScreenStyles } from '../../styles/PodCastScreen/styles';
 import colors from '../../styles/colors';
 import { TouchableOpacity } from 'react-native';
 import { Audio } from 'expo-av';
+import { usePodcastData } from './PodcastContext';
+import { useSoundData } from './SoundContext';
 
 
 
 const Bottom = (props) => {
 
-    const [sound, setSound] = useState();
-    const [isPlaying, setIsPlaying] = useState(false);
+    const {sound, setSound} = useSoundData();
+    const {isPlaying, setIsPlaying} = useSoundData();
     const [podcastId, setPodcastId] = useState();
-    const [duration, setDuration] = useState(props.duration);
-    const [position, setPosition] = useState('0');
+    const {duration, setDuration} = useSoundData();
+    const {position, setPosition} = useSoundData();
     const [slider, setSlider] = useState();
+    const [newPosition, setNewPosition] = useState();
 
-    const musicStatus = async status => {
-        if (!status.isLoaded) {
-        if (status.error) {
-            console.log(`Error on expo AV: ${status.error}`);
-        }
-        } else {
-        setDuration(status.durationMillis);
-        setPosition(status.positionMillis);
-        }
-    };
-    
-        async function playSound() {
-            console.log('Loading Sound');
-            const { sound } = await Audio.Sound.createAsync({uri: props.uri},{ shouldPlay: true }, musicStatus);
-            setSound(sound);
-        }
+    const {podcastData} = usePodcastData();
 
-        const playController = async () => {
-            if (!sound) {
-            return;
-            }
-            isPlaying ? await sound.pauseAsync() : await sound.playAsync();
-        };
+    const {playSound, playController} = useSoundData();
 
         useEffect(() => {
             //setPodcastId(props.id);
@@ -53,24 +36,17 @@ const Bottom = (props) => {
             playController();
         }, [isPlaying]);
 
-        // useEffect(() => {
-        //     if (sound) sound.unloadAsync(); // unload
-        //     playSound();
-        // }, [podcastId]);
 
-        const getProgress = () => {
-            if (sound === null || duration === null || position === null) return 0;
-            let slider = Math.floor((position / duration) * 100);
-            //dispatch(setSlider(slider, position, duration));
-            setSlider(slider, position, duration)
-            return slider;
-        };
+        useEffect(() => {
+            if (sound) sound.unloadAsync(); // unload
+        }, [podcastData]);
+
 
     return (
         <View style = {[PlayerScreenStyles.view, {flex: 1, backgroundColor: '#ffffff'}]}>
-            <View style = {[PlayerScreenStyles.view, {flex: 2, paddingTop: 90, paddingBottom: 40}]}>
-                <Text style = {PlayerScreenStyles.titleText}>{props.time}</Text>
-                <Text style = {PlayerScreenStyles.timeText}>{props.hashTag}</Text>
+            <View style = {[PlayerScreenStyles.view, {flex: 2, paddingTop: 90, paddingBottom: 30}]}>
+                <Text style = {PlayerScreenStyles.titleText}>{podcastData.time}</Text>
+                <Text style = {PlayerScreenStyles.timeText}>{podcastData.hashTag}</Text>
             </View>
             <View style = {PlayerScreenStyles.topBtnView}>
                 <View>
@@ -81,18 +57,26 @@ const Bottom = (props) => {
                 </View>
             </View>
             <View style = {{
-            flex: 2,
+            flex: 1.5,
             }}>
-            <Slider
-                style={{width: 350, height: 30}}
-                minimumValue={0}
-                maximumValue={duration}
-                value={slider}
-                onValueChange = {()=>{getProgress()}}
-                minimumTrackTintColor={colors.primary}
-                maximumTrackTintColor='#a0a0a0'
-                thumbTintColor={colors.primary}
-            />
+                <Slider
+                    style={{width: 350, height: 20}}
+                    minimumValue={0}
+                    maximumValue={duration}
+                    value={position}
+                    onValueChange = {setNewPosition}
+                    minimumTrackTintColor={colors.primary}
+                    maximumTrackTintColor='#a0a0a0'
+                    thumbTintColor={colors.primary}
+                />
+                <View style = {{
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    paddingHorizontal: 15,
+                }}>
+                    <Text style = {{fontSize: 12, color: colors.textGray}}>{Math.floor(position/60000)}:{String(Math.floor(position/1000%60)).padStart(2, "0")}</Text>
+                    <Text style = {{fontSize: 12, color: colors.textGray}}>{Math.floor(duration/60000)}:{String(Math.floor(duration/1000%60)).padStart(2, "0")}</Text>
+                </View>
             </View>
             <View style = {[PlayerScreenStyles.playBtn]}>
                 <View><MaterialIcons name="skip-previous" size={50} color="black" /></View>
