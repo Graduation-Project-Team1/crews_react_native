@@ -11,9 +11,18 @@ export const snsDataApi = async () => {
 
 export const totalNewsApi = async () => {
   const response = await baseAxios
-    .get('/totalNews/6908')
+    .get('/news/6908')
     .then((response) => response.data);
     // console.log("Total News API ===> ", response);
+
+  return response;
+}
+
+export const communityDataApi = async () => {
+  const response = await baseAxios
+    .get('/community/6908')
+    .then((response) => response.data);
+    // console.log("Community Data API ===> ", response);
 
   return response;
 }

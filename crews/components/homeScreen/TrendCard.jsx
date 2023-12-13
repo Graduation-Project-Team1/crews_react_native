@@ -2,13 +2,13 @@ import React, { useContext } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import Svg from "react-native-svg";
 import colors from "../../styles/colors";
+import Comment from '../../assets/icons/icon_comment.svg'
+import CommentGray from '../../assets/icons/icon_comment_gray.svg'
 import TimeLine from '../../assets/icons/icon_timeline.svg'
 import TimeLineGray from '../../assets/icons/icon_timeline_gray.svg'
-import UpDown from '../../assets/icons/icon_up_down.svg'
-import UpDownGray from '../../assets/icons/icon_up_down_gray.svg'
 import { ThemeContext } from "styled-components/native";
 
-const TrendCard = ({order, title, chart, watch, isCurrentCard}) => {
+const TrendCard = ({order, title, comment, watch, isCurrentCard}) => {
   const theme = useContext(ThemeContext);
   
   const dynamicStyle = {
@@ -30,13 +30,13 @@ const TrendCard = ({order, title, chart, watch, isCurrentCard}) => {
         <Text style={dynamicTitleStyle}>{title}</Text>
         <View style={trendCardStyle.contentSub}>
           {
-            isCurrentCard ? <UpDown width={13} height={13} /> : <UpDownGray width={13} height={13} />
-          }
-          <Text style={dynamicTextStyle}>{ chart >= 0 ? chart + "위 상승" : chart * -1 + "위 하락"}</Text>
-          {
             isCurrentCard ? <TimeLine width={13} height={13} /> : <TimeLineGray width={13} height={13} />
           }
           <Text style={dynamicTextStyle}>{watch}회</Text>
+          {
+            isCurrentCard ? <Comment width={13} height={13} /> : <CommentGray width={13} height={13} />
+          }
+          <Text style={dynamicTextStyle} ellipsizeMode="tail" numberOfLines={1}>{comment.substring(0,6) + '..'}</Text>
         </View>
       </View>
       <View style={[trendCardStyle.order, {backgroundColor: theme.background}]}>

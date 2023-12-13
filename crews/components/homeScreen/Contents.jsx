@@ -20,9 +20,7 @@ const Contents = ({navigation}) => {
   useEffect(() => {
     mainNewsApi()
     .then((res) => {
-      // console.log('뉴스리스트 조회');
-      // console.log(res.result);
-      setNewsList(res.result);
+      setNewsList(res.slice(0, 3));
     })
     .catch((err) => {
       console.log('뉴스리스트 조회 에러');
@@ -33,7 +31,7 @@ const Contents = ({navigation}) => {
     .then((res) => {
       // console.log('트렌드 조회');
       // console.log(res.result);
-      setTrendList(res.result);
+      setTrendList(res);
     })
     .catch((err) => {
       console.log('트렌드 조회 에러');
@@ -42,8 +40,9 @@ const Contents = ({navigation}) => {
 
     emotionApi()
     .then((res) => {
-      // console.log('여론 감정 조회');
+      console.log('여론 감정 조회', res);
       setEmotionData(res);
+      console.log(emotionData.positive);
     })
     .catch((err) => {
       console.log('여론 감정 조회 에러');
@@ -55,7 +54,7 @@ const Contents = ({navigation}) => {
   useEffect(() => {
     const rollingInterval = setInterval(() => {
       if (scrollViewRef.current) {
-        const contentWidth = 168 * (trendList.length); // 총 너비 계산
+        const contentWidth = 168 * (trendList ? trendList.length : 100); // 총 너비 계산
         const nextOffset = (scrollOffset + 168) % contentWidth; // 다음으로 스크롤할 위치 계산
         scrollViewRef.current.scrollTo({ x: nextOffset, y: 0, animated: true });
         setScrollOffset(nextOffset);
@@ -74,9 +73,9 @@ const Contents = ({navigation}) => {
         <TitleBar text="주요 뉴스" navigation={navigation} target={'이슈'} />
         <View>
           {
-            newsList.length > 0 ? newsList.map((news, index) => {
+            newsList && newsList.length > 0 ? newsList.map((news, index) => {
               return (
-                <NewsRow key={index} order={index + 1} title={news.title} time={news.createdAt} img={'https://imgnews.pstatic.net/image/421/2023/12/03/0007212695_001_20231203151104193.jpg?type=w647'} url={'https://n.news.naver.com/mnews/article/421/0007212695?sid=102'}/>
+                <NewsRow key={index} order={index + 1} title={news.title} time={news.date} press={news.press} url={'https://n.news.naver.com/mnews/article/421/0007212695?sid=102'}/>
               );
             }) : <Text>뉴스가 없습니다.</Text>
           }
@@ -87,15 +86,15 @@ const Contents = ({navigation}) => {
         <TitleBar text="우리팀 트렌드" navigation={navigation} target={'분석'}  />
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} ref={scrollViewRef}>
           {
-            trendList.length > 0 ? trendList.map((trend, index) => {
+            trendList && trendList.length > 0 ? trendList.map((trend, index) => {
               const isCurrentCard = scrollOffset === index * 168;
               return (
                 <TrendCard
                   key={index}
                   order={index + 1}
                   title={trend.keyword}
-                  chart={trend.moving}
-                  watch={trend.mention}
+                  watch={trend.buzz}
+                  comment={trend.comment}
                   isCurrentCard={isCurrentCard}
                 />
               );
@@ -108,14 +107,14 @@ const Contents = ({navigation}) => {
             <Text style={[emotionChartStyle.emotionTitle, {color: theme.text}]}>긍정</Text>
             <View style={emotionChartStyle.emotionContent}>
               <View style={emotionChartStyle.emotionChartBase}>
-                <View style={[emotionChartItemStyle(emotionData ? emotionData.good ? emotionData.good.score : 0 : 0), {
+                <View style={[emotionChartItemStyle(emotionData ? emotionData.positive ? emotionData.positive : 0 : 0), {
                   backgroundColor: theme.primary,
                 }]}/>
               </View>
               <View style={emotionChartStyle.emotionChartTagsOuter}>
                 {
-                  emotionData && emotionData.good &&
-                  emotionData.good.keyword.map((word, index) => {
+                  emotionData && emotionData.p_keywords &&
+                  emotionData.p_keywords.map((word, index) => {
                     return (
                       <Text style={emotionChartStyle.emotionChartTags} key={index}>#{word}</Text>
                     );
@@ -128,14 +127,14 @@ const Contents = ({navigation}) => {
             <Text style={[emotionChartStyle.emotionTitle, {color: theme.text}]}>부정</Text>
             <View style={emotionChartStyle.emotionContent}>
               <View style={emotionChartStyle.emotionChartBase}>
-                <View style={[emotionChartItemStyle(emotionData ? emotionData.bad ? emotionData.bad.score : 0 : 0), {
+                <View style={[emotionChartItemStyle(emotionData ? emotionData.negative ? emotionData.negative : 0 : 0), {
                   backgroundColor: theme.accent,
                 }]}/>
               </View>
               <View style={emotionChartStyle.emotionChartTagsOuter}>
                 {
-                  emotionData && emotionData.bad &&
-                  emotionData.bad.keyword.map((word, index) => {
+                  emotionData && emotionData.n_keywords &&
+                  emotionData.n_keywords.map((word, index) => {
                     return (
                       <Text style={emotionChartStyle.emotionChartTags} key={index}>#{word}</Text>
                     );

@@ -11,14 +11,14 @@ const NewsSection = ({newsList}) => {
     <View style={newsSectionStyle.base}>
       <Text style={[newsSectionStyle.title, {color: theme.text}]}>종합 뉴스</Text>
       <View style={newsSectionStyle.content}>
-        {newsList.map((news, index) => {
+        { newsList && newsList.map((news, index) => {
           return (
             <NewsRow
               key={index}
               order={index + 1}
               title={news.title}
-              time={news.createdAt}
-              img={news.img}
+              time={news.date}
+              press={news.press}
               url={news.url}
               />
           );

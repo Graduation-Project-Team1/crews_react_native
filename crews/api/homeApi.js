@@ -2,7 +2,7 @@ import { baseAxios } from "./baseAxios";
 
 export const mainNewsApi = async () => {
   const response = await baseAxios
-    .get('/data/news/6908')
+    .get('/news/6908')
     .then((response) => response.data);
     // console.log("Main News API ===> ", response);
 
@@ -11,16 +11,16 @@ export const mainNewsApi = async () => {
 
 export const emotionApi = async () => {
   const response = await baseAxios 
-    .get('/data/emotion/6908')
+    .get('/community/6908/emotion')
     .then((response) => response.data);
-    // console.log("Emotion ===> ", response);
+    console.log("Emotion ===> ", response);
 
   return response;
 }
 
 export const trendApi = async () => {
   const response = await baseAxios
-    .get('/data/trend/6908')
+    .get('/community/6908/keyword')
     .then((response) => response.data);
     // console.log("Trend ===> ", response);
 
