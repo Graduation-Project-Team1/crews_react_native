@@ -4,17 +4,20 @@ export const contentStyle = StyleSheet.create({
   layout: {
     marginTop:30,
     marginLeft:15,
-    marginRight:15
+    marginRight:15,
   },
   headLine: {
     fontSize:16,
-    fontWeight:'bold'
+    fontWeight:'bold',
+    marginLeft:10,
+    marginTop:5
   },
 
   boxLayout: {
     flexDirection:'row',
     marginTop:20,
-    marginLeft:12
+    marginLeft:12,
+    marginBottom:15
   },
 
   lineNumber: {
@@ -39,7 +42,8 @@ export const contentStyle = StyleSheet.create({
     resizeMode: "stretch",
     height:45,
     width:60,
-    borderRadius:10
+    borderRadius:10,
+    marginRight:10
   }
 
 

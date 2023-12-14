@@ -25,9 +25,9 @@ const TeamStatsScreen = () => {
   return (
     <ScrollView style={{showsVerticalScrollIndicator:false,backgroundColor:theme.background}}>    
         <CurrentSeasonBox data={data}/>
-        <View style={{height: 1,backgroundColor: theme.primary, marginTop: 40}}/>
+        <View style={{height: 1,backgroundColor: '#E5E9EF', marginTop: 40}}/>
         <HistoricalRecordBox data={data}/>     
-        <View style={{height: 1,backgroundColor: theme.primary, marginTop: 40}}/>
+        <View style={{height: 1,backgroundColor: '#E5E9EF', marginTop: 40}}/>
         <HighestRecordBox data={data}/>
     </ScrollView>
   );

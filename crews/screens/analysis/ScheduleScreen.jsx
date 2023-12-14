@@ -39,10 +39,11 @@ export default function ScheduleScreen({navigation}) {
           <View style={{ flex: 1, height: 2, backgroundColor: theme.pointBackground}} />
           <View style={{ flex: 1, height: 2, backgroundColor:  theme.primaryLightMore}} />
         </View>
-        <Calendar style={[styles.calendar,{backgroundColor:theme.primaryLight}]}
+        <Calendar style={[styles.calendar]}
             // 캘린더 내 스타일 수정
             theme={{
-                calendarBackground:theme.primaryLight,
+                calendarBackground:theme.primaryLightMore,
+                backgroundColor:theme.primaryLightMore,
                 todayTextColor: 'black',
                 textDayFontSize: 20,
                 textDayFontWeight: 'bold',
