@@ -6,7 +6,7 @@ import { ThemeContext } from "styled-components/native";
 const KeywordBox = ({ rank, mentions, mood }) =>{
     const theme = useContext(ThemeContext);
     return(
-        <View style={[keywordBoxStyle.layout,{borderColor:theme.border}]}>
+        <View style={[keywordBoxStyle.layout,{borderColor:theme.primaryLight}]}>
             <View style={keywordBoxStyle.box}>
                 <Image style={[keywordBoxStyle.icon,{tintColor:theme.text} ]} source={require('../../assets/team/swap-vert-icon.png')} />
                 <Text style={[keywordBoxStyle.boldText,{color:theme.text}]}>트렌드 순위</Text>

@@ -72,7 +72,7 @@ const KeywordBar = ({teamTrend}) => {
           );
         })}
       </View>
-      <View style={{ height: 1, backgroundColor: "#CAC4D0" }} />
+      <View style={{ height: 1, backgroundColor: '#E5E9EF' }} />
       <KeywordName />
       <View>
         {selectedBar !== null && (

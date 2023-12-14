@@ -12,8 +12,6 @@ const TodayScheduleBox = () => {
                 <Image style={todayScheduleBoxStyle.sizeImage} source={require('../../assets/analysis/seoulIcon.png')} />
             </View>
         </View> 
-
-        
         <View style={[todayScheduleBoxStyle.liveTalkBox]}>
             <Icon name="chatbubbles-outline" style={{marginRight:5}}></Icon>
             <Text style={{fontSize:10,fontWeight:'bold'}}>실시간 중계</Text>
