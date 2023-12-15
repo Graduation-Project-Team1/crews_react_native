@@ -17,13 +17,10 @@ const PlayerScreen = () => {
     const fetchData = async () => {
       try {
         const playerResponse = await axios.get("https://crews.jongmin.xyz/data/player/list?teamId=7653");
-        const keeperResponse = await axios.get("https://crews.jongmin.xyz/data/record?playerId=872090");
-        const defenderResponse = await axios.get("https://crews.jongmin.xyz/data/record?playerId=99963");
-        const midfielderResponse = await axios.get("https://crews.jongmin.xyz/data/record?playerId=38642");
-        const attackerResponse = await axios.get("https://crews.jongmin.xyz/data/record?playerId=38651");
-        ///data/player/list?teamId=
-        ///data/player?playerId=
-        ///data/record?playerId=
+        const keeperResponse = await axios.get("https://crews.jongmin.xyz/data/player/record/list?teamId=6908&pos=G");
+        const defenderResponse = await axios.get("https://crews.jongmin.xyz/data/player/record/list?teamId=6908&pos=D");
+        const midfielderResponse = await axios.get("https://crews.jongmin.xyz/data/player/record/list?teamId=6908&pos=M");
+        const attackerResponse = await axios.get("https://crews.jongmin.xyz/data/player/record/list?teamId=6908&pos=F");
         setPlayerData(playerResponse.data);
         setKeeperData(keeperResponse.data);
         setDefenderData(defenderResponse.data);
@@ -48,9 +45,9 @@ const PlayerScreen = () => {
       ...playerData.map((player, index) => {
         if (index === 0 || index === 1) {
           return [          player?.name,          "GK",          keeperData[index]?.saves,
-            keeperData[index]?.goalConceded,
+            keeperData[index]?.goalConceded || 0,
             keeperData[index]?.cleanSheet,
-            keeperData[index]?.totalShots,
+            keeperData[index]?.totalShots || 0,
             keeperData[index]?.fouls,
             keeperData[index]?.yellowCards,
             keeperData[index]?.redCards,
@@ -71,7 +68,7 @@ const PlayerScreen = () => {
           ];
         } else if(index>=13 && index<21 ) {
           return [          player?.name,          "MF",          midfielderData[index-2]?.goals,
-          midfielderData[index-13]?.assists,
+          midfielderData[index-13]?.assists || 0,
           midfielderData[index-13]?.yellowCards,
           midfielderData[index-13]?.redCards,
           midfielderData[index-13]?.totalPasses,
@@ -83,7 +80,7 @@ const PlayerScreen = () => {
           ];
         } else{
           return [          player?.name,          "FW",          attackerData[index-2]?.goals,
-          attackerData[index-21]?.assists,
+          attackerData[index-21]?.assists || 0,
           attackerData[index-21]?.yellowCards,
           attackerData[index-21]?.redCards,
           attackerData[index-21]?.totalShots,
