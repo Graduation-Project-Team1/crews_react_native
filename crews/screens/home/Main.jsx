@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import HomeScreen from './HomeScreen';
@@ -11,6 +11,7 @@ import PodcastIndex from '../podcast/PodcastIndex';
 import { View } from "react-native";
 import Player from '../../components/PodCastScreen/Player';
 import { usePodcastData } from '../../components/PodCastScreen/PodcastContext';
+import { useSoundData } from '../../components/PodCastScreen/SoundContext';
 import { ThemeContext } from "styled-components/native";
 
 const Tab = createBottomTabNavigator();
@@ -18,11 +19,12 @@ const Tab = createBottomTabNavigator();
 const Main = ({navigation}) => {
 
   const {podcastData} = usePodcastData();
+  const { playSound, sound } = useSoundData();
 
   useEffect(() => {
-
-    console.log("팟캐스트 데이터 업데이트: ", podcastData);
-    
+      //setPodcastId(props.id);
+      if (sound) sound.unloadAsync(); // unload
+      playSound();
   }, [podcastData]);
 
 

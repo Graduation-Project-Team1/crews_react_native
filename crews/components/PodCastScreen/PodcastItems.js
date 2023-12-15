@@ -11,17 +11,6 @@ const PodcastList = (props) => {
     const [teamId, setTeamId] = useState(6908);
     const [podcastListData, setPodcastListData] = useState([]);
 
-    const { playSound, sound } = useSoundData();
-
-    useEffect(() => {
-        //setPodcastId(props.id);
-        if (sound) sound.unloadAsync(); // unload
-        playSound();
-    }, []);
-
-    useEffect(() => {
-        if (sound) sound.unloadAsync(); // unload
-    }, [podcastData]);
 
     useEffect(() => {
         const getPodcastList = async() => {
