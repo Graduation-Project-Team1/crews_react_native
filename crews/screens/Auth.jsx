@@ -18,7 +18,9 @@ const Auth = () => {
 
     <PodcastDataProvider>
       <SoundDataProvider>
-        <NavigationContainer>
+        <NavigationContainer
+        independent={true}
+        >
           <Stack.Navigator
           screenOptions={{headerShown: false}}>
             <Stack.Screen name='Home' component={Main} />

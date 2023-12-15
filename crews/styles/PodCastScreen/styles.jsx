@@ -47,7 +47,7 @@ export const playerStyles = StyleSheet.create({
         height: 75,
         width: '100%',
         position: 'absolute',
-        bottom: 70.5,
+        bottom: 70,
         flexDirection: 'row',
         alignItems: 'center',
         padding:10,

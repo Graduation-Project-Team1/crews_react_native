@@ -56,7 +56,7 @@ const PodCastScreen = ({navigation}) => {
               <Text style = {{fontSize: 18, fontWeight: 'bold', position: 'absolute', right: 0}}>지난 라디오</Text>
             </View>
           
-            <PodcastList month = {9}/>          
+            <PodcastList/>          
             
           </ScrollView>
   
