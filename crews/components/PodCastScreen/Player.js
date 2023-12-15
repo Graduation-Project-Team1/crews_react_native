@@ -39,10 +39,10 @@ const Player = (props) => {
               <TouchableOpacity 
               onPress={()=>{setIsPlaying(!isPlaying)}}
               >
-                {isPlaying? <Image 
+                {isPlaying? <FontAwesome5 name="play" size={16} color="black" style = {{margin: 11}} />:
+                <Image 
                   style = {{margin: 10}}
-                  source = {require("../../assets/PodCastScreen/pause-11.png")}/>
-                  :<FontAwesome5 name="play" size={16} color="black" style = {{margin: 11}} />}
+                  source = {require("../../assets/PodCastScreen/pause-11.png")}/>}
               </TouchableOpacity>
               <TouchableOpacity>
                 <Image 

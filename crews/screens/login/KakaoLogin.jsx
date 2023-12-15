@@ -61,6 +61,8 @@ const KakaoLogin = ({navigation, setIsLogin}) => {
     console.log("INJECTED_JAVASCRIPT");
   `;
 
+  navigation.navigate("Onboarding");
+
   return (
     <View style={{ flex: 1 }}>
       <WebView

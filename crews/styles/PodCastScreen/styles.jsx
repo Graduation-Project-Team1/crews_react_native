@@ -1,6 +1,8 @@
 import {StyleSheet} from 'react-native';
 import colors from '../colors';
 
+
+
 export const bannerStyles = StyleSheet.create({
     banner: {
         width: '100%',

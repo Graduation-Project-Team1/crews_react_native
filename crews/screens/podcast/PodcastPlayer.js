@@ -9,6 +9,7 @@ import Bottom from '../../components/PodCastScreen/PlayerBottom';
 
 import { PlayerScreenStyles, playListStyles } from '../../styles/PodCastScreen/styles';
 
+
 const PodcastPlayer = ({navigation}) => {
 
   const {podcastData} = usePodcastData();

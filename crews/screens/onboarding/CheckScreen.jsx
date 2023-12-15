@@ -10,7 +10,8 @@ import colors from '../../styles/colors';
 import StartBtn from '../../components/onboardingScreen/StartBtn';
 
 
-const Check = ({navigation}) => {
+const Check = ({navigation, setIsLogin}) => {
+
 
     return (
         <View style = {{flex:1}}>
@@ -30,8 +31,10 @@ const Check = ({navigation}) => {
                 marginBottom: 10
             }}>
                 < StartBtn
+                    navigation={navigation}
                     onPress = {() => {}}
                     message = '정보를 모두 입력해주세요'
+                    setIsLogin = {setIsLogin}
                 />
             </View>
         </View>

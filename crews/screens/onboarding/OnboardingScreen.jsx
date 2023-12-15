@@ -53,7 +53,7 @@ const OnboardingScreen = ({navigation, setIsLogin}) => {
                 <MyTeam swiper={swiper}/>
                 <MyMember swiper={swiper}/>
                 <Theme swiper={swiper}/>
-                <Check navigation={navigation}/>
+                <Check navigation={navigation} setIsLogin = {setIsLogin}/>
                 
             </Swiper>
             </View>

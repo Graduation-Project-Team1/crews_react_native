@@ -1,10 +1,14 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
 import { View, Text, Switch } from "react-native";
+import { ThemeContext } from "styled-components/native";
 
 
 const ToggleSetting = (props) =>{
     const [isEnabled, setIsEnabled] = useState(false);
+    const theme = useContext(ThemeContext);
+
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+
     return (
         <View style = {{
         flexDirection: 'row',
@@ -19,8 +23,8 @@ const ToggleSetting = (props) =>{
             <Switch
             onValueChange={toggleSwitch}
             value={isEnabled}
-            trackColor={{false: '#8c8b8d', true: '#6696ff'}}
-            thumbColor={isEnabled ? '#D6E3FF' : '#f4f3f4'}
+            trackColor={{false: '#8c8b8d', true: theme.primaryLight}}
+            thumbColor={isEnabled ? theme.primaryLightMore : '#f4f3f4'}
             />
         </View>
     )
