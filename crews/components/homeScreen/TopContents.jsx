@@ -6,11 +6,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 
 const TopContents = () => {
+
+  const currentDate = new Date();
+  const formattedDate = `${currentDate.getMonth() + 1}월 ${currentDate.getDate()}일`
   return (
     <View style={[styles.container, topContentsStyles.topContentLayout]}>
       <View style={[topContentsStyles.topContentLeft]}>
         <Text style={[topContentsStyles.topContentTitle]}>
-          8월 1일의 전북 현대
+          {formattedDate}의 전북현대
         </Text>
         <View style={topContentsStyles.topContentTextOuter}>
           <Text style={[topContentsStyles.topContentText]}>트렌드 순위 3위</Text>
