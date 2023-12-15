@@ -1,5 +1,5 @@
+import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
-import { Image } from "react-native";
 import { playListStyles } from '../../styles/PodCastScreen/styles';
 import colors from '../../styles/colors';
 import { FontAwesome5 } from '@expo/vector-icons';

@@ -16,30 +16,16 @@ const Bottom = (props) => {
 
     const {sound, setSound} = useSoundData();
     const {isPlaying, setIsPlaying} = useSoundData();
-    const [podcastId, setPodcastId] = useState();
     const {duration, setDuration} = useSoundData();
     const {position, setPosition} = useSoundData();
-    const [slider, setSlider] = useState();
-    const [newPosition, setNewPosition] = useState();
 
     const {podcastData} = usePodcastData();
 
     const {playSound, playController} = useSoundData();
 
         useEffect(() => {
-            //setPodcastId(props.id);
-            if (sound) sound.unloadAsync(); // unload
-            playSound();
-        }, []);
-
-        useEffect(() => {
-            playController();
-        }, [isPlaying]);
-
-
-        useEffect(() => {
-            if (sound) sound.unloadAsync(); // unload
-        }, [podcastData]);
+                    playController();
+                }, [isPlaying]);
 
 
     return (
@@ -64,7 +50,7 @@ const Bottom = (props) => {
                     minimumValue={0}
                     maximumValue={duration}
                     value={position}
-                    onValueChange = {setNewPosition}
+                    onValueChange = {position}
                     minimumTrackTintColor={colors.primary}
                     maximumTrackTintColor='#a0a0a0'
                     thumbTintColor={colors.primary}

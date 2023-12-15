@@ -24,26 +24,26 @@ export function SoundDataProvider({children}){
 
     const [url, setUrl] = useState();
 
-    useEffect(() => {
-        const getSoundData = async() => {
-            try {
-                const responseSoundData = await axios.get(`https://crews.jongmin.xyz/podcast?podcastId=${podcastData.id}`);
+    // useEffect(() => {
+    //     const getSoundData = async() => {
+    //         try {
+    //             const responseSoundData = await axios.get(`https://crews.jongmin.xyz/podcast?podcastId=${podcastData.id}`);
     
-                    // 성공적인 응답 처리
-                    console.log(responseSoundData.data);
-                    setUrl(responseSoundData.data);
-                    console.log("Podcastlist: 성공");
+    //                 // 성공적인 응답 처리
+    //                 console.log(responseSoundData);
+    //                 setUrl(responseSoundData.data);
+    //                 console.log("Podcastlist: 성공");
 
-            } catch (error) {
-                // Axios 오류 처리
-                console.error(error);
-            }
-        };
+    //         } catch (error) {
+    //             // Axios 오류 처리
+    //             console.error(error);
+    //         }
+    //     };
 
     
-        getSoundData();
+    //     getSoundData();
 
-    }, [podcastData]);
+    // }, [podcastData]);
 
     const musicStatus = async status => {
         if (!status.isLoaded) {
@@ -60,7 +60,7 @@ export function SoundDataProvider({children}){
     
     async function playSound() {
         console.log('Loading Sound');
-        const { sound } = await Audio.Sound.createAsync({uri: uri},{ shouldPlay: true }, musicStatus);
+        const { sound } = await Audio.Sound.createAsync({uri: `https://crews.jongmin.xyz/podcast?podcastId=${podcastData.id}`},{ shouldPlay: true }, musicStatus);
         setSound(sound);
     }
 
@@ -69,7 +69,7 @@ export function SoundDataProvider({children}){
         return;
         }
         sound.setPositionAsync(newPosition);
-        isPlaying ? await sound.pauseAsync() : await sound.playFromPositionAsync({position});
+        isPlaying ? await sound.pauseAsync() : await sound.playAsync({position});
     };
 
 
