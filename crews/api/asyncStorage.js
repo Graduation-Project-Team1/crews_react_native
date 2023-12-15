@@ -1,5 +1,27 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+// memberId
+export const storeMemberId = async (id) => {
+  try {
+    await AsyncStorage.setItem('memberId', id);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getMemberId = async () => {
+  try {
+    const id = await AsyncStorage.getItem('memberId');
+    if (id !== null) {
+      return id;
+    } else {
+      return '';
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 // token
 export const storeToken = async (token) => {
   try {
