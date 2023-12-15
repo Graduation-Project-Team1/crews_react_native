@@ -13,7 +13,7 @@ export default function ScheduleScreen({navigation}) {
   const [selectedDate, setSelectedDate] = useState(null);
   const theme = useContext(ThemeContext);
 
-  const [scheduleData, setScheduleData] = useState([]);  // 수정된 코드
+  const [scheduleData, setScheduleData] = useState({});  // 수정된 코드
   useEffect(() => {
     const fetchData = async () => {
       try {

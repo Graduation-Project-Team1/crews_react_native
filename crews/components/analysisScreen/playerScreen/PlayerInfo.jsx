@@ -4,6 +4,8 @@ import { ThemeContext } from "styled-components/native";
 const PlayerInfo = (props) => {
   const { statInfo, getValueOrLoading} = props;
   const theme = useContext(ThemeContext);
+
+  //수비수 2명 뺀 상태
   return (
     <ScrollView>
       <Text style={{marginLeft:10,marginTop:20,fontWeight:'bold',color:theme.text}}>GK(2)</Text>
@@ -34,11 +36,11 @@ const PlayerInfo = (props) => {
         </ScrollView>
       </View>
       
-      <Text style={{marginLeft:10,marginTop:20,fontWeight:'bold',color:theme.text}}>DF(11)</Text>
+      <Text style={{marginLeft:10,marginTop:20,fontWeight:'bold',color:theme.text}}>DF(9)</Text> 
       <View style={{flexDirection:"row",marginTop:10,marginLeft:10,marginRight:10,borderWidth:1,borderRadius:10,borderColor:'#E5E9EF'}}>
         <View style={{flexDirection:'column'}}>
           <Text style={{marginTop:17,paddingLeft:19,paddingRight:30,  borderBottomWidth: 1,borderColor: '#E5E9EF',color:theme.text}}>이름</Text>
-          {statInfo.slice(4, 15).map((row, index) => (
+          {statInfo.slice(4, 13).map((row, index) => (
             <View key={index} style={{flexDirection:'row'}}>
               <Text style={{marginTop:17, marginLeft:15,color:theme.text}}>{getValueOrLoading(row, 0)}</Text>
             </View>
@@ -47,14 +49,14 @@ const PlayerInfo = (props) => {
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.row}>
           <View style={{flexDirection:"column", borderBottomWidth: 1, borderColor: '#E5E9EF'}}>
             <Text style={{marginTop:17, borderBottomWidth: 1, borderColor: '#E5E9EF',color:theme.text}}>   
-              포지션        태클        가로채기        걷어내기        경고        퇴장        슈팅막음        볼경합        볼경합승리        공중볼경합        경기수
+              포지션               태클        가로채기        걷어내기        경고        퇴장        슈팅막음        볼경합        볼경합승리        공중볼경합        경기수
             </Text>
-            {statInfo.slice(4, 15).map((row, index) => (
+            {statInfo.slice(4, 13).map((row, index) => (
               <View key={index} style={{ flexDirection: 'row', marginTop: 17, marginLeft: 5 }}>
                 <Text style={{ flex: 1 ,color:theme.text}}>
                   DF
                 </Text>
-                {row.slice(2, 12).map((value, idx) => (
+                {row.slice(2, 10).map((value, idx) => (
                   <Text key={idx} style={{ flex: 1 ,color:theme.text}}>{value}</Text>
                 ))}
               </View>
