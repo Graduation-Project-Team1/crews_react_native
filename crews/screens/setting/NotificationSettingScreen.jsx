@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
 import { View, Text, Switch } from "react-native";
 
 import CategoryBtn from "../../components/settingScreen/CategoryBtn";
@@ -7,8 +7,12 @@ import ProfileView from "../../components/settingScreen/ProfileView";
 
 import ToggleSetting from "../../components/settingScreen/ToggleSetting";
 
+import { ThemeContext } from "styled-components/native";
+
 
 const NotificationSettingScreen = ({navigation}) => {
+
+    const theme = useContext(ThemeContext);
     
     return (
         <View style = {{

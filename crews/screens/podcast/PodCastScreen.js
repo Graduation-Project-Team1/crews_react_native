@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import MorningBanner from '../../components/PodCastScreen/MorningBanner.js';
 import EveningBanner from '../../components/PodCastScreen/EveningBanner.js';
@@ -9,23 +9,21 @@ import Player from '../../components/PodCastScreen/Player.js';
 import PodcastList from '../../components/PodCastScreen/PodcastItems.js';
 import colors from '../../styles/colors.jsx';
 
+
 import { usePodcastData } from '../../components/PodCastScreen/PodcastContext.jsx';
 
 const PodCastScreen = ({navigation}) => {
 
   const {podcastData} = usePodcastData();
   const {onClickPodcast} = usePodcastData();
+  
 
-  // useEffect(() => {
-
-  //   console.log(podcastData);
-
-  // }, [podcastData]);
 
   return (
     <View style = {{
       flex: 1,
       backgroundColor: '#ffffff'
+      
     }}>
           <ScrollView style = {{
           padding: 15,

@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Feather, MaterialIcons, FontAwesome5 } from '@expo/vector-icons'; 
 import Slider from '@react-native-community/slider';
 import { PlayerScreenStyles } from '../../styles/PodCastScreen/styles';
@@ -10,6 +10,7 @@ import { Audio } from 'expo-av';
 import { usePodcastData } from './PodcastContext';
 import { useSoundData } from './SoundContext';
 
+import { ThemeContext } from "styled-components/native";
 
 
 const Bottom = (props) => {
@@ -22,6 +23,8 @@ const Bottom = (props) => {
     const {podcastData} = usePodcastData();
 
     const {playSound, playController} = useSoundData();
+
+    const theme = useContext(ThemeContext);
 
         useEffect(() => {
                     playController();
@@ -51,9 +54,9 @@ const Bottom = (props) => {
                     maximumValue={duration}
                     value={position}
                     onValueChange = {position}
-                    minimumTrackTintColor={colors.primary}
+                    minimumTrackTintColor={theme.primary}
                     maximumTrackTintColor='#a0a0a0'
-                    thumbTintColor={colors.primary}
+                    thumbTintColor={theme.primary}
                 />
                 <View style = {{
                     flexDirection: 'row',

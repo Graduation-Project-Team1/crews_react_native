@@ -1,17 +1,21 @@
 import React from "react";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Text, View, TouchableOpacity } from "react-native";
 import { AntDesign } from '@expo/vector-icons'; 
 import axios from 'axios';
+import { ThemeContext } from "styled-components/native";
 
 import CategoryBtn from "../../components/settingScreen/CategoryBtn";
+    
 
 const SettingScreen = ({navigation}) => {
 
     const [userName, setUserName] = useState(['user']);
     const [userTeam, setUserTeam] = useState(['teamname']);
     const [userPlayer, setUserPlayer] = useState(['playername']);
-    const [userId, setUserId] = useState(302)
+    const [userId, setUserId] = useState(352);
+    
+    const theme = useContext(ThemeContext);
 
     useEffect(() => {
         const getUserdata = async() => {
@@ -45,7 +49,7 @@ const SettingScreen = ({navigation}) => {
     <View style = {{flex: 1}}>
         <View style = {{
             flex: 3.5,
-            backgroundColor: '#1B1DB7',
+            backgroundColor: theme.primary,
         }}>
             <View style = {{
                 alignItems: 'flex-start',
