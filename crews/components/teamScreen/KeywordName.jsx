@@ -6,11 +6,11 @@ const KeywordName = () =>{
     const theme = useContext(ThemeContext);
     return(
         <View style={{flexDirection:"row",justifyContent:'space-around',marginTop:10}}>
-            <Text style={{color:theme.text}}>키워드</Text>
-            <Text style={{color:theme.text}}>키워드</Text>
-            <Text style={{color:theme.text}}>키워드</Text>
-            <Text style={{color:theme.text}}>키워드</Text>
-            <Text style={{color:theme.text}}>키워드</Text>
+            <Text style={{color:theme.text}}>수원</Text>
+            <Text style={{color:theme.text}}>울산</Text>
+            <Text style={{color:theme.text}}>전북</Text>
+            <Text style={{color:theme.text}}>대구</Text>
+            <Text style={{color:theme.text}}>제주</Text>
         </View>
     );
 };

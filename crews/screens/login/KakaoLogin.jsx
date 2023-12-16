@@ -5,9 +5,12 @@ import WebView from "react-native-webview";
 import { storeMemberId, storeToken } from "../../api/asyncStorage";
 import axios from "axios";
 import { useFocusEffect } from "@react-navigation/native";
+import { useRecoilState } from "recoil";
+import { userTeamState } from "../../recoil/teamState";
 
 const KakaoLogin = ({navigation, setIsLogin}) => {
   const webViewRef = useRef();
+  const [currentState, setCurrentState] = useRecoilState(userTeamState);
 
   useEffect(() => {
     console.log("KakaoLogin");
@@ -27,6 +30,10 @@ const KakaoLogin = ({navigation, setIsLogin}) => {
     if (parsedBody.success === true && parsedBody.token !== null && parsedBody.memberId !== null) {
       storeMemberId(parsedBody.memberId.toString());
       storeToken(parsedBody.token);
+      setCurrentState({
+        ...currentState,
+        memberId: parsedBody.memberId,
+      })
       console.log(`멤버 아이디 & 토큰 저장됨 : ${parsedBody.memberId}, ${parsedBody.token}`);
       setIsLogin(true);
     } else if (parsedBody.message === 'preference' && parsedBody.token === null && parsedBody.memberId !== null) {

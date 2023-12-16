@@ -44,7 +44,6 @@ const AppSettingScreen = ({navigation}) => {
                   <ThemeSelectBtn text = '우리 팀 테마' value = 'team' color = {theme.primary} checked = {checked} setChecked = {setChecked} />
                   <ThemeSelectBtn text = '라이트 테마' value = 'light' color = '#1B1DB7' checked = {checked} setChecked = {setChecked} />
                   <ThemeSelectBtn text = '다크 테마' value = 'dark' color = '#181818' checked = {checked} setChecked = {setChecked} />
-                  <ThemeSelectBtn text = '서울 FC 테마' value = 'team7646' color = '#B6181A' checked = {checked} setChecked = {setChecked} />
                 </View>
                 
             </View>

@@ -11,9 +11,10 @@ import colors from '../../styles/colors.jsx';
 
 
 import { usePodcastData } from '../../components/PodCastScreen/PodcastContext.jsx';
+import { ThemeContext } from 'styled-components';
 
 const PodCastScreen = ({navigation}) => {
-
+  const theme = useContext(ThemeContext);
   const {podcastData} = usePodcastData();
   const {onClickPodcast} = usePodcastData();
   
@@ -22,7 +23,7 @@ const PodCastScreen = ({navigation}) => {
   return (
     <View style = {{
       flex: 1,
-      backgroundColor: '#ffffff'
+      backgroundColor: theme.background
       
     }}>
           <ScrollView style = {{
@@ -30,7 +31,7 @@ const PodCastScreen = ({navigation}) => {
           paddingTop: 50,
           flex: 1
           }}>
-            <Text style = {{fontWeight: 'bold', fontSize: 18, marginBottom: 30}}>오늘의 라디오</Text>
+            <Text style = {{fontWeight: 'bold', color: theme.text, fontSize: 18, marginBottom: 30}}>오늘의 라디오</Text>
             
             <View style = {{
               flexDirection: 'column',
@@ -51,7 +52,7 @@ const PodCastScreen = ({navigation}) => {
             }}>
               <AlignButton name = "최신순"/>
               <AlignButton name = "2023년 12월"/>
-              <Text style = {{fontSize: 18, fontWeight: 'bold', position: 'absolute', right: 0}}>지난 라디오</Text>
+              <Text style = {{fontSize: 18, color: theme.text, fontWeight: 'bold', position: 'absolute', right: 0}}>지난 라디오</Text>
             </View>
           
             <PodcastList/>          
