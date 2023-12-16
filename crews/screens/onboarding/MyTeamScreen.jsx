@@ -18,20 +18,26 @@ const [leagueList, setLeagueList] = useState([])
 const [teamList, setTeamList] = useState([]);
 
 const [onSport, setOnSport] = useState('');
-const [onLeague, setOnLeague] = useState('');
+const [onLeague, setOnLeague] = useState(0);
 
 const { onTeamClick } = useTeamData();
 const { teamData } = useTeamData();
 
 
 useEffect(() => {
+    if (onSport === '') return;
+
     const getLeagueList = async() => {
         try {
-            const responseLeague = await axios.get(`https://crews.jongmin.xyz/data/league/list?sportsName=${onSport}`);
-
-                // 성공적인 응답 처리
-                setLeagueList(responseLeague.data);
-                console.log("getLeagueList: 성공");
+            const responseLeague = await axios.get(`https://crews.jongmin.xyz/data/league/list?sportsName=${onSport}`)
+                .then((response) => {
+                    // 성공적인 응답 처리
+                    setLeagueList(response.data);
+                    console.log("getLeagueList: 성공");
+                })
+                .catch((error) => {
+                    console.log("error: ", error);
+                })
 
         } catch (error) {
             // Axios 오류 처리
@@ -40,14 +46,24 @@ useEffect(() => {
             
         }
     };
+    getLeagueList();
+}, [onSport]);
+
+useEffect(() => {
+    if (onLeague === 0) return;
 
     const getTeamList = async() => {
         try {
-            const responseTeam = await axios.get(`https://crews.jongmin.xyz/data/team/list?leagueId=${onLeague}`);
-
-                // 성공적인 응답 처리
-                setTeamList(responseTeam.data);
-                console.log("getTeamList: 성공");
+            const responseTeam = await axios.get(`https://crews.jongmin.xyz/data/team/list?leagueId=${onLeague}`)
+                .then((response) => {
+                    // 성공적인 응답 처리
+                    setTeamList(response.data);
+                    console.log("getTeamList: 성공");
+                })
+                .catch((error) => {
+                    console.log("error: ", error);
+                })
+                    
 
         } catch (error) {
             // Axios 오류 처리
@@ -55,12 +71,9 @@ useEffect(() => {
             console.error("Response status:", error.response.status);
         }
     };
-
-    getLeagueList();
     getTeamList();
+}, [onLeague]);
 
-    console.log("onleague: ", onLeague);
-}, [onSport, onLeague]);
 
 const onClickSport = (selectedSport) => {
     setOnSport(selectedSport);

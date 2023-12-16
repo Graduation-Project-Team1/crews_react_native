@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity } from 'react-native';
+import { Image, TouchableOpacity } from 'react-native';
 import { Text, View } from 'react-native';
 import { commonStyle, myMemberStyle } from '../../styles/onboardingScreen/style';
 import { useMemberData } from './context';
@@ -19,12 +19,13 @@ const TeamMembers = (props) => {
         height: 170}
       }
       onPress={props.onPress}>
-        <View style = {[myMemberStyle.imageView, memberData === props.id? {borderWidth: 3, borderColor: colors.primary}:{}]}>
+        <View style = {[myMemberStyle.imageViewContainer]}>
+          <Image style = {[myMemberStyle.imageView, memberData === props.id? {borderWidth: 3, borderColor: colors.primary}:{}]} source = {{uri: props.photo}}/>
           {memberData === props.id? 
             <View style = {{
                 position: "absolute", 
-                bottom: 0, 
-                right: 0,
+                bottom: 8, 
+                right: 5,
                 backgroundColor: colors.primary,
                 height: 25,
                 width: 25,

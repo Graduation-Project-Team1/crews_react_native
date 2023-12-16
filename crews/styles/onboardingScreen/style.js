@@ -52,6 +52,10 @@ export const profileStyle = StyleSheet.create({
 });
 
 export const myMemberStyle = StyleSheet.create({
+  imageViewContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   imageView: {
     width : 100, 
     height : 100,
@@ -135,6 +139,10 @@ export const myTeamStyle = StyleSheet.create({
     width: 100,
     height: 170
   },
+  sportTeamImageView: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },  
   sportTeamImage: {
     width : 100, 
     height : 100,
