@@ -46,6 +46,7 @@ const Base = () => {
         });
       }
     });
+    console.log("BASE USEEFFECT : ", currentTeam);
   }, []);
 
   useEffect(() => {

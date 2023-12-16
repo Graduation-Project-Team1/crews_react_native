@@ -22,6 +22,28 @@ export const getMemberId = async () => {
   }
 }
 
+// memberName
+export const storeMemberName = async (name) => {
+  try {
+    await AsyncStorage.setItem('memberName', name);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getMemberName = async () => {
+  try {
+    const name = await AsyncStorage.getItem('memberName');
+    if (name !== null) {
+      return name;
+    } else {
+      return '';
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 // token
 export const storeToken = async (token) => {
   try {
@@ -103,6 +125,49 @@ export const getTeamId = async () => {
       return id;
     } else {
       return '6908';
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// player
+export const storePlayerId = async (id) => {
+  try {
+    await AsyncStorage.setItem('playerId', id);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getPlayerId = async () => {
+  try {
+    const id = await AsyncStorage.getItem('playerId');
+    if (id !== null) {
+      return id;
+    } else {
+      return '';
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const storePlayerName = async (name) => {
+  try {
+    await AsyncStorage.setItem('playerName', name);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getPlayerName = async () => {
+  try {
+    const name = await AsyncStorage.getItem('playerName');
+    if (name !== null) {
+      return name;
+    } else {
+      return '';
     }
   } catch (error) {
     console.log(error);

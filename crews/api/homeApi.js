@@ -1,26 +1,26 @@
 import { baseAxios } from "./baseAxios";
 
-export const mainNewsApi = async () => {
+export const mainNewsApi = async (teamId) => {
   const response = await baseAxios
-    .get('/news/6908')
+    .get(`/news/${teamId}`)
     .then((response) => response.data);
     // console.log("Main News API ===> ", response);
 
   return response;
 }
 
-export const emotionApi = async () => {
+export const emotionApi = async (teamId) => {
   const response = await baseAxios 
-    .get('/community/6908/emotion')
+    .get(`/community/${teamId}/emotion`)
     .then((response) => response.data);
     console.log("Emotion ===> ", response);
 
   return response;
 }
 
-export const trendApi = async () => {
+export const trendApi = async (teamId) => {
   const response = await baseAxios
-    .get('/community/6908/keyword')
+    .get(`/community/${teamId}/keyword`)
     .then((response) => response.data);
     // console.log("Trend ===> ", response);
 

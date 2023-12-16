@@ -1,12 +1,12 @@
-import React,{ useState, useEffect } from "react";
+import React,{ useState, useEffect, useContext } from "react";
 import PlayList from "./PlayList";
 import { View } from 'react-native';
 import { usePodcastData } from "./PodcastContext";
 import axios from 'axios';
 import { useSoundData } from "./SoundContext";
+import { ThemeContext } from "styled-components";
 
 const PodcastList = (props) => {
-
     const {podcastData, setPodcastData} = usePodcastData();
     const [teamId, setTeamId] = useState(6908);
     const [podcastListData, setPodcastListData] = useState([]);
@@ -70,6 +70,7 @@ const PodcastList = (props) => {
         <View>
             {podcastListData.map(item => (
                 <PlayList
+                    key = {item.id}
                     id = {String(item.id).padStart(2, "0")}
                     time = {item.time}
                     hashTag = "#승리 #연승 #패배"

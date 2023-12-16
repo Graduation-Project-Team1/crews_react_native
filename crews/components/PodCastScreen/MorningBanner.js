@@ -28,8 +28,8 @@ const MorningBanner = (props) => {
           <View style = {{
             flexDirection:'row'
           }}>
-            {hashList.map(item => (
-              <Text style = {{fontSize: 12, marginRight: 4}}>#{item}</Text>
+            {hashList.map((item, idx) => (
+              <Text key={idx} style = {{fontSize: 12, marginRight: 4}}>#{item}</Text>
             ))}
             
           </View>

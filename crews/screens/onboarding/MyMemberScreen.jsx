@@ -18,12 +18,14 @@ import Team7650 from '../../assets/team/7650.png';
 import Team34220 from '../../assets/team/34220.png';
 import Team41261 from '../../assets/team/41261.png';
 import Team48912 from '../../assets/team/48912.png';
+import { useRecoilState } from 'recoil';
+import { userTeamState } from '../../recoil/teamState';
+import { storePlayerId, storePlayerName } from '../../api/asyncStorage';
 
 
 const MyMember = ({swiper}) => {
-
+    const [userTeam, setUserTeam] = useRecoilState(userTeamState);
     const [memberList, setMemberList] = useState([]);
- 
     const { teamData } = useTeamData();
     const { onMemberClick } = useMemberData();
 
@@ -86,8 +88,16 @@ const MyMember = ({swiper}) => {
     }
 
     const onClick = (member) => {
-      console.log("MyMemberScreen: ", member);
-      onMemberClick(member);
+      console.log("MyMemberScreen: ", member.id);
+      onMemberClick(member.id);
+      storePlayerId(member.id.toString());
+      storePlayerName(member.name);
+
+      setUserTeam({
+        ...userTeam,
+        playerId: member.id,
+        playerName: member.name,
+      });
     }
 
 
@@ -105,7 +115,7 @@ const MyMember = ({swiper}) => {
                 style={[myMemberStyle.teamImageView]}
                 source={imgSrc(teamData)}
               />
-              <Text style={{ fontWeight: 'bold' }}>{teamData}</Text>
+              <Text style={{ fontWeight: 'bold' }}>{userTeam.name}</Text>
               </>
             )}
           </View>
@@ -120,7 +130,7 @@ const MyMember = ({swiper}) => {
                       key={item.id}
                       id={item.id}
                       photo={item.photo}
-                      onPress={() => onClick(item.id)}
+                      onPress={() => onClick(item)}
                       />
                   ))}
                   </View>

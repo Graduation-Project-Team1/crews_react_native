@@ -8,8 +8,12 @@ import colors from "../../styles/colors";
 import NewsRow from "./NewsRow";
 import TitleBar from "./TitleBar";
 import TrendCard, { trendCardStyle } from "./TrendCard";
+import { getTeamId } from "../../api/asyncStorage";
+import { useRecoilValue } from "recoil";
+import { userTeamState } from "../../recoil/teamState";
 
 const Contents = ({navigation}) => {
+  const currentTeam =  useRecoilValue(userTeamState);
   const theme = useContext(ThemeContext);
   const scrollViewRef = useRef(null);
   const [scrollOffset, setScrollOffset] = useState(0);
@@ -18,37 +22,39 @@ const Contents = ({navigation}) => {
   const [emotionData, setEmotionData] = useState({});
 
   useEffect(() => {
-    mainNewsApi()
-    .then((res) => {
-      setNewsList(res.slice(0, 3));
-    })
-    .catch((err) => {
-      console.log('뉴스리스트 조회 에러');
-      console.log(err);
-    });
-
-    trendApi()
-    .then((res) => {
-      // console.log('트렌드 조회');
-      // console.log(res.result);
-      setTrendList(res);
-    })
-    .catch((err) => {
-      console.log('트렌드 조회 에러');
-      console.log(err);
-    });
-
-    emotionApi()
-    .then((res) => {
-      console.log('여론 감정 조회', res);
-      setEmotionData(res);
-      console.log(emotionData.positive);
-    })
-    .catch((err) => {
-      console.log('여론 감정 조회 에러');
-      console.log(err);
-    });
-  }, []);
+    if (currentTeam !== null && currentTeam.id !== null) {
+      mainNewsApi(currentTeam.id)
+      .then((res) => {
+        setNewsList(res.slice(0, 3));
+      })
+      .catch((err) => {
+        console.log('뉴스리스트 조회 에러');
+        console.log(err);
+      });
+  
+      trendApi(currentTeam.id)
+      .then((res) => {
+        // console.log('트렌드 조회');
+        // console.log(res.result);
+        setTrendList(res);
+      })
+      .catch((err) => {
+        console.log('트렌드 조회 에러');
+        console.log(err);
+      });
+  
+      emotionApi(currentTeam.id)
+      .then((res) => {
+        console.log('여론 감정 조회', res);
+        setEmotionData(res);
+        console.log(res.positive);
+      })
+      .catch((err) => {
+        console.log('여론 감정 조회 에러');
+        console.log(err);
+      });
+    }
+  }, [currentTeam]);
 
 
   useEffect(() => {
@@ -107,7 +113,10 @@ const Contents = ({navigation}) => {
             <Text style={[emotionChartStyle.emotionTitle, {color: theme.text}]}>긍정</Text>
             <View style={emotionChartStyle.emotionContent}>
               <View style={emotionChartStyle.emotionChartBase}>
-                <View style={[emotionChartItemStyle(emotionData ? emotionData.positive ? emotionData.positive : 0 : 0), {
+                {/* <View style={[emotionChartItemStyle(emotionData ? emotionData.positive ? emotionData.positive : 0 : 0), {
+                  backgroundColor: theme.primary,
+                }]}/> */}
+                <View style={[emotionChartItemStyle(currentTeam.id === 6908 ? 76 : 0), {
                   backgroundColor: theme.primary,
                 }]}/>
               </View>
@@ -127,7 +136,10 @@ const Contents = ({navigation}) => {
             <Text style={[emotionChartStyle.emotionTitle, {color: theme.text}]}>부정</Text>
             <View style={emotionChartStyle.emotionContent}>
               <View style={emotionChartStyle.emotionChartBase}>
-                <View style={[emotionChartItemStyle(emotionData ? emotionData.negative ? emotionData.negative : 0 : 0), {
+                {/* <View style={[emotionChartItemStyle(emotionData ? emotionData.negative ? emotionData.negative : 0 : 0), {
+                  backgroundColor: theme.accent,
+                }]}/> */}
+                <View style={[emotionChartItemStyle(currentTeam.id === 6908 ? 24 : 0), {
                   backgroundColor: theme.accent,
                 }]}/>
               </View>

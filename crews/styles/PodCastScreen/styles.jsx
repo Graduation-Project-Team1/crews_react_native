@@ -90,7 +90,7 @@ export const PlayerScreenStyles = StyleSheet.create({
         position: 'absolute', 
         alignSelf: 'center', 
         top: 190,
-        backgroundColor: '#e0e0e0'
+        backgroundColor: '#000000'
     },
     topBtnView :{
         height: 30,

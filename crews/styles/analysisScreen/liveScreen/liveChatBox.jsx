@@ -7,6 +7,7 @@ export const liveChatBoxStyle = StyleSheet.create({
     },
     messageList: {
         flex: 1,
+        marginBottom: 10,
     },
     inputContainer: {
         flexDirection: 'row',

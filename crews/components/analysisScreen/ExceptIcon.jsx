@@ -3,7 +3,7 @@ import { todayScheduleBoxStyle } from "../../styles/analysisScreen/todaySchedule
 import Icon from "react-native-vector-icons/Ionicons";
 const ExceptIcon = () => {
     return(
-    <View style={[todayScheduleBoxStyle.layout,{marginTop:10,}]}>
+    <View style={[todayScheduleBoxStyle.layout,{marginTop:10}]}>
         <Text style={[todayScheduleBoxStyle.liveTextBox]}>LIVE</Text>
         <View style={[todayScheduleBoxStyle.liveBox]}>
             <Text style={{fontWeight:'bold',fontSize:20,marginTop:10}}>전북현대 vs FC서울{"\n"}1:0</Text>

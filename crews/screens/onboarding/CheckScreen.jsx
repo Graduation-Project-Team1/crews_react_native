@@ -3,7 +3,7 @@ import { Text, View } from 'react-native';
 import { Image } from 'react-native';
 import { Shadow } from 'react-native-shadow-2';
 import { commonStyle, checkStyle, } from '../../styles/onboardingScreen/style';
-
+import Logo from '../../assets/logo/logo.svg';
 import { LinearGradient } from 'expo-linear-gradient';
 import colors from '../../styles/colors';
 
@@ -21,7 +21,9 @@ const Check = ({navigation, setIsLogin}) => {
                 distance={5}
                 offset={[0, 4]}
                 >
-                    <LinearGradient style={checkStyle.image} colors={[colors.primary, '#1B1DB7d7','#1B1DB7c7', '#1B1DB7b7', '#1B1DB7a7']}></LinearGradient>
+                    <LinearGradient style={checkStyle.image} colors={[colors.primary, '#1B1DB7d7','#1B1DB7c7', '#1B1DB7b7', '#1B1DB7a7']}>
+                        <Logo width = {80} height = {80}/>
+                    </LinearGradient>
                 </Shadow>
                 <Text style = {[checkStyle.text, {marginTop: 33}]}>CREWS와 함께</Text>
                 <Text style = {[checkStyle.text]}>즐거운 스포츠 생활을 시작해보세요 🎉</Text>

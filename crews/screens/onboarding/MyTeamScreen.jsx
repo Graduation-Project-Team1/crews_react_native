@@ -11,9 +11,12 @@ import SportTeam from '../../components/onboardingScreen/SportTeam';
 import SportLeague from '../../components/onboardingScreen/SportLeague';
 import SportCategory from '../../components/onboardingScreen/SportCategory';
 import TeamNextBtn from '../../components/onboardingScreen/TeamNextBtn'
+import { storeTeamId, storeTeamName } from '../../api/asyncStorage';
+import { useRecoilState } from 'recoil';
+import { userTeamState } from '../../recoil/teamState';
 
 const MyTeam = ({swiper}) => {
-
+const [userTeam, setUserTeam] = useRecoilState(userTeamState);
 const [leagueList, setLeagueList] = useState([])
 const [teamList, setTeamList] = useState([]);
 
@@ -84,7 +87,17 @@ const onClickSport = (selectedSport) => {
 //const uniqueLeagueTitles = Array.from(new Set(filteredList.map(item => item.league))); // 중복 제거
 
 const selectTeamClick = (selectedTeam) => {
-    onTeamClick(selectedTeam);
+    onTeamClick(selectedTeam.teamId);
+    storeTeamId(selectedTeam.teamId.toString());
+
+    const teamName = selectedTeam.teamName === 'Jeonbuk Hyundai Motors' ? '전북현대' : 'FC 서울'
+    storeTeamName(teamName);
+    setUserTeam({
+        ...userTeam,
+        teamId: selectedTeam.teamId,
+        teamName: teamName,
+    });
+    console.log(selectedTeam.teamId);
 };
 
 
@@ -139,7 +152,7 @@ return (
                         name={item.teamName}
                         key={index}
                         id={item.teamId}
-                        onPress={() => {selectTeamClick(item.teamId);}}
+                        onPress={() => {selectTeamClick(item);}}
                         />
                     ))}
                     </View> 

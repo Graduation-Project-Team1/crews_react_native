@@ -11,8 +11,11 @@ import { communityDataApi, snsDataApi, totalNewsApi } from "../../api/issueApi";
 import { ThemeContext } from "styled-components/native";
 import { useRecoilValue } from "recoil";
 import { themeState } from "../../recoil/themeState";
+import { getTeamId } from "../../api/asyncStorage";
+import { userTeamState } from "../../recoil/teamState";
 
 const IssueScreen = () => {
+  const currentTeam = useRecoilValue(userTeamState);
   const theme = useContext(ThemeContext);
   const currentTheme = useRecoilValue(themeState);
   const [value, setValue] = useState('twitter');
@@ -23,7 +26,7 @@ const IssueScreen = () => {
   const [newsData, setNewsData] = useState([]);
 
   useEffect(() => {
-    snsDataApi()
+    snsDataApi(currentTeam.id)
       .then((res) => {
         setTwitterData(res.filter(item => item.sns === 'twitter')[0]);
         setInstagramData(res.filter(item => item.sns === 'instagram')[0]);
@@ -33,7 +36,7 @@ const IssueScreen = () => {
         console.log(err);
       });
 
-    totalNewsApi()
+    totalNewsApi(currentTeam.id)
       .then((res) => {
         setNewsData(res);
       })
@@ -41,7 +44,7 @@ const IssueScreen = () => {
         console.log(err);
       });
 
-    communityDataApi()
+    communityDataApi(currentTeam.id)
       .then((res) => {
         setCommunityData(res);
       })

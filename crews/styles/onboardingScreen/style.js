@@ -39,7 +39,9 @@ export const profileStyle = StyleSheet.create({
     width: 170,
     height: 170,
     borderRadius: 100,
-    marginBottom: 40
+    marginBottom: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   textInputView: {
     width: 200,
@@ -201,6 +203,8 @@ export const checkStyle = StyleSheet.create({
     width: 130,
     height: 130,
     borderRadius: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   text: {
     fontSize: 16,

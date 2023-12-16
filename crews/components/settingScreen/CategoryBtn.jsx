@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Text, View, TouchableOpacity } from "react-native";
 import { AntDesign } from '@expo/vector-icons'; 
+import { ThemeContext } from "styled-components";
 
 const CategoryBtn = ( props ) => {
+    const theme = useContext(ThemeContext);
     return(
         <TouchableOpacity 
         onPress={props.onPress}
@@ -14,11 +16,11 @@ const CategoryBtn = ( props ) => {
             alignItems: 'center',
             justifyContent: 'space-between'
         }}>
-            <Text style = {{fontSize: 16, color: props.color}}>{props.title}</Text>
+            <Text style = {{fontSize: 16, color: theme.text}}>{props.title}</Text>
             <AntDesign 
                 name="right" 
                 size={17} 
-                color="black"/>
+                color={theme.text}/>
         </TouchableOpacity>
     )
 }

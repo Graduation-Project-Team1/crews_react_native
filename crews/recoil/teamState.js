@@ -5,6 +5,10 @@ export const userTeamState = atom({
   default: {
     name: '전북현대',
     id: 6908,
+    playerName: '조규성',
+    playerId: 0,
+    memberName: '이름',
+    memberId: 0,
   }
 });
 
