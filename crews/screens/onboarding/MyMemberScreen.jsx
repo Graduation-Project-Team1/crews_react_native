@@ -115,7 +115,7 @@ const MyMember = ({swiper}) => {
                 style={[myMemberStyle.teamImageView]}
                 source={imgSrc(teamData)}
               />
-              <Text style={{ fontWeight: 'bold' }}>{userTeam.name}</Text>
+              <Text style={{ fontWeight: 'bold' }}>{userTeam.teamName}</Text>
               </>
             )}
           </View>

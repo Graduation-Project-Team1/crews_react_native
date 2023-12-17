@@ -93,14 +93,13 @@ const SettingScreen = ({navigation}) => {
         }}>
             <View style = {{
                 alignItems: 'flex-start',
-                position: 'absolute',
                 top: 0
                 }}>
                 <TouchableOpacity 
-                onPress={()=> navigation.pop()}
+                onPress={()=> {navigation.pop()}}
                 style = {{ 
                     margin: 10,
-                    marginTop: 40,
+                    marginTop: 30,
                     width: 30, 
                     height: 30,
                     alignItems: 'center',
@@ -108,16 +107,15 @@ const SettingScreen = ({navigation}) => {
                 }}>
                     <AntDesign 
                         name="left" 
-                        size={17} 
+                        size={20} 
                         color="white"/>
                 </TouchableOpacity>
             </View>
             
             <View style = {{
-                flex: 1,
+                flex: 0.8,
                 alignItems: 'center',
                 justifyContent: 'center',
-                marginTop: 50,
             }}>
                 <Image style = {{
                     width: 90,
@@ -126,7 +124,7 @@ const SettingScreen = ({navigation}) => {
                     marginBottom: 10,
                 }} source={imgSrc(userTeam && userTeam.id)}/>
                 <Text style = {{color: '#FFFFFF', fontSize: 20, fontWeight: 'bold', marginTop: 15}}>{userTeam.memberName}</Text>
-                <Text style = {{color: '#ffffff', fontSize: 16, marginTop: 5}}>{userTeam.name} / {userTeam.playerName}</Text>
+                <Text style = {{color: '#ffffff', fontSize: 16, marginTop: 5}}>{userTeam.teamName} / {userTeam.playerName}</Text>
             </View>
         </View>
 

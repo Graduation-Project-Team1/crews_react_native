@@ -6,16 +6,19 @@ import axios from 'axios';
 import { useSoundData } from "./SoundContext";
 import { ThemeContext } from "styled-components";
 
+import { useRecoilValue } from "recoil";
+import { userTeamState } from "../../recoil/teamState";
+
 const PodcastList = (props) => {
     const {podcastData, setPodcastData} = usePodcastData();
-    const [teamId, setTeamId] = useState(6908);
+    //const [teamId, setTeamId] = useState(6908);
     const [podcastListData, setPodcastListData] = useState([]);
-
+    const userTeam = useRecoilValue(userTeamState);
 
     useEffect(() => {
         const getPodcastList = async() => {
             try {
-                const responsePodcastData = await axios.get(`https://crews.jongmin.xyz/podcast/list?teamId=${teamId}`);
+                const responsePodcastData = await axios.get(`https://crews.jongmin.xyz/podcast/list?teamId=${userTeam.id}`);
     
                     // 성공적인 응답 처리
                     console.log(responsePodcastData.data);
@@ -73,7 +76,7 @@ const PodcastList = (props) => {
                     key = {item.id}
                     id = {String(item.id).padStart(2, "0")}
                     time = {item.time}
-                    hashTag = "#승리 #연승 #패배"
+                    hashTag = {item.title}
                     onPress = {()=> {setPodcastData(item)}}
                 />
             ))}

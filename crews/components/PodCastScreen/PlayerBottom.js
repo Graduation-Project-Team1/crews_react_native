@@ -13,7 +13,7 @@ import { useSoundData } from './SoundContext';
 import { ThemeContext } from "styled-components/native";
 
 
-const Bottom = (props) => {
+const Bottom = (props, {navigation}) => {
 
     const {sound, setSound} = useSoundData();
     const {isPlaying, setIsPlaying} = useSoundData();
@@ -35,15 +35,15 @@ const Bottom = (props) => {
         <View style = {[PlayerScreenStyles.view, {flex: 1, backgroundColor: '#ffffff'}]}>
             <View style = {[PlayerScreenStyles.view, {flex: 2, paddingTop: 90, paddingBottom: 30}]}>
                 <Text style = {PlayerScreenStyles.titleText}>{podcastData.time}</Text>
-                <Text style = {PlayerScreenStyles.timeText}>{podcastData.hashTag}</Text>
+                <Text style = {PlayerScreenStyles.timeText}>{podcastData.title}</Text>
             </View>
             <View style = {PlayerScreenStyles.topBtnView}>
-                <View>
+                <TouchableOpacity onPress={()=>{navigation.pop()}}>
                     <MaterialIcons name="playlist-play" size={30} color="black" />
-                </View>
-                <View>
+                </TouchableOpacity>
+                <TouchableOpacity>
                     <MaterialIcons name="shuffle" size={28} color="black" />
-                </View>
+                </TouchableOpacity>
             </View>
             <View style = {{
             flex: 1.5,
