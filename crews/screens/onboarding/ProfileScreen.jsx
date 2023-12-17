@@ -81,6 +81,7 @@ const Profile = ({swiper, navigation}) => {
                   swiper.current.scrollBy(1, true)
                   storeMemberName(nickname);
                   setCurrentState({...currentState, memberName: nickname});
+                  console.log("nickname: ", currentState);
                 }}
                 message = '닉네임을 입력해주세요'
             />

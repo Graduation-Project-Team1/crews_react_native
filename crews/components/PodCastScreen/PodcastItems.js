@@ -70,7 +70,7 @@ const PodcastList = (props) => {
 
 
     return(
-        <View>
+        <View style={{paddingBottom: 100}}>
             {podcastListData.map(item => (
                 <PlayList
                     key = {item.id}

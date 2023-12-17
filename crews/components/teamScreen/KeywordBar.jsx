@@ -56,7 +56,7 @@ const KeywordBar = ({teamTrend}) => {
   const nUrl3 = teamTrend.map(item => item.negativeNewsUrl3);
 
   return (
-    <View>
+    <View style={{paddingBottom: 100}}>
       <View style={{flexDirection: "row",justifyContent: "space-around",}}>
         {bars.map((bar, index) => {
           const adjustedBackgroundColor =

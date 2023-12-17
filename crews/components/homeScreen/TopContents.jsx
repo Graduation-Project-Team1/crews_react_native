@@ -59,7 +59,7 @@ const TopContents = () => {
     <View style={[styles.container, topContentsStyles.topContentLayout]}>
       <View style={[topContentsStyles.topContentLeft]}>
         <Text style={[topContentsStyles.topContentTitle]}>
-          {formattedDate}의 {currentTeam.name}
+          {`${formattedDate}\n${currentTeam.name}`}
         </Text>
         <View style={topContentsStyles.topContentTextOuter}>
           <Text style={[topContentsStyles.topContentText]}>트렌드 순위 3위</Text>

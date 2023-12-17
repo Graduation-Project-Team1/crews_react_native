@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { TextInput} from 'react-native';
 import { Text, View} from 'react-native';
 import { Image } from 'react-native';
@@ -7,9 +7,11 @@ import colors from '../../styles/colors';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useMemo } from 'react';
 import { RadioButton } from 'react-native-paper';
+import { ThemeContext } from 'styled-components';
 
 
 const ThemeSelectBtn = (props) =>{
+    const theme = useContext(ThemeContext);
     return (
         <View style = {{
                 height:60,
@@ -36,7 +38,7 @@ const ThemeSelectBtn = (props) =>{
                         }}/> : null
                 }
                 
-                <Text style = {{fontSize: 16}}>{props.text}</Text>
+                <Text style = {{fontSize: 16, color: theme.text}}>{props.text}</Text>
                 </View>
                 <RadioButton
                 value="first"

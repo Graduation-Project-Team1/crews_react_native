@@ -9,6 +9,7 @@ import axios from 'axios';
 import { commonStyle, swiperStyle, } from '../../styles/onboardingScreen/style';
 
 import { useMemberData, useNicknameData, useTeamData } from './context';
+import { getMemberId } from '../../api/asyncStorage';
 
 
 const StartBtn = ({navigation, setIsLogin}, props) => {
@@ -17,17 +18,19 @@ const StartBtn = ({navigation, setIsLogin}, props) => {
     const {memberData} = useMemberData();
     const {teamData} = useTeamData();
     const {nicknameData} = useNicknameData();
-
-    const [userId, setUserId] = useState(352);
-
     const [currentTeam, setCurrentTeam] = useRecoilState(userTeamState);
   
     useEffect(() => {
     }, [memberData, teamData, nicknameData]);
 
     const putUserPref = async() => {
+        console.log("putUserPref");
+        console.log("nickname: ", nicknameData);
+        console.log("teamData: ", teamData);
+        console.log("PlayerData: ", memberData);
+        console.log("userId: ", currentTeam.memberId);
         try {
-            const responsePref = await axios.put(`https://crews.jongmin.xyz/member/${userId}/preferences`,
+            const responsePref = await axios.put(`https://crews.jongmin.xyz/member/${currentTeam.memberId}/preferences`,
             {
                 nickname : nicknameData,
                 teamId : teamData,
@@ -36,17 +39,12 @@ const StartBtn = ({navigation, setIsLogin}, props) => {
 
                 // 성공적인 응답 처리
                 console.log(responsePref.data);
-                setCurrentTeam({
-                    ...currentTeam,
-                    id: Number(teamData),
-                  });
-                
                 setIsLogin(true);
 
         } catch (error) {
             // 사용자 정보 없을시 patch로 실행
             try {
-                const responsePref = await axios.patch(`https://crews.jongmin.xyz/member/${userId}/preferences`,
+                const responsePref = await axios.patch(`https://crews.jongmin.xyz/member/${currentTeam.memberId}/preferences`,
                 {
                     nickname : nicknameData,
                     teamId : teamData,

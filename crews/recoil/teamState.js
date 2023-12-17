@@ -3,9 +3,9 @@ import { atom } from "recoil";
 export const userTeamState = atom({
   key: 'userTeamState',
   default: {
-    name: '전북현대',
-    id: 6908,
-    playerName: '조규성',
+    name: '가나다',
+    id: 0,
+    playerName: '강어진',
     playerId: 0,
     memberName: '이름',
     memberId: 0,

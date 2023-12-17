@@ -92,6 +92,7 @@ const MyMember = ({swiper}) => {
       onMemberClick(member.id);
       storePlayerId(member.id.toString());
       storePlayerName(member.name);
+      console.log("MyMemberScreen: ", userTeam);
 
       setUserTeam({
         ...userTeam,
@@ -115,7 +116,7 @@ const MyMember = ({swiper}) => {
                 style={[myMemberStyle.teamImageView]}
                 source={imgSrc(teamData)}
               />
-              <Text style={{ fontWeight: 'bold' }}>{userTeam.teamName}</Text>
+              <Text style={{ fontWeight: 'bold' }}>{userTeam.name}</Text>
               </>
             )}
           </View>
