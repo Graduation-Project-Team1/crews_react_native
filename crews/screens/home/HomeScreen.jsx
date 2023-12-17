@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { setBgColors, styles } from "../../styles/styles";
 import colors from "../../styles/colors";
@@ -16,6 +16,7 @@ const HomeScreen = ({navigation}) => {
   const isOtherTeamMode = useRecoilValue(otherTeamState);
 
   return (
+    <ScrollView style={{width:'100%'}}>
     <View style={[styles.layout, {
       backgroundColor: theme.pointBackground,
       }
@@ -26,6 +27,7 @@ const HomeScreen = ({navigation}) => {
       <TopContents/>
       <Contents navigation={navigation}/>
     </View>
+    </ScrollView>
   );
 };
 

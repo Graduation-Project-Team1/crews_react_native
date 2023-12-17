@@ -18,9 +18,9 @@ const SearchScreen = () => {
   const [result, setResult] = useState(null);
 
   const handleSearch = () => {
-    setResult(keyword)
+    setResult(keyword.trim().split(" ").join("+"))
     console.log("키워드 : ", keyword);
-    console.log(keyword.split(" ").join("+"));
+    console.log(keyword.trim().split(" ").join("+"));
     Keyboard.dismiss()
   }
 

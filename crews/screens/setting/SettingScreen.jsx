@@ -6,7 +6,7 @@ import axios from 'axios';
 import { ThemeContext } from "styled-components/native";
 
 import CategoryBtn from "../../components/settingScreen/CategoryBtn";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { userTeamState } from "../../recoil/teamState";
 import Team6908 from '../../assets/team/6908.png';
 import Team7644 from '../../assets/team/7644.png';
@@ -20,13 +20,15 @@ import Team7650 from '../../assets/team/7650.png';
 import Team34220 from '../../assets/team/34220.png';
 import Team41261 from '../../assets/team/41261.png';
 import Team48912 from '../../assets/team/48912.png';
+import { getMemberId } from "../../api/asyncStorage";
     
 
 const SettingScreen = ({navigation}) => {
-    const userTeam = useRecoilValue(userTeamState);
+    const [currentState, setCurrentState] = useRecoilState(userTeamState);
+    const [memberId, setMemberId] = useState(0);
+    const [userTeam, setUserTeam] = useState('전북현대'); // [userTeam, setUserTeam
     const [userName, setUserName] = useState(['user']);
     const [userPlayer, setUserPlayer] = useState(['playername']);
-    const [userId, setUserId] = useState(352);
     
     const theme = useContext(ThemeContext);
 
@@ -62,15 +64,43 @@ const SettingScreen = ({navigation}) => {
     }
 
     useEffect(() => {
+        getMemberId().then((memberId) => {
+            if (memberId === null) {
+                console.log("memberId is null");
+            } else {
+                console.log(memberId);
+                setMemberId(memberId);
+                setCurrentState({
+                    ...currentState,
+                    memberId: memberId,
+                });
+            }
+        });
+    }, []);
+
+    useEffect(() => {
+        if (memberId === 0) {
+            return;
+        }
         const getUserdata = async() => {
             try {
-                const responseUserdata = await axios.get(`https://crews.jongmin.xyz/member/${userId}`);
+                const responseUserdata = await axios.get(`https://crews.jongmin.xyz/member/${memberId}`);
     
                     // 성공적인 응답 처리
                     console.log(responseUserdata.data);
                     console.log("getUserdata: 성공");
 
-                    // setUserName(responseUserdata.data.nickname);
+                    setUserTeam(responseUserdata.data.teamName);
+                    setUserName(responseUserdata.data.nickname);
+                    setUserPlayer(responseUserdata.data.playerName);
+                    setCurrentState({
+                        ...currentState,
+                        name: responseUserdata.data.teamName,
+                        id: responseUserdata.data.teamId,
+                        playerName: responseUserdata.data.playerName,
+                        playerId: responseUserdata.data.playerId,
+                        memberName: responseUserdata.data.nickname,
+                    });
 
                     console.log(userName);
 
@@ -83,7 +113,7 @@ const SettingScreen = ({navigation}) => {
     
         getUserdata();
 
-    }, [userName, userTeam, userPlayer]);
+    }, [memberId]);
 
   return (
     <View style = {{flex: 1}}>
@@ -122,9 +152,9 @@ const SettingScreen = ({navigation}) => {
                     height: 90,
                     borderRadius: 100,
                     marginBottom: 10,
-                }} source={imgSrc(userTeam && userTeam.id)}/>
-                <Text style = {{color: '#FFFFFF', fontSize: 20, fontWeight: 'bold', marginTop: 15}}>{userTeam.memberName}</Text>
-                <Text style = {{color: '#ffffff', fontSize: 16, marginTop: 5}}>{userTeam.teamName} / {userTeam.playerName}</Text>
+                }} source={imgSrc(userTeam && userTeam)}/>
+                <Text style = {{color: '#FFFFFF', fontSize: 20, fontWeight: 'bold', marginTop: 15}}>{userName}</Text>
+                <Text style = {{color: '#ffffff', fontSize: 16, marginTop: 5}}>{userTeam} / {userPlayer}</Text>
             </View>
         </View>
 

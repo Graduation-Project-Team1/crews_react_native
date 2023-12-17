@@ -20,30 +20,30 @@ const SearchResult = ({result}) => {
   const [teamData, setTeamData] = useState(null);
   const [newsData, setNewsData] = useState([]);
   const [radioData, setRadioData] = useState([]);
-  const [gameData, setGameData] = useState([]);
 
   useEffect(() => {
+
+    if (result === '') {
+      return (
+        <View style={emptyResultStyle.base}>
+          <Text style={[emptyResultStyle.text, {color: theme.text}]}>검색 결과가 없습니다.</Text>
+        </View>
+      )
+    }
+
     searchApi(result)
       .then((res) => {
-        setTeamData(res.team);
-        setNewsData(res.news);
-        setRadioData(res.radio);
-        setGameData(res.game);
+        console.log(res.teamInfoResponses);
+        setTeamData(res.teamInfoResponses);
+        setNewsData(res.newsResponses);
+        setRadioData(res.podcastInfoResponses);
       })
       .catch((err) => {
         console.log(err)
       })
   }, [result])
 
-  if (result === '') {
-    return (
-      <View style={emptyResultStyle.base}>
-        <Text style={[emptyResultStyle.text, {color: theme.text}]}>검색 결과가 없습니다.</Text>
-      </View>
-    )
-  }
-
-  const handleOtherTeamClick = () => {
+  const handleOtherTeamClick = (team) => {
     console.log("다른 팀 클릭");
 
     setPrevTeam({
@@ -51,41 +51,40 @@ const SearchResult = ({result}) => {
       id: currentTeam.id,
     });
 
-    if (teamData) {
-      setOtherTeamMode(true);
-      setCurrentTeam({
-        name: teamData.name,
-        id: teamData.id,
-      })
-      navigation.goBack();
-    }
+    setOtherTeamMode(true);
+    setCurrentTeam({
+      ...currentTeam,
+      name: team.teamName,
+      id: team.teamId,
+    })
+    navigation.goBack();
   };
 
   return (
     <View style={searchResultStyle.layout}>
       <ScrollView showsVerticalScrollIndicator={false}>
         {
-          teamData !== null && (
-            <View>
+          teamData !== null && teamData.map((team, idx) =>  (
+            <View key={idx}>
               <View>
                 <Text style={searchResultStyle.teamGray}>{`다른 팀이 궁금하신가요?\n내 팀을 변경하지 않고 다른 팀을 구경해보세요.`}</Text>
-                <TouchableOpacity style={searchResultStyle.team} onPress={handleOtherTeamClick}>
+                <TouchableOpacity style={searchResultStyle.team} onPress={()=>handleOtherTeamClick(team)}>
                   <Image 
-                    source={{uri: teamData.img}}
+                    source={{uri: team.logo}}
                     style={searchResultStyle.teamImg}/>
                   <View style={searchResultStyle.teamInfo}>
-                    <Text style={[searchResultStyle.teamTitle, {color: theme.text}]}>{teamData.name}</Text>
-                    <Text style={[searchResultStyle.teamCategory, {color: theme.text}]}>{teamData.category}</Text>
+                    <Text style={[searchResultStyle.teamTitle, {color: theme.text}]}>{team.teamName}</Text>
+                    <Text style={[searchResultStyle.teamCategory, {color: theme.text}]}>국내 축구</Text>
                   </View>
                   <Right width={24} height={24} fill={colors.black}/>
                 </TouchableOpacity>
               </View>
               <View style={searchResultStyle.divider}/>
             </View>
-          )
+          ))
         }
         {
-          newsData.length > 0 && (
+          newsData && newsData.length > 0 && (
             <View style={searchResultStyle.contentContainer}>
               <Text style={[searchResultStyle.headerText, {color: theme.text}]}>뉴스</Text>
               <View>
@@ -95,8 +94,8 @@ const SearchResult = ({result}) => {
                       key={index}
                       order={index + 1}
                       title={news.title}
-                      time={news.createdAt}
-                      img={news.img}
+                      time={news.date}
+                      press={news.press}
                       url={news.url}
                   />
                   ))
@@ -106,7 +105,7 @@ const SearchResult = ({result}) => {
           )
         }
         {
-          radioData.length > 0 && (
+          radioData && radioData.length > 0 && (
             <View style={searchResultStyle.contentContainer}>
               <Text style={[searchResultStyle.headerText, {color: theme.text}]}>라디오</Text>
               <View>
@@ -116,27 +115,7 @@ const SearchResult = ({result}) => {
                       key={index}
                       order={index + 1}
                       title={radio.title}
-                      tags={radio.tags}
-                    />
-                  ))
-                }
-              </View>
-            </View>
-          )
-        }
-        {
-          gameData.length > 0 && (
-            
-            <View style={searchResultStyle.contentContainer}>
-              <Text style={[searchResultStyle.headerText, {color: theme.text}]}>경기 정보</Text>
-              <View>
-                {
-                  gameData.map((game, index) => (
-                    <MatchResult
-                      key={index}
-                      date={game.time}
-                      team1={game.team[0]}
-                      team2={game.team[1]}
+                      tags={radio.teamName}
                     />
                   ))
                 }

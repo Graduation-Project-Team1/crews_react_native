@@ -90,12 +90,12 @@ const selectTeamClick = (selectedTeam) => {
     onTeamClick(selectedTeam.teamId);
     storeTeamId(selectedTeam.teamId.toString());
 
-    const teamName = selectedTeam.teamName === 'Jeonbuk Hyundai Motors' ? '전북현대' : 'FC 서울';
+    const teamName = selectedTeam.teamName;
     storeTeamName(teamName);
     setUserTeam({
         ...userTeam,
-        teamId: selectedTeam.teamId,
-        teamName: teamName,
+        id: selectedTeam.teamId,
+        name: teamName,
     });
     console.log(selectedTeam.teamId);
 };

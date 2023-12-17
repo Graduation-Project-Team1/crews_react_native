@@ -38,6 +38,10 @@ const KakaoLogin = ({navigation, setIsLogin}) => {
       setIsLogin(true);
     } else if (parsedBody.message === 'preference' && parsedBody.token === null && parsedBody.memberId !== null) {
       storeMemberId(parsedBody.memberId.toString());
+      setCurrentState({
+        ...currentState,
+        memberId: parsedBody.memberId,
+      })
       console.log("멤버 아이디 저장됨 : ", parsedBody.memberId);
       navigation.navigate("Onboarding");
     } else {
@@ -67,8 +71,6 @@ const KakaoLogin = ({navigation, setIsLogin}) => {
     requestAnimationFrame(getToken);
     console.log("INJECTED_JAVASCRIPT");
   `;
-
-  navigation.navigate("Onboarding");
 
   return (
     <View style={{ flex: 1 }}>

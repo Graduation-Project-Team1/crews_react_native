@@ -74,6 +74,7 @@ const Contents = ({navigation}) => {
     <View style={[contentsStyle.layout, StyleSheet.create({
       backgroundColor: theme.background,
       color: colors.white,
+      paddingBottom: 100,
     })]}>
       <View>
         <TitleBar text="주요 뉴스" navigation={navigation} target={'이슈'} />
