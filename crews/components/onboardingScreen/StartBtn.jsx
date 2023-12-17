@@ -1,4 +1,4 @@
-import React,{ useEffect } from 'react';
+import React,{ useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil'
 import { userTeamState } from '../../recoil/teamState';
 import { TouchableOpacity } from 'react-native';
@@ -18,6 +18,8 @@ const StartBtn = ({navigation, setIsLogin}, props) => {
     const {teamData} = useTeamData();
     const {nicknameData} = useNicknameData();
 
+    const [userId, setUserId] = useState(352);
+
     const [currentTeam, setCurrentTeam] = useRecoilState(userTeamState);
   
     useEffect(() => {
@@ -25,7 +27,7 @@ const StartBtn = ({navigation, setIsLogin}, props) => {
 
     const putUserPref = async() => {
         try {
-            const responsePref = await axios.put(`https://crews.jongmin.xyz/member/352/preferences`,
+            const responsePref = await axios.put(`https://crews.jongmin.xyz/member/${userId}/preferences`,
             {
                 nickname : nicknameData,
                 teamId : teamData,
@@ -42,19 +44,26 @@ const StartBtn = ({navigation, setIsLogin}, props) => {
                 setIsLogin(true);
 
         } catch (error) {
-            // Log specific error information
-            if (error.response) {
-                // The request was made, but the server responded with a status code that falls out of the range of 2xx
-                console.error("Server responded with error status:", error.response.status);
-                console.error("Server response data:", error.response.data);
-            } else if (error.request) {
-                // The request was made but no response was received
-                console.error("No response received:", error.request);
-            } else {
-                // Something happened in setting up the request that triggered an error
-                console.error("Error setting up the request:", error.message);
-            }
-            console.error("Error config:", error.config);
+            // 사용자 정보 없을시 patch로 실행
+            try {
+                const responsePref = await axios.patch(`https://crews.jongmin.xyz/member/${userId}/preferences`,
+                {
+                    nickname : nicknameData,
+                    teamId : teamData,
+                    playerId : memberData,
+                });
+    
+                    // 성공적인 응답 처리
+                    console.log(responsePref.data);
+                    setCurrentTeam({
+                        ...currentTeam,
+                        id: Number(teamData),
+                      });
+                    
+                    navigation.pop();
+                }catch(error) {
+                    console.log(error);
+                }
         }
         
         };

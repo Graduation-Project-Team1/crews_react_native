@@ -28,7 +28,7 @@ const Player = (props) => {
             <MaterialIcons style = {{marginLeft: 10}} name="playlist-play" size={35} color="black" />
             <View style = {[playerStyles.textView]}>
               <Text style = {[playerStyles.titleText]}>{podcastData.time}</Text>
-              <Text style = {[playerStyles.time]}>#승리 #연승 #패배</Text>
+              <Text style = {[playerStyles.time]}>{podcastData.title}</Text>
             </View>
             <View style = {[playerStyles.iconView]}>
               <TouchableOpacity>

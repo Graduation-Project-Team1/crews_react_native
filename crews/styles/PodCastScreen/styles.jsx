@@ -113,9 +113,9 @@ export const PlayerScreenStyles = StyleSheet.create({
         fontWeight: 'bold'
     },
     timeText: {
-        fontSize: 16,
+        fontSize: 15,
         color: colors.textGray,
-        fontWeight: '100'
+        fontWeight: '400'
     }
 })
 
