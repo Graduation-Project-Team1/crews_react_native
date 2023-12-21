@@ -82,7 +82,7 @@ const Contents = ({navigation}) => {
           {
             newsList && newsList.length > 0 ? newsList.map((news, index) => {
               return (
-                <NewsRow key={index} order={index + 1} title={news.title} time={news.date} press={news.press} url={'https://n.news.naver.com/mnews/article/421/0007212695?sid=102'}/>
+                <NewsRow key={index} order={index + 1} title={news.title} time={news.date} press={news.press} url={news.url}/>
               );
             }) : <Text>뉴스가 없습니다.</Text>
           }
